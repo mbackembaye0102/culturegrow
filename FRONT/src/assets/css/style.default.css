@@ -201,7 +201,7 @@ section header {
 * ==========================================================
 */
 nav.navbar {
-  background: #393836;
+  background: white;
   padding: .8rem 0;
   /* Navbar Brand --------- */
   /*  Dropdowns ------------ */
@@ -223,7 +223,7 @@ nav.navbar .navbar-holder {
 
 nav.navbar a {
   font-size: .8rem;
-  color: #fff;
+  color: black;
   position: relative;
 }
 
@@ -328,7 +328,7 @@ nav.navbar a.menu-btn {
   width: 40px;
   height: 40px;
   line-height: 40px;
-  background: #292929;
+  background: #FF4080;
   color: #fff;
   text-align: center;
   padding: 0 !important;
@@ -340,7 +340,7 @@ nav.navbar a.menu-btn i[class*='icon-'] {
 }
 
 nav.navbar a.menu-btn:hover {
-  background: #33b35a;
+  background: #FF4080;
 }
 
 /*  NAVBAR MEDIAQUERIES ---------------------------------- */
@@ -384,8 +384,8 @@ nav.navbar a.menu-btn:hover {
   height: 100%;
   width: 200px;
   text-align: left;
-  background: #393836;
-  color: #fff;
+  background: #fff;
+  color: black;
   z-index: 999;
   overflow-y: auto;
   -webkit-transition: all 0.3s;
@@ -424,14 +424,14 @@ nav.navbar a.menu-btn:hover {
   position: relative;
   font-size: .9rem;
   font-weight: 300;
-  color: #fff;
+  color: black;
   text-decoration: none;
   width: 100%;
   padding: 12px;
 }
 
 .side-navbar li a:focus, .side-navbar li a:hover, .side-navbar li a[aria-expanded="true"] {
-  background: #33b35a;
+  background: #FF4080;
   color: #fff;
   text-decoration: none;
 }
@@ -478,7 +478,7 @@ nav.navbar a.menu-btn:hover {
 }
 
 .side-navbar li ul.collapse a:hover {
-  background: #121212;
+  background: grey;
 }
 
 .side-navbar .sidenav-header {
@@ -674,11 +674,11 @@ nav.navbar a.menu-btn:hover {
 }
 
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-  background-color: #33b35a;
+  background-color: #FF4080;
 }
 
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar:hover {
-  background-color: #33b35a;
+  background-color: #FF4080;
 }
 
 /*
@@ -698,7 +698,7 @@ nav.navbar a.menu-btn:hover {
 
 .dashboard-counts .count-title i {
   font-size: 1.5em;
-  color: #33b35a;
+  color: #FF4080;
 }
 
 .dashboard-counts .icon {
@@ -905,7 +905,6 @@ nav.navbar a.menu-btn:hover {
 
 .statistics .user-activity .page-statistics strong {
   display: block;
-  text-transform: uppercase;
   color: #33b35a;
   font-size: 2em;
 }
@@ -1852,15 +1851,15 @@ STYLE SWITCHER FOR DEMO
 }
 
 .btn-primary {
-  color: color-yiq(#33b35a);
-  background-color: #33b35a;
-  border-color: #33b35a;
+  color: color-yiq(#FF4080);
+  background-color: #ff4080;
+  border-color: #FF4080;
 }
 
 .btn-primary:hover {
-  color: color-yiq(#2b954b);
-  background-color: #2b954b;
-  border-color: #288b46;
+  color: color-yiq(#FF4080);
+  background-color: #FF4080;
+  border-color: #FF4080;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2413,13 +2412,12 @@ body {
 }
 
 a {
-  color: #33b35a;
+  color: #FF4080;
   text-decoration: none;
 }
 
 a:focus, a:hover {
-  color: #22773c;
-  text-decoration: underline;
+  color: #FF4080;
 }
 
 h1,
@@ -2532,12 +2530,10 @@ mark,
 }
 
 .text-primary {
-  color: #33b35a !important;
+  color: #FF4080 !important;
 }
 
-a.text-primary:focus, a.text-primary:hover {
-  color: #288b46 !important;
-}
+
 
 /*
  * 4. PAGINATION
@@ -2573,7 +2569,7 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .page-link:focus, .page-link:hover {
-  color: #22773c;
+  color: #FF4080;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #ddd;
@@ -2752,12 +2748,10 @@ a.bg-dark:focus, a.bg-dark:hover {
 }
 
 .text-primary {
-  color: #33b35a !important;
+  color: FF4080 !important;
 }
 
-a.text-primary:focus, a.text-primary:hover {
-  color: #288b46 !important;
-}
+
 
 .text-secondary {
   color: #868e96 !important;
