@@ -10,12 +10,24 @@ import {AuthService} from './service/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestComponent } from './test/test.component';
 import { InterceptorService } from './interceptor.service';
+import { AddstructureComponent } from './structure/addstructure/addstructure.component';
+import { ListstructureComponent } from './structure/liststructure/liststructure.component';
+import { OnestructureComponent } from './structure/onestructure/onestructure.component';
+import { ListuserComponent } from './user/listuser/listuser.component';
+import { AdduserComponent } from './user/adduser/adduser.component';
+import { OneuserComponent } from './user/oneuser/oneuser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TestComponent,
+    AddstructureComponent,
+    ListstructureComponent,
+    OnestructureComponent,
+    ListuserComponent,
+    AdduserComponent,
+    OneuserComponent,
   ],
   imports: [
     BrowserModule,
