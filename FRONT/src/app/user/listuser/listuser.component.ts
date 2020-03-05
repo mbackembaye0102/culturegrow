@@ -1,3 +1,4 @@
+import { StructureService } from './../../structure/structure.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,10 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./listuser.component.scss']
 })
 export class ListuserComponent implements OnInit {
-
-  constructor(private router:Router) { }
+user:any;
+  constructor(private router:Router,private monService:StructureService) { }
 
   ngOnInit() {
+this.monService.listuser().subscribe(
+  res=>{console.log(res);
+    this.user=res;
+  },
+  error=>{console.log(error);
+  }
+)
   }
   new(){
 this.router.navigateByUrl('grow/add/users')

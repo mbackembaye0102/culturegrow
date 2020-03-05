@@ -6,37 +6,62 @@
           <img src="https://i.ibb.co/kQB44c0/user.png" alt="user-pic">
         </div>
         <div class="user-details">
-          <form action="" class="form-horizontal user-form">
-            <div class="form-group">
-              <label for="" class="label col-lg-3 col-sm-3 col-md-3  col-xs-12">UserName</label>
-              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                <input type="text" class="form-control">
+          <form [formGroup]="user" class="">
+            <div class="form-group row" >
+              <label for="prenom" class="label col-3">Prenom</label>
+              <input type="text" formControlName="prenom" class="form-control col-7">
+            </div>
+            <div class="form-group row">
+              <label for="prenom" class="label col-3">Nom</label>
+              <input type="text" formControlName="nom" class="form-control col-7">
+            </div>
+            <div class="form-group row">
+              <label for="prenom" class="label col-3">Telephone</label>
+              <input type="text" formControlName="telephone" class="form-control col-7">
+            </div>
+            <div class="form-group row">
+              <label for="prenom" class="label col-3">Email</label>
+              <input type="text" formControlName="email" class="form-control col-7">
+            </div>
+            <!-- <div class="form-group row">
+              <label for="prenom" class="label col-3">Team</label>
+              <select name="" class="form-control col-7" id="">
+                <option value="Créa">Créa</option>
+                <option value="Tech">Tech</option>
+              </select>
+              <span (click)="plusteam()" class="col-1"><i style="font-size: 40px;" class="fa fa-plus-square"></i></span>
+            </div> -->
+
+              <div class="form-group row">
+                <label for="prenom" class="label col-3">Team</label>
+                <select name="" formControlName="teams" class="form-control col-7" id="">
+                  <option value="Créa">Créa</option>
+                  <option value="Tech">Tech</option>
+                </select>
+                <div  (click)="plusteam()" *ngIf="cache" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
+              </div>
+            <div *ngFor="let item of list; let i=index">
+              <div class="form-group row">
+                <label for="prenom" class="label col-3">Team</label>
+                <select name="" class="form-control col-7" id="">
+                  <option value="Créa">Créa</option>
+                  <option value="Tech">Tech</option>
+                </select>
+                <div  (click)="plusteam1()" *ngIf="(nbrFichier-1)==i" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="" class="label col-lg-3 col-sm-3 col-md-3 col-xs-12">Password</label>
-              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                <input type="password" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                <div class="checkbox-wrap">
-                  <div class="custom-input">
-                    <input id="check" type="checkbox">
-                    <span class="custom-check"></span>
-                  </div>
-                  <label for="check">Remember Me</label>
-                </div>
-              </div>
+            <div class="form-group row">
+              <label for="prenom" class="label col-3">Profil</label>
+              <select name="" formControlName="profil" class="form-control col-7" id="">
+                <option value="Colaborateur">Colaborateur</option>
+                <option value="Mentor">Mentor</option>
+                <option value="Administrateur">Administrateur</option>
+              </select>
             </div>
             <div class="form-group">
               <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-9 col-md-9 col-sm-9 col-xs-12 button-contain">
-                <button class="btn btn-primary">Log In</button>
-                <button class="btn btn-primary">Sign Up</button>
-                <div class="forgot-pass">
-                  <a href="#">Forgot Your Password?</a>
-                </div>
+                <button class="btn btn-primary" (click)="save(user)">Save</button>
+                <button class="btn btn-primary">Canccel</button>
               </div>
             </div>
           </form>

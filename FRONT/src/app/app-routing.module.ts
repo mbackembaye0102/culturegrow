@@ -8,6 +8,10 @@ import { OnestructureComponent } from './structure/onestructure/onestructure.com
 import { ListuserComponent } from './user/listuser/listuser.component';
 import { AdduserComponent } from './user/adduser/adduser.component';
 import { OneuserComponent } from './user/oneuser/oneuser.component';
+import { AddpromoComponent } from './structure/addpromo/addpromo.component';
+import { OrganisationComponent } from './grow/organisation/organisation.component';
+import { AddTeamComponent } from './grow/add-team/add-team.component';
+import { AddTeamFunctionComponent } from './grow/add-team-function/add-team-function.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -17,6 +21,10 @@ const routes: Routes = [
   {path:'grow/users',component:ListuserComponent},
   {path:'grow/add/users',component:AdduserComponent},
   {path:'grow:user/:id',component:OneuserComponent},
+  {path:'promo/add',component:AddpromoComponent},
+  {path:'grow/organisation',component:OrganisationComponent},
+  {path:'grow/addteam',component:AddTeamComponent},
+  {path:'grow/addteamfunction',component:AddTeamFunctionComponent},
   {path:"test",component:TestComponent}
 ];
 

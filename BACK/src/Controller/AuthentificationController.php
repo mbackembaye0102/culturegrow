@@ -28,7 +28,7 @@ class AuthentificationController extends AbstractController
             $validation=$userPassword->isPasswordValid($user,$reception['password']);
             
             if ($validation) {
-                if ($user->getStatut()==NULL) {
+                if ($user->getStatut()!=NULL) {
                     $token = $JWTEncoder->encode([
                         'username' => $user->getUsername(),
                         'roles' => $user->getRoles(),

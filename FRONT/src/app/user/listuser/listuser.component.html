@@ -8,12 +8,19 @@
     
     </div>
     <div class="col-7"></div>
-    <div class="col-2">
-      <input type="submit" value="NEW" (click)="new()" class="btn btn-primary">
+    <div class="col-1">
+      <a [routerLink]="['/grow/add/users']">
+      <input type="submit" value="NEW" class="btn btn-primary">
+    </a>
+    </div>
+    <div class="col-1">
+      <a [routerLink]="['/grow/addteamfunction']">
+      <input type="submit" value="NEW POST" class="btn btn-primary">
+    </a>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4" *ngFor="let item of user">
         <div class="contact-box">
             <a class="row" href="profile.html">
             <div class="col-4">
@@ -23,12 +30,11 @@
                 </div>
             </div>
             <div class="col-8">
-                <h3><strong>EL Hadji Yaya LY</strong></h3>
-                <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+                <h3><strong>{{item.Prenom}} {{item.Nom}}</strong></h3>
                 <address>
-                    <strong>Team Tech&Digital</strong><br>
-                    <abbr title="Email">M:</abbr>yaya@gmail.com <br>
-                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                    <strong>{{item.Statut}}</strong><br>
+                    <abbr title="Email">M:</abbr>{{item.username}} <br>
+                    <abbr title="Phone">P:</abbr> {{item.Telephone}}
                 </address>
             </div>
                 </a>

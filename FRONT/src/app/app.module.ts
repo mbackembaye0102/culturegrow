@@ -16,6 +16,10 @@ import { OnestructureComponent } from './structure/onestructure/onestructure.com
 import { ListuserComponent } from './user/listuser/listuser.component';
 import { AdduserComponent } from './user/adduser/adduser.component';
 import { OneuserComponent } from './user/oneuser/oneuser.component';
+import { AddpromoComponent } from './structure/addpromo/addpromo.component';
+import { OrganisationComponent } from './grow/organisation/organisation.component';
+import { AddTeamComponent } from './grow/add-team/add-team.component';
+import { AddTeamFunctionComponent } from './grow/add-team-function/add-team-function.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { OneuserComponent } from './user/oneuser/oneuser.component';
     ListuserComponent,
     AdduserComponent,
     OneuserComponent,
+    AddpromoComponent,
+    OrganisationComponent,
+    AddTeamComponent,
+    AddTeamFunctionComponent,
   ],
   imports: [
     BrowserModule,

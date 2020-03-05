@@ -1,13 +1,13 @@
+import { Component, OnInit } from '@angular/core';
 import { StructureService } from './../structure.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-addstructure',
-  templateUrl: './addstructure.component.html',
-  styleUrls: ['./addstructure.component.scss']
+  selector: 'app-addpromo',
+  templateUrl: './addpromo.component.html',
+  styleUrls: ['./addpromo.component.scss']
 })
-export class AddstructureComponent implements OnInit {
+export class AddpromoComponent implements OnInit {
 
   constructor(private structureservice:StructureService) { }
 
