@@ -1,15 +1,14 @@
 <div class="container">
   <div class="form-background">
     <div class="img">
-        <img src="../../assets/img/growacademy (1).png" alt="">
-
+      <img src="../../assets/img/growacademy (1).png" alt="">
     </div>
- <form [formGroup]="utilisateur" (ngSubmit)="addsys(utilisateur.value)">
-  <input type="text" placeholder="username" formControlName="username">
-  <br>
-  <input type="text" placeholder="password" formControlName="password">
-  <br><br>
-  <input type="submit" value="Se Connecter" [disabled]="!utilisateur.valid" >
-</form>
-</div>
+    <form [formGroup]="utilisateur" (ngSubmit)="addsys(utilisateur.value)">
+      <input type="text" placeholder="username" formControlName="username">
+      <br>
+      <input type="text" placeholder="password" formControlName="password">
+      <br><br>
+      <input type="submit" value="Se Connecter" [disabled]="!utilisateur.valid">
+    </form>
+  </div>
 </div>

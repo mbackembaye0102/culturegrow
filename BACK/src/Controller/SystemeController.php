@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 
-use App\Entity\Structure;
 use App\Entity\User;
 use App\Repository\StructureRepository;
+use App\Repository\TeamPromoRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,58 +27,52 @@ class SystemeController extends AbstractController
         return new JsonResponse($a->getPrenom());
     }
     /**
-     * @Route("/addstructure",name="save")
+     * @Route("/growteam")
      */
-    public function saveuser(Request $request,EntityManagerInterface $entityManagerInterface){
-        $data = json_decode($request->getContent(), true);
-        $nom= $data['nom'];
-        $structure= new Structure();
-        $structure->setNom($nom);
-        $entityManagerInterface->persist($structure);
-        $entityManagerInterface->flush();
-        return $this->json([
-            'message'=>'Ajout Effectuer',
-            'status'=>200
-        ]);   
-    }
-    /**
-     * @Route("/liststructure")
-     */
-    public function allstructure(Request $request,StructureRepository $structureRepository,SerializerInterface $serializer){
-        $a=$structureRepository->findAll();
-        $data = $serializer->serialize($a, 'json');
+    public function growteam(StructureRepository $structureRepository,TeamPromoRepository $TeamPromo,SerializerInterface $serializer){
+        $stucture=$structureRepository->findOneBy(['nom' => 'GROW']);
+        $team=$TeamPromo->findBy(['structure' => $stucture->getId()]);
+        $data = $serializer->serialize($team, 'json',[
+            'groups' => ['grow']
+        ]);
         return new Response($data, 200, [
             'Content-Type' => 'application/json'
         ]);
-
     }
+
     /**
      * @Route("/saveuser")
      */
-    public function adduser(Request $request,EntityManagerInterface $entityManagerInterface,UserPasswordEncoderInterface $encoder){
-        $data = json_decode($request->getContent(), true);
-        $user= new User();
-        $user->setPrenom($data['prenom']);
-        $user->setNom($data['nom']);
-        $user->setUsername($data['email']);
-        $user->setPassword($encoder->encodePassword($user,"welcome"));
-        $profil=$data['profil'];
-        $user->setRoles(["ROLE_$profil"]);
-        $user->setTelephone($data['telephone']);
-        $user->setStatut($data['teams']);
-        $entityManagerInterface->persist($user);
-        $entityManagerInterface->flush();
-        return $this->json([
-            'message'=>'Ajout Effectuer',
-            'status'=>200
-        ]);  
+    public function adduser(Request $request){
+        $data= $request->request->all();
+        return new JsonResponse(['token' => $data['prenom']]);
+    //    $id=2;
+    //     $team=$teamPromoRepository->findOneBy(['id'=>$id]);
+    //     $user= new User();
+    //     $user->setPrenom($data['prenom']);
+    //     $user->setNom($data['nom']);
+    //     $user->setUsername($data['email']);
+    //     $user->setPassword($encoder->encodePassword($user,"welcome"));
+    //     $profil=$data['profil'];
+    //     $user->setRoles(["ROLE_$profil"]);
+    //     $user->setTelephone($data['telephone']);
+    //     $user->setStatut("actif");
+    //     $user->setTeampromo($team);
+    //     $entityManagerInterface->persist($user);
+    //     $entityManagerInterface->flush();
+    //     return $this->json([
+    //         'message'=>'Ajout Effectuer',
+    //         'status'=>200
+    //     ]);  
     }
     /**
      * @Route("/listuser")
      */
     public function listuser(Request $request,UserRepository $user,SerializerInterface $serializer){
         $a=$user->findAll();
-        $data = $serializer->serialize($a, 'json');
+        $data = $serializer->serialize($a, 'json',[
+            'groups' => ['grow']
+        ]);
         return new Response($data, 200, [
             'Content-Type' => 'application/json'
         ]);

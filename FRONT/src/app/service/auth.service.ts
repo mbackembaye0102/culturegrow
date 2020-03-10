@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 export class AuthService {
   private urllogin:string="http://127.0.0.1:8000/login";
   private urlInfos:string="http://127.0.0.1:8000/infos";
-   jwt: string;
+  jwt: string;
+  public connecter=false;
   constructor(private http: HttpClient,private route:Router) { }
   logger(data){
     return this.http.post(this.urllogin , data , {observe:'response'})
@@ -52,5 +53,17 @@ export class AuthService {
 }
   getToken(){
     return this.jwt=localStorage.getItem('token');
+  }
+  chargementpage(){
+    if (localStorage.getItem('token')) {
+      if (this.connecter==false) {
+        this.connecter=true;
+      }
+      console.log(this.connecter);
+      
+    }
+    else{
+      this.route.navigate(["/"])
+    }
   }
 }

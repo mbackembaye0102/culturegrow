@@ -11,6 +11,8 @@ information:any;
   constructor(private authentification :AuthService) { }
 
   ngOnInit() {
+    console.log("test");
+    
     this.authentification.infosconnecter().subscribe(
       res=>{console.log(res);
         this.information=res;
@@ -18,6 +20,7 @@ information:any;
       error=>{console.log(error);
       }
     )
+    this.authentification.chargementpage();
   }
 
 }

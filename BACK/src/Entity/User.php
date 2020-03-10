@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -14,11 +15,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"grow", "externe"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"grow", "externe"})
      */
     private $username;
 
@@ -35,11 +38,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow", "externe"})
      */
     private $Prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow", "externe"})
      */
     private $Nom;
 
@@ -50,8 +55,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow", "externe"})
      */
     private $Telephone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TeamPromo", inversedBy="users")
+     */
+    private $teampromo;
 
     public function getId(): ?int
     {
@@ -170,6 +181,18 @@ class User implements UserInterface
     public function setTelephone(string $Telephone): self
     {
         $this->Telephone = $Telephone;
+
+        return $this;
+    }
+
+    public function getTeampromo(): ?TeamPromo
+    {
+        return $this->teampromo;
+    }
+
+    public function setTeampromo(?TeamPromo $teampromo): self
+    {
+        $this->teampromo = $teampromo;
 
         return $this;
     }

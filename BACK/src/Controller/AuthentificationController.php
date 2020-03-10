@@ -37,7 +37,7 @@ class AuthentificationController extends AbstractController
                     ]);
                     return new JsonResponse(['token' => $token]);
                 }
-              if ($user->getStatut()=="ACTIF") {
+              if ($user->getStatut()=="actif") {
                 $token = $JWTEncoder->encode([
                     'username' => $user->getUsername(),
                     'roles' => $user->getRoles(),

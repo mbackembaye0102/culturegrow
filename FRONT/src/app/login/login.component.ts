@@ -12,13 +12,15 @@ export class LoginComponent implements OnInit {
   constructor(private authentification :AuthService) { }
 
   ngOnInit() {
+    console.log("login");
+    
   }
   token:any;
   addsys(donner:any){
     console.log(donner);
     this.authentification.logger(donner).subscribe(
       res=>{
-        
+        this.authentification.connecter=true;
         this.token=res.body
         this.authentification.enregistrementToken(this.token.token);
       },

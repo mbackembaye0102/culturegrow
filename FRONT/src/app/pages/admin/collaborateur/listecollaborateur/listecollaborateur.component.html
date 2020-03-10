@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <!-- <input type="search" name="" class="" id=""> -->
+      <div class="form-group marginRech">
+        <input type="search" placeholder="Recherche" class="inputRech">
+    </div>
+    
+    </div>
+    <div class="col-7"></div>
+    <div class="col-2">
+      <a [routerLink]="['/collaborateur/add']">
+      <input type="submit" value="NEW" class="btn btn-primary">
+    </a>
+    </div>
+    <!-- <div class="col-1">
+      <a [routerLink]="['/grow/addteamfunction']">
+      <input type="submit" value="NEW POST" class="btn btn-primary">
+    </a>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let item of user">
+        <div class="contact-box">
+            <a class="row" href="profile.html">
+            <div class="col-4">
+                <div class="text-center">
+                    <img alt="image" class="rounded-circle m-t-xs img-fluid" src="../../../assets/img/avatar-0.jpg">
+                    <div class="m-t-xs font-bold">Developpeur Web Mobile</div>
+                </div>
+            </div>
+            <div class="col-8">
+                <h3><strong>{{item.Prenom}} {{item.Nom}}</strong></h3>
+                <address>
+                    <strong>{{item.Statut}}</strong><br>
+                    <abbr title="Email">M:</abbr>{{item.username}} <br>
+                    <abbr title="Phone">P:</abbr> {{item.Telephone}}
+                </address>
+            </div>
+                </a>
+        </div>
+    </div>
+</div>
+</div>
