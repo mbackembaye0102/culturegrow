@@ -38,6 +38,7 @@ import { ListeposteComponent } from './pages/admin/poste/listeposte/listeposte.c
 import { HomeComponent } from './pages/mentor/home/home.component';
 import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 // import { ListecollaborateurComponent } from './pages/admin/listecollaborateur/listecollaborateur.component';
 // import { AjoutcollaborateurComponent } from './pages/admin/ajoutcollaborateur/ajoutcollaborateur.component';
 // import { ModifcollaborateurComponent } from './pages/admin/modifcollaborateur/modifcollaborateur.component';
@@ -75,6 +76,7 @@ import { AddteamstructureComponent } from './pages/admin/structure/addteamstruct
     HomeComponent,
     OnestructureComponent,
     AddteamstructureComponent,
+    QuestionsComponent,
     // ListecollaborateurComponent,
     // AjoutcollaborateurComponent,
     // ModifcollaborateurComponent,

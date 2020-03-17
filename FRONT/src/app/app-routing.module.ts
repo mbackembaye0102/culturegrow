@@ -13,6 +13,7 @@ import { ListestructureComponent } from './pages/admin/structure/listestructure/
 import { HomeComponent } from './pages/mentor/home/home.component';
 import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path:'team/add',component:AjoutteamComponent},
   {path:'team/update/:id',component:ModifteamComponent},
   {path:'mentor',component:HomeComponent},
-  {path:"test",component:TestComponent}
+  {path:"test",component:TestComponent},
+  {path:"questions",component:QuestionsComponent}
 ];
 
 @NgModule({
