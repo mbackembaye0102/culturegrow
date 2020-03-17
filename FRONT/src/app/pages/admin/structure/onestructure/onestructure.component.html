@@ -9,22 +9,22 @@
     </div>
     <div class="col-7"></div>
     <div class="col-2">
-      <a [routerLink]="['/structure/add']" routerLinkActive="router-link-active" >NEW
+      <a [routerLink]="['/structure/addteam',rien]">NEW
         <!-- <input type="submit" value="NEW" (click)="new()" class="btn btn-primary"> -->
       </a>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4" *ngFor="let item of structuremodel">
-      <a [routerLink]="['/onestructure',item.id]" >
-      <div class="card mb-4">
-        <img class="card-img-top" src="../../../assets/img/pencil.jpg"  alt="Card image cap">
+    <div class="col-3" *ngFor="let item of infos">
+      
+      <div class="card">
         <div class="card-body">
-           <h1 class="card-title">{{item.nom}}</h1>
+          <a  [routerLink]="['/team',item.id]">
+          <h5 class="card-title">{{item.nom}}</h5>
+        </a>
         </div>
-     </div>
-    </a>
+      </div>
+   
     </div>
-
-</div>
+  </div>
 </div>

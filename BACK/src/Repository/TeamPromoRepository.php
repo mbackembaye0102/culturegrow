@@ -18,7 +18,17 @@ class TeamPromoRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TeamPromo::class);
     }
-
+    /**
+     * @return TeamPromo[] Returns an array of TeamPromo objects
+     */
+public function teamdechaquestructure($valeur){
+    return $this->createQueryBuilder('t')
+                ->andWhere('t.structure = :val')
+                ->setParameter('val', $valeur)
+                ->getQuery()
+                ->getResult()
+                ;
+}
     // /**
     //  * @return TeamPromo[] Returns an array of TeamPromo objects
     //  */

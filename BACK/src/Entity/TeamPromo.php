@@ -34,13 +34,14 @@ class TeamPromo
     private $structure;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="teampromo")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserTeamPromo", mappedBy="teamPromo")
      */
-    private $users;
+    private $userTeamPromos;
+
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->userTeamPromos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,33 +74,35 @@ class TeamPromo
     }
 
     /**
-     * @return Collection|User[]
+     * @return Collection|UserTeamPromo[]
      */
-    public function getUsers(): Collection
+    public function getUserTeamPromos(): Collection
     {
-        return $this->users;
+        return $this->userTeamPromos;
     }
 
-    public function addUser(User $user): self
+    public function addUserTeamPromo(UserTeamPromo $userTeamPromo): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setTeampromo($this);
+        if (!$this->userTeamPromos->contains($userTeamPromo)) {
+            $this->userTeamPromos[] = $userTeamPromo;
+            $userTeamPromo->setTeamPromo($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUserTeamPromo(UserTeamPromo $userTeamPromo): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if ($this->userTeamPromos->contains($userTeamPromo)) {
+            $this->userTeamPromos->removeElement($userTeamPromo);
             // set the owning side to null (unless already changed)
-            if ($user->getTeampromo() === $this) {
-                $user->setTeampromo(null);
+            if ($userTeamPromo->getTeamPromo() === $this) {
+                $userTeamPromo->setTeamPromo(null);
             }
         }
 
         return $this;
     }
+
+
 }

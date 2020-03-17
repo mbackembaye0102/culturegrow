@@ -20,7 +20,7 @@ information:any;
       error=>{console.log(error);
       }
     )
-    this.authentification.chargementpage();
+//    this.authentification.chargementpage();
   }
 
 }

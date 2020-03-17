@@ -1,16 +1,19 @@
-<body *ngIf="auth.connecter">
+<body>
   <!-- side Menu -->
-  <app-sidemenu></app-sidemenu>
-  <div class="page">
+  <app-sidemenu *ngIf="auth.connecter"></app-sidemenu>
+  <div [ngClass]="{page: auth.connecter}">
     <!-- header -->
-    <app-header></app-header>
+    <app-header *ngIf="auth.connecter"></app-header>
     <section class="mt-30px mb-30px">
       <router-outlet></router-outlet>
     </section>
     <!-- footer -->
-    <app-footer></app-footer>
+    <app-footer *ngIf="auth.connecter"></app-footer>
   </div>
 </body>
-<div *ngIf="!auth.connecter">
+<!-- <div *ngIf="!auth.connecter">
   <router-outlet></router-outlet>
-</div>
+  <h1>Valeur de connecter dans le div={{auth.connecter}}</h1>
+  <h1 [ngClass]="{bon: good}">TRUE</h1>
+  <h1 [ngClass]="{mauvais: !good}">FALSE</h1>
+</div> -->

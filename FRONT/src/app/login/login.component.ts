@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     console.log("login");
+    this.authentification.logout();
     
   }
   token:any;
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     console.log(donner);
     this.authentification.logger(donner).subscribe(
       res=>{
-        this.authentification.connecter=true;
+       // this.authentification.connecter=true;
         this.token=res.body
         this.authentification.enregistrementToken(this.token.token);
       },

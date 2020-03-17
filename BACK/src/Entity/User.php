@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -60,9 +62,28 @@ class User implements UserInterface
     private $Telephone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TeamPromo", inversedBy="users")
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $teampromo;
+    private $userteam = [];
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"grow", "externe"})
+     */
+    private $poste;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserTeamPromo", mappedBy="user")
+     */
+    private $userTeamPromos;
+
+
+
+    public function __construct()
+    {
+        $this->userTeamPromos = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -185,15 +206,59 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTeampromo(): ?TeamPromo
+    public function getUserteam(): ?array
     {
-        return $this->teampromo;
+        return $this->userteam;
     }
 
-    public function setTeampromo(?TeamPromo $teampromo): self
+    public function setUserteam(?array $userteam): self
     {
-        $this->teampromo = $teampromo;
+        $this->userteam = $userteam;
 
         return $this;
     }
+
+    public function getPoste(): ?string
+    {
+        return $this->poste;
+    }
+
+    public function setPoste(string $poste): self
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserTeamPromo[]
+     */
+    public function getUserTeamPromos(): Collection
+    {
+        return $this->userTeamPromos;
+    }
+
+    public function addUserTeamPromo(UserTeamPromo $userTeamPromo): self
+    {
+        if (!$this->userTeamPromos->contains($userTeamPromo)) {
+            $this->userTeamPromos[] = $userTeamPromo;
+            $userTeamPromo->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserTeamPromo(UserTeamPromo $userTeamPromo): self
+    {
+        if ($this->userTeamPromos->contains($userTeamPromo)) {
+            $this->userTeamPromos->removeElement($userTeamPromo);
+            // set the owning side to null (unless already changed)
+            if ($userTeamPromo->getUser() === $this) {
+                $userTeamPromo->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

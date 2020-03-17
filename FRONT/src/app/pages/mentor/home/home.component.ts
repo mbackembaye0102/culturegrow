@@ -12,7 +12,29 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.auth.chargementpage()
+    console.log(this.diagne);
+    
   }
+  diagne=[
+  {
+    'idK':1,
+    'commentaire':'Merciiiiiiiiiii',
+    'nombeneficiare':'Ndioba DIAGNE',
+    'datekudo':123546546,
+    'utilisateur':{
+      'nom':'Mansour DRAME'
+    }
+  },
 
+  {
+    'idK':2,
+    'commentaire':'Merci pour le coashing',
+    'nombeneficiare':'Mansour DRAME',
+    'datekudo':5498744654464,
+    'utilisateur':{
+      'nom':'Ndioba DIAGNE'
+    }
+  }
+  ]
 
 }

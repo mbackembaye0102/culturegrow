@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from './../../../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,23 +17,26 @@ export class AjoutcollaborateurComponent implements OnInit {
   public unTab = 2;
   public list=[]
   public nbrFichier = 0;
+  public taille=1;
   public team:Teampromo;
-  constructor(private auth:AuthService,private admin:AdminService) { }
+  public job:Teampromo;
+  constructor(private auth:AuthService,private admin:AdminService,private router:Router) { }
 
   ngOnInit() {
-    this.auth.chargementpage()
     this.admin.listeteamgrow().subscribe(
       res=>{
-        //console.log(res);
         this.team=res;
-        //console.log(this.team);
-        //console.log("rien");
-        
-        
       },
       error=>{
         console.log(error);
-        
+      }
+    )
+    this.admin.listepostegrow().subscribe(
+      res=>{
+        this.job=res;
+      },
+      error=>{
+        console.log(error);
       }
     )
   }
@@ -42,17 +46,21 @@ export class AjoutcollaborateurComponent implements OnInit {
     telephone:new FormControl!(''),
     email:new FormControl(''),
     profil: new FormControl(''),
-    teams: new FormControl(''),
-    team1: new FormControl('')
-  })
+    team1: new FormControl(''),
+    team2: new FormControl(''),
+    taille: new FormControl(''),
+    poste: new FormControl('')
+  });
     plusteam(){
       this.cache=false;
       this.list.push("a");
       this.nbrFichier++;
+      this.taille++;
     }
     plusteam1(){
       this.list.push("a");
       this.nbrFichier++;
+      this.taille++;
     }
     onAddFile() {
      // this.unTab.push("");
@@ -60,8 +68,13 @@ export class AjoutcollaborateurComponent implements OnInit {
     }
   save(donner){
     console.log(donner);
-    this.admin.saveuser(donner.value).subscribe(
+    console.log(this.taille);
+    donner.taille=this.taille;
+    console.log(donner);
+    this.admin.saveuser(donner).subscribe(
       res=>{console.log(res);
+        this.router.navigate(['/collaborateur'])
+
       },
       error=>{console.log(error);
       }

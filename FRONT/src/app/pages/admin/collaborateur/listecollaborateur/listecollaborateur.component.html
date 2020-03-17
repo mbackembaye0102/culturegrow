@@ -22,19 +22,19 @@
   <div class="row">
     <div class="col-lg-4" *ngFor="let item of user">
         <div class="contact-box">
-            <a class="row" href="profile.html">
+            <a class="row" [routerLink]="['/collaborateur/update',item.id]">
             <div class="col-4">
                 <div class="text-center">
                     <img alt="image" class="rounded-circle m-t-xs img-fluid" src="../../../assets/img/avatar-0.jpg">
-                    <div class="m-t-xs font-bold">Developpeur Web Mobile</div>
+                    <!-- <div class="m-t-xs font-bold">Developpeur Web Mobile</div> -->
                 </div>
             </div>
             <div class="col-8">
                 <h3><strong>{{item.Prenom}} {{item.Nom}}</strong></h3>
                 <address>
-                    <strong>{{item.Statut}}</strong><br>
-                    <abbr title="Email">M:</abbr>{{item.username}} <br>
-                    <abbr title="Phone">P:</abbr> {{item.Telephone}}
+                    <strong>{{item.poste}}</strong><br>
+                    <abbr title="Email">Mail:</abbr>{{item.username}} <br>
+                    <abbr title="Phone">Phone:</abbr> {{item.Telephone}}
                 </address>
             </div>
                 </a>

@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
@@ -12,6 +11,8 @@ import { ListeteamComponent } from './pages/admin/team/listeteam/listeteam.compo
 import { ModifteamComponent } from './pages/admin/team/modifteam/modifteam.component';
 import { ListestructureComponent } from './pages/admin/structure/listestructure/listestructure.component';
 import { HomeComponent } from './pages/mentor/home/home.component';
+import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
+import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -20,8 +21,10 @@ const routes: Routes = [
   {path:'collaborateur/update/:id',component:ModifcollaborateurComponent},
   {path:'structure',component:ListestructureComponent},
   {path:'structure/add',component:AjoutstructureComponent},
+  {path:'onestructure/:id',component:OnestructureComponent},
+  {path:'structure/addteam/:id',component:AddteamstructureComponent},
   {path:'structure/update/:id',component:ModifcollaborateurComponent},
-  {path:'team',component:ListeteamComponent},
+  {path:'team/:id',component:ListeteamComponent},
   {path:'team/add',component:AjoutteamComponent},
   {path:'team/update/:id',component:ModifteamComponent},
   {path:'mentor',component:HomeComponent},

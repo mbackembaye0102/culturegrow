@@ -1,5 +1,6 @@
 import { AuthService } from './../../../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listeteam',
@@ -8,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListeteamComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
-
+  constructor(private auth:AuthService,private route:ActivatedRoute) { }
+  public id:any;
   ngOnInit() {
-    this.auth.chargementpage()
+    //this.auth.chargementpage()
+    this.id=this.route.snapshot.params['id'];
+    console.log(this.id);
+    
   }
 
 

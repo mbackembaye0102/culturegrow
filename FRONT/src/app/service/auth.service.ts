@@ -11,6 +11,7 @@ export class AuthService {
   private urlInfos:string="http://127.0.0.1:8000/infos";
   jwt: string;
   public connecter=false;
+  public deconnecter=true;
   constructor(private http: HttpClient,private route:Router) { }
   logger(data){
     return this.http.post(this.urllogin , data , {observe:'response'})
@@ -22,8 +23,15 @@ export class AuthService {
   enregistrementToken(jwtToken : string){ 
     localStorage.setItem('token',jwtToken);
     this.jwt=jwtToken;
-    this.route.navigate(["/test"]);
+    this.connecter=true;
+    this.deconnecter=false;
+    this.route.navigate(["/collaborateur"]);
   //  this.recuperation();
+  }
+  logout(){
+    localStorage.removeItem('token')
+    this.connecter=false;
+this.route.navigate(["/login"])
   }
   recuperation(){
     let jwtHelper = new JwtHelperService();
@@ -56,14 +64,27 @@ export class AuthService {
   }
   chargementpage(){
     if (localStorage.getItem('token')) {
-      if (this.connecter==false) {
-        this.connecter=true;
+  //    alert("dans le if connecter"+this.connecter);
+    //  alert("dans le if deconnecter"+this.deconnecter);
+      this.connecter=true;   
+      this.deconnecter=false;     
       }
-      console.log(this.connecter);
+      else{
+      //  alert("dans le else connecter"+this.connecter)    
+      }
+      // console.log(this.connecter);
+      // if (this.connecter==false) {
+      //   this.connecter=true;
+      // }
+      // else{
+      //   console.log(this.connecter);
+        
+      // }
+      // console.log(this.connecter);
       
     }
-    else{
-      this.route.navigate(["/"])
-    }
-  }
+    // else{
+    //   this.route.navigate(["/"])
+    // }
+ // }
 }

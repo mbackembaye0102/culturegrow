@@ -36,6 +36,8 @@ import { ModifteamComponent } from './pages/admin/team/modifteam/modifteam.compo
 import { AjoutposteComponent } from './pages/admin/poste/ajoutposte/ajoutposte.component';
 import { ListeposteComponent } from './pages/admin/poste/listeposte/listeposte.component';
 import { HomeComponent } from './pages/mentor/home/home.component';
+import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
+import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 // import { ListecollaborateurComponent } from './pages/admin/listecollaborateur/listecollaborateur.component';
 // import { AjoutcollaborateurComponent } from './pages/admin/ajoutcollaborateur/ajoutcollaborateur.component';
 // import { ModifcollaborateurComponent } from './pages/admin/modifcollaborateur/modifcollaborateur.component';
@@ -71,6 +73,8 @@ import { HomeComponent } from './pages/mentor/home/home.component';
     AjoutposteComponent,
     ListeposteComponent,
     HomeComponent,
+    OnestructureComponent,
+    AddteamstructureComponent,
     // ListecollaborateurComponent,
     // AjoutcollaborateurComponent,
     // ModifcollaborateurComponent,

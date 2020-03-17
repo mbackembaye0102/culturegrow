@@ -11,7 +11,6 @@ export class SidemenuComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit() {
-    this.auth.chargementpage()
   }
 
 }

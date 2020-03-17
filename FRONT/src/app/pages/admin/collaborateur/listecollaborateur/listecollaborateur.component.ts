@@ -13,7 +13,8 @@ export class ListecollaborateurComponent implements OnInit {
   constructor(private auth:AuthService,private router:Router,private admin:AdminService) { }
 
   ngOnInit() {
-    this.auth.chargementpage();
+  //  this.auth.chargementpage();
+  //alert(this.auth.connecter)
     this.admin.listuser().subscribe(
       res=>{console.log(res);
         this.user=res;

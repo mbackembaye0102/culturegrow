@@ -11,7 +11,7 @@ export class ModifcollaborateurComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit() {
-    this.auth.chargementpage()
+    //this.auth.chargementpage()
   }
 
 
