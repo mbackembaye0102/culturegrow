@@ -25,7 +25,6 @@ export class AuthService {
     localStorage.setItem('token',jwtToken);
     this.jwt=jwtToken;
 
-    
     this.recuperation();
   }
   logout(){
