@@ -34,7 +34,7 @@ class TeamPromo
     private $structure;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserTeamPromo", mappedBy="teamPromo")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserTeamPromo", mappedBy="TeamPromo")
      */
     private $userTeamPromos;
 
@@ -103,6 +103,5 @@ class TeamPromo
 
         return $this;
     }
-
 
 }

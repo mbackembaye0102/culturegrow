@@ -19,6 +19,23 @@ class StructureRepository extends ServiceEntityRepository
         parent::__construct($registry, Structure::class);
     }
 
+   /**
+     * @return Structure[] Returns an array of Structure objects
+     */
+    
+    public function allstructure($value)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.id != :val')
+            ->setParameter('val', $value)
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Structure[] Returns an array of Structure objects
     //  */

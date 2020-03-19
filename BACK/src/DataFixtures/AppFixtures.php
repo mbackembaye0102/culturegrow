@@ -42,7 +42,6 @@ class AppFixtures extends Fixture
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setStatut("actif");
         $user->setTelephone("772652363");
-       // $user->setUserteam(["Team Tech&Digital"]);
         $user->setPoste("Développeur");
         $password = $this->encoder->encodePassword($user, 'welcome');
         $user->setPassword($password);
@@ -59,7 +58,6 @@ class AppFixtures extends Fixture
         $user1->setRoles(["ROLE_ADMIN"]);
         $user1->setStatut("actif");
         $user1->setTelephone("772658952");
-       // $user1->setUserteam(["Team Tech&Digital","Team Business"]);
         $user1->setPoste("Développeur");
         $password1 = $this->encoder->encodePassword($user1, 'welcome');
         $user1->setPassword($password1);

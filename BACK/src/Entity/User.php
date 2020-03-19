@@ -62,11 +62,6 @@ class User implements UserInterface
     private $Telephone;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
-     */
-    private $userteam = [];
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"grow", "externe"})
      */
@@ -76,8 +71,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\UserTeamPromo", mappedBy="user")
      */
     private $userTeamPromos;
-
-
 
     public function __construct()
     {
@@ -202,18 +195,6 @@ class User implements UserInterface
     public function setTelephone(string $Telephone): self
     {
         $this->Telephone = $Telephone;
-
-        return $this;
-    }
-
-    public function getUserteam(): ?array
-    {
-        return $this->userteam;
-    }
-
-    public function setUserteam(?array $userteam): self
-    {
-        $this->userteam = $userteam;
 
         return $this;
     }

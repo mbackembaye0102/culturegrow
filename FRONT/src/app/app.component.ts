@@ -11,6 +11,6 @@ export class AppComponent implements OnInit{
   good=false;
   constructor(private auth:AuthService){}
   ngOnInit(){
-    this.auth.chargementpage();    
+    this.auth.recuperation();    
   }
 }

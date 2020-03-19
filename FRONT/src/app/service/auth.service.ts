@@ -10,6 +10,7 @@ export class AuthService {
   private urllogin:string="http://127.0.0.1:8000/login";
   private urlInfos:string="http://127.0.0.1:8000/infos";
   jwt: string;
+  role:any;
   public connecter=false;
   public deconnecter=true;
   constructor(private http: HttpClient,private route:Router) { }
@@ -23,10 +24,9 @@ export class AuthService {
   enregistrementToken(jwtToken : string){ 
     localStorage.setItem('token',jwtToken);
     this.jwt=jwtToken;
-    this.connecter=true;
-    this.deconnecter=false;
-    this.route.navigate(["/collaborateur"]);
-  //  this.recuperation();
+
+    
+    this.recuperation();
   }
   logout(){
     localStorage.removeItem('token')
@@ -36,16 +36,24 @@ this.route.navigate(["/login"])
   recuperation(){
     let jwtHelper = new JwtHelperService();
     let objet= jwtHelper.decodeToken(this.jwt);
-    console.log(objet.aut);
-    this.route.navigate(["/test"]);
-    //  this.role=objet.roles;
-    //  localStorage.setItem('role',objet.roles[0]);
+    console.log(objet);
+   // this.route.navigate(["/test"]);
+      this.role=objet.roles;
+      localStorage.setItem('role',objet.roles[0]);
     //  if (this.role[0]=="ROLE_ALL") {
     //    this.router.navigate(["/listusersysteme"]);
     //  }
-    //  if (this.role[0]=="ROLE_ADMIN") {
-    //    this.router.navigate(["/listusersysteme"]);
-    //  }
+     if (this.role[0]=="ROLE_ADMIN") {
+      this.connecter=true;
+      this.deconnecter=false;
+      this.route.navigate(["/collaborateur"]);
+      // this.router.navigate(["/listusersysteme"]);
+     }
+     else{
+      this.connecter=false;
+      this.deconnecter=true;
+      this.route.navigate(["/questions"]);
+     }
     //  if (this.role[0]=="ROLE_CAISSIER") {
     //    this.router.navigate(["/depot"]);
     //  }

@@ -2,20 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Structure;
 use App\Entity\TeamPromo;
-use App\Entity\User;
-use App\Repository\StructureRepository;
-use App\Repository\TeamPromoRepository;
+use App\Entity\UserTeamPromo;
 use App\Repository\UserRepository;
 use App\Repository\PosteRepository;
+use App\Repository\StructureRepository;
+use App\Repository\TeamPromoRepository;
+use App\Repository\UserTeamPromoRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
      * @Route("/admin", name="admin")
@@ -25,13 +27,14 @@ class AdminController extends AbstractController
     /**
      * @Route("/saveusergrow", methods={"POST"})
      */
-    public function adduser(Request $request,UserPasswordEncoderInterface $encoder,EntityManagerInterface $entityManagerInterface){
+    public function adduser(Request $request,UserPasswordEncoderInterface $encoder,EntityManagerInterface $entityManagerInterface,TeamPromoRepository $teamPromoRepository){
         $data= $request->request->all();
         $user= new User();
         $taille=$data["taille"];
         $team=[];
         for ($i=1; $i <=$taille; $i++) { 
-            array_push($team,$data["team$i"]);
+            $teams[$i]=$teamPromoRepository->findOneBy(['nom'=>$data["team$i"]]);
+            array_push($team,$teams[$i]);
         }
         $user->setPrenom($data['prenom']);
         $user->setNom($data['nom']);
@@ -39,11 +42,17 @@ class AdminController extends AbstractController
         $user->setPoste($data['poste']);
         $user->setPassword($encoder->encodePassword($user,"welcome"));
         $profil=$data['profil'];
-        $user->setUserteam($team);
         $user->setRoles(["ROLE_$profil"]);
         $user->setTelephone($data['telephone']);
         $user->setStatut("actif");
         $entityManagerInterface->persist($user);
+        
+        for ($i=0; $i <$taille; $i++) { 
+            $userTeamPromo= new UserTeamPromo();
+            $userTeamPromo->setUser($user);
+            $userTeamPromo->setTeamPromo($team[$i]);
+            $entityManagerInterface->persist($userTeamPromo);
+        }
         $entityManagerInterface->flush();
         return $this->json([
             'message'=>'Ajout Effectuer',
@@ -103,7 +112,8 @@ class AdminController extends AbstractController
      * @Route("/listestructure")
      */
     public function liststructure(SerializerInterface $serializer,StructureRepository $stucture){
-        $a=$stucture->findAll();
+        $grow=$stucture->findOneBy(['nom'=>'GROW']);
+        $a=$stucture->allstructure($grow->getId());
         $data = $serializer->serialize($a, 'json',[
             'groups' => ['grow']
         ]);
@@ -140,7 +150,7 @@ class AdminController extends AbstractController
                 'Content-Type' => 'application/json'
             ]);
         }
-            /**
+    /**
      * @Route("/saveoneteamstructure")
      */
     public function saveoneteamstructure(Request $request,StructureRepository $structureRepository,EntityManagerInterface $entityManagerInterface){
@@ -155,6 +165,61 @@ class AdminController extends AbstractController
             'message'=>'Ajout Effectuer',
             'status'=>200
         ]);  
+    }
+    /**
+     * @Route("/userteam")
+     */
+    public function userteam(Request $request,UserTeamPromoRepository $userTeamPromoRepository,SerializerInterface $serializer){
+        $data=$request->request->all();
+        $user=$userTeamPromoRepository->findBy(['TeamPromo'=>$data['id']]);
+        
+        $data = $serializer->serialize($user, 'json',[
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+    /**
+     * @Route("/saveuserteam")
+     */
+    public function saveuserteam(Request $request,EntityManagerInterface $entityManagerInterface,UserPasswordEncoderInterface $encoder,TeamPromoRepository $teamPromoRepository){
+        $data=$request->request->all();
+        $user= new User();
+        $user->setPrenom($data['prenom']);
+        $user->setNom($data['nom']);
+        $user->setUsername($data['email']);
+        $user->setPoste($data['poste']);
+        $user->setPassword($encoder->encodePassword($user,"welcome"));
+        $profil="externe";
+        $user->setRoles(["ROLE_$profil"]);
+        $user->setTelephone($data['telephone']);
+        $user->setStatut("actif");
+        $entityManagerInterface->persist($user);
+        $userTeamPromo= new UserTeamPromo();
+        $userTeamPromo->setUser($user);
+        $a=$teamPromoRepository->find($data['id']);
+        $userTeamPromo->setTeamPromo($a);
+        $entityManagerInterface->persist($userTeamPromo);
+        $entityManagerInterface->flush();
+        return $this->json([
+            'message'=>'Ajout Effectuer',
+            'status'=>200
+        ]);  
+
+    }
+        /**
+     * @Route("/structurepromo")
+     */
+    public function structurepromo(Request $request,TeamPromoRepository $teamPromoRepository,SerializerInterface $serializer){
+        $data=$request->request->all();
+        $a=$teamPromoRepository->findBy(['id'=>$data['id']]);
+        $data = $serializer->serialize($a, 'json',[
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
     }
     
 }

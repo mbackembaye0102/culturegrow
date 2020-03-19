@@ -1,222 +1,109 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-
-@import url('https://fonts.googleapis.com/css?family=Lato');
-
-
-// STYLES
-
-// fonts
-
-$font-primary: 'Montserrat','Arial',sans-serif;
-$font-body: 'Lato','Arial',sans-serif;
-
-// colors
-$color-primary: #8D6CC7;
-$color-primary-dark: darken($color-primary,3%);
-$color-light-gray: #DAE2F1;
-
-// GLOBAL
-
-*{
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;         /* Opera/IE 8+ */
+.logo{
+  width: 30%;
+  text-align: center;
+  margin-left: 150px;
 }
-
-html,
-body{
-  // background: #DCEAED;
-  height: 100%;
-}
-
-body{
-  background:
-    linear-gradient(
-      rgba(220, 234, 237, .7),
-      rgba(220, 234, 237, .7)
-    ),
-    url(http://res.cloudinary.com/jenelle-miller/image/upload/v1518619522/doodles_cuau2z.png) repeat;
-}
-
-.container{
-  height: 100%;
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .img{
-  text-align: center;
+  height: 30%;
+}
+.input{
+  border-radius: 15px;
+  margin-bottom: 10px;
+  border:  solid white;
+  background-color: #E9E9E9;
+  height: 30px;
+  width: 250px;
+  color: white;
+  padding: 15px;
 }
 
-// FORM
-
-.form-background{
-  background: #fff;
-  width: 420px;
-  border-radius: 10px;
-  padding: 32px;
-  // align-self: center;
--webkit-box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
--moz-box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
-box-shadow: 0px 15px 88px -37px rgba(0,0,0,0.17);
-} 
-
-form{
-  text-transform: capitalize;
-  font-family: $font-body;
-  text-align: center;
-  
-}
-
-input{
-  width: 100%;
-  margin-bottom: 15px;
-  border-radius: 30px;
+.bouton{
+  background-color: #FF4080;
   border: 1px solid #FF4080;
-  padding: 15px 20px;
-  color:#8498AF;
-  font-size: .9rem;
-  transition: .4s;
-  
-    &:last-child{
-    margin-bottom: 0;
-  }
-  &:focus{
-    border-color: #FF4080;
-    outline: none;
-    
-  }
-}
-
-[type="submit"]{
-  background: $color-primary;
-  border-radius: 30px;
-  padding: 16px 30px;
-  width: 100%;
-  color: #fff;
-  background: #FF4080;
-  text-transform: uppercase;
-  font-size: .8rem;
-  transition: .4s;
-  font-family: $font-primary;
-  border: none;
-  box-shadow: none;
-  margin: 0;
-  
-    &:hover{
-   // background: $color-primary-dark;
-   background: #FF4080;
-    cursor: pointer;
-  }
-}
-
-.sign-up-divider{
-  font-family: $font-primary;
+  color: white;
+  border-radius: 15px;
+  width: 35%;
   text-align: center;
-  color: #C4C8D4;
-  font-size: .8rem;
-  letter-spacing: .5px;
-  padding: 24px 0;
-  
-  &::before{
-  content: '';
-  display: inline-block;
-  width: 27%;
-  margin-right: 5%;
-  height: 1px;
-  background: $color-light-gray;
-  vertical-align: middle;
+  margin-left: 80px;
+  margin-bottom: 20px;
+
 }
 
-  &::after{
-    content: '';
-    display: inline-block;
-    width: 27%;
-    margin-left: 5%;
-    height: 1px;
-    background: $color-light-gray;
-    vertical-align: middle;
+.form{
+  border: 2px solid #E9E9E9;
+  border-radius: 20px;
+  padding-left: 100px;
+  padding-top: 30px;
+  box-shadow: 2px 2px 2px 2px #E9E9E9 ;
+
+
+}
+
+.formulaire{
+padding-top: 65px;
+}
+
+
+/*resolution d'ecran à 640px*/
+
+@media screen and (max-width: 440px){
+  $url:"/assets/mbackenever1.png";
+  body{
+     width: auto;
+   margin:0;
+     padding: 0;
+     background-image: url($url);
+     background-repeat: no-repeat;
+    //  background: {
+    //   image: url($url);
+    //   // repeat:no-repeat;
+    //  };
   }
+.never{
+   visibility: hidden;
+}
+
+.formulaire{
+   margin-top: -500px;
+}
+.input{
+
+  height: 30px;
+  width: 200px;
+  color: black;
+  background-color: rgb(187, 187, 187);
+
+  
 
 }
 
-// Social Icons
+.form{
+  border: 2px solid #E9E9E9;
+  padding-left: 35px;
+  padding-top: 30px;
+  opacity: 0.9;
+  background-color: white;
+  margin:0;
 
-.social-media-icons{
+
+}
+.bouton{
+  background-color: #FF4080;
+  border: 1px solid #FF4080;
+  color: white;
+  border-radius: 15px;
+  width: 35%;
   text-align: center;
-  color: #fff;
-  
-    & li{
-    margin-right: 10px;
-    list-style: none;
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 1rem;
-    line-height: .8rem;
-    transition: .3s;
-    display: relative;
-    padding-top: 15px;
-  }
-  
-  & li a{
-    color: #fff;
-    vertical-align: middle;
-    text-align: center;
-    top: 10px;
-  }
-  
+  margin-left: 50px;
+  margin-bottom: 20px;
+
 }
-
-li.google{
-  background: #EA5859;
-  &:hover{
-  background: darken(#EA5859,6%);
-  cursor: pointer;
-  }
-}
-
-li.facebook{
-  background: #527ED5;
-  &:hover{
-  background: darken(#527ED5,6%);
-  cursor: pointer;
-  }
-}
-
-li.twitter{
-  background: #61BDED;
-  &:hover{
-  background: darken(#61BDED,6%);
-  cursor: pointer;
-  }
-}
-
-// LOGIN
-
-.login{
+.logo{
+  width: 30%;
   text-align: center;
-  margin-top: 24px;
-  font-size: .8rem;
-  font-family: $font-primary;
-  
-   & a{
-    margin-left: 4px;
-    text-decoration: none;
-    color: $color-primary;
-    transition: .3s;
-  }
-  & a:hover{
-    color: $color-primary-dark;
-  }
+  margin-left: 120px;
 }
 
 
 
+}

@@ -12,8 +12,11 @@ export class AdminService {
   private urladdstructure:string="http://127.0.0.1:8000/admin/savestructure";
   private urllistestructure:string="http://127.0.0.1:8000/admin/listestructure";
   private urladdteamstructure:string="http://127.0.0.1:8000/admin/addteamstructure";
-  private urloneteamstructure:string="http://127.0.0.1:8000/admin/oneteamstructure"
-  private urlsaveoneteamstructure:string="http://127.0.0.1:8000/admin/saveoneteamstructure"
+  private urloneteamstructure:string="http://127.0.0.1:8000/admin/oneteamstructure";
+  private urlsaveoneteamstructure:string="http://127.0.0.1:8000/admin/saveoneteamstructure";
+  private urluserteam:string="http://127.0.0.1:8000/admin/userteam";
+  private urlsaveuserteam:string="http://127.0.0.1:8000/admin/saveuserteam";
+  public idteam=0;
   constructor(private http: HttpClient) { }
  saveuser(data){
     return this.http.post(this.urlsaveuser , data , {observe:'response'})
@@ -42,4 +45,11 @@ export class AdminService {
   saveoneteamstructure(data){
     return this.http.post(this.urlsaveoneteamstructure,data,{observe:'response'})
   }
+  userteam(data){
+    return this.http.post(this.urluserteam,data,{observe:'response'})
+  }
+  saveuserteam(data){
+    return this.http.post(this.urlsaveuserteam,data,{observe:'response'})
+  }
+  
 }

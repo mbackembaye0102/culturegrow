@@ -102,58 +102,9 @@
       margin-right: 0;
     }
   }
-
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-   }
-   
-   .form-group {
-    //background: tomato;
-    padding: 1em;
-    margin: 1em;
-   }
-   
-   
-   $input-file-color: grey;
-   $input-file-hover-color: black;
-   
-   input[type=file] {
-     outline: 0;
-     opacity: 0;
-     pointer-events: none;
-     user-select: none;
-   }
-   
-   .label {
-     width: 120px;
-    // height: 100px;
-     border-radius: 5px;
-     display: block;
-     padding: 1.2em;
-     transition: border 300ms ease;
-     cursor: pointer;
-     width: 200px;
-   
-     i {
-       display: block;
-       font-size: 42px;
-     }
-     
-     i,
-     .title {
-       color: $input-file-color;
-       transition: 200ms color;
-     }
-
-   }
-.user-details{
-    margin-top: -100px;
-}
-
-.bt{
-    margin-top: -40px;
-
-}
+  .login-wrap .forgot-pass a {
+    display: block;
+    text-decoration: underline;
+    font-size: 16px;
+    margin-top: 10px;
+  }

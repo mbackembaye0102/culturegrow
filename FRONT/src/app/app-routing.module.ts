@@ -14,19 +14,21 @@ import { HomeComponent } from './pages/mentor/home/home.component';
 import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
+import { AdduserComponent } from './pages/adduser/adduser.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
+  {path:'login',component:LoginComponent},
   {path:'collaborateur',component:ListecollaborateurComponent},
-  {path:'collaborateur/add',component:AjoutcollaborateurComponent},
+  {path:'collaborateur/add',component:AdduserComponent},
   {path:'collaborateur/update/:id',component:ModifcollaborateurComponent},
   {path:'structure',component:ListestructureComponent},
   {path:'structure/add',component:AjoutstructureComponent},
   {path:'onestructure/:id',component:OnestructureComponent},
   {path:'structure/addteam/:id',component:AddteamstructureComponent},
   {path:'structure/update/:id',component:ModifcollaborateurComponent},
+  {path:'team/add',component:AdduserComponent},
   {path:'team/:id',component:ListeteamComponent},
-  {path:'team/add',component:AjoutteamComponent},
   {path:'team/update/:id',component:ModifteamComponent},
   {path:'mentor',component:HomeComponent},
   {path:"test",component:TestComponent},
