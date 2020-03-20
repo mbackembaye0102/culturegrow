@@ -24,7 +24,10 @@ export class AuthService {
   enregistrementToken(jwtToken : string){ 
     localStorage.setItem('token',jwtToken);
     this.jwt=jwtToken;
-
+    let jwtHelper = new JwtHelperService();
+    let objet= jwtHelper.decodeToken(this.jwt);
+ //   this.role=objet.roles;
+    localStorage.setItem('role',objet.roles[0]);
     this.recuperation();
   }
   logout(){
@@ -33,16 +36,15 @@ export class AuthService {
 this.route.navigate(["/login"])
   }
   recuperation(){
-    let jwtHelper = new JwtHelperService();
-    let objet= jwtHelper.decodeToken(this.jwt);
-    console.log(objet);
+
+//    console.log(objet);
    // this.route.navigate(["/test"]);
-      this.role=objet.roles;
-      localStorage.setItem('role',objet.roles[0]);
+
     //  if (this.role[0]=="ROLE_ALL") {
     //    this.router.navigate(["/listusersysteme"]);
     //  }
-     if (this.role[0]=="ROLE_ADMIN") {
+    let rrr=localStorage.getItem('role')
+     if (rrr=="ROLE_ADMIN") {
       this.connecter=true;
       this.deconnecter=false;
       this.route.navigate(["/collaborateur"]);

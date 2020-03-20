@@ -1,3 +1,4 @@
+import { ListeComponent } from './pages/mbacke/liste/liste.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
@@ -15,6 +16,7 @@ import { OnestructureComponent } from './pages/admin/structure/onestructure/ones
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
 import { AdduserComponent } from './pages/adduser/adduser.component';
+import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -32,7 +34,9 @@ const routes: Routes = [
   {path:'team/update/:id',component:ModifteamComponent},
   {path:'mentor',component:HomeComponent},
   {path:"test",component:TestComponent},
-  {path:"questions",component:QuestionsComponent}
+  {path:"questions",component:QuestionsComponent},
+  {path:"mbacke",component:ListeComponent},
+  {path:"mbackedetail",component:DetailuserComponent},
 ];
 
 @NgModule({

@@ -40,6 +40,8 @@ import { OnestructureComponent } from './pages/admin/structure/onestructure/ones
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
 import { AdduserComponent } from './pages/adduser/adduser.component';
+import { ListeComponent } from './pages/mbacke/liste/liste.component';
+import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 // import { ListecollaborateurComponent } from './pages/admin/listecollaborateur/listecollaborateur.component';
 // import { AjoutcollaborateurComponent } from './pages/admin/ajoutcollaborateur/ajoutcollaborateur.component';
 // import { ModifcollaborateurComponent } from './pages/admin/modifcollaborateur/modifcollaborateur.component';
@@ -79,6 +81,8 @@ import { AdduserComponent } from './pages/adduser/adduser.component';
     AddteamstructureComponent,
     QuestionsComponent,
     AdduserComponent,
+    ListeComponent,
+    DetailuserComponent,
     // ListecollaborateurComponent,
     // AjoutcollaborateurComponent,
     // ModifcollaborateurComponent,
