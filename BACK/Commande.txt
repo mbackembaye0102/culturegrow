@@ -7,7 +7,7 @@ composer create-project symfony/skeleton neldale
 'csrf_protection' => false,
 composer require --dev orm-fixtures
 php bin/console doctrine:fixtures:load
-php bin/console doctrine:schema:update  --force
+php bin/console doctrine:schema:update  --forceè
 php bin/console server:run
 'mapped'=> false
 pour le git

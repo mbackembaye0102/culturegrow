@@ -12,13 +12,11 @@ export class AuthService {
   jwt: string;
   role:any;
   public connecter=false;
-  public deconnecter=true;
   constructor(private http: HttpClient,private route:Router) { }
   logger(data){
     return this.http.post(this.urllogin , data , {observe:'response'})
   }
   infosconnecter(){
-   // console.log(data);
     return this.http.post(this.urlInfos  , {observe:'response'})
   }
   enregistrementToken(jwtToken : string){ 
@@ -26,74 +24,38 @@ export class AuthService {
     this.jwt=jwtToken;
     let jwtHelper = new JwtHelperService();
     let objet= jwtHelper.decodeToken(this.jwt);
- //   this.role=objet.roles;
     localStorage.setItem('role',objet.roles[0]);
-    this.recuperation();
+    this.connecter=true;
+    this.redirection();
+  }
+  redirection(){
+    this.role=localStorage.getItem('role');
+    if (this.role==="ROLE_ADMIN") {
+      this.route.navigate(['/collaborateur']);
+    }
+    else if(this.role==="ROLE_MENTOR"){
+      this.route.navigate(['/mentor']);
+    }
+    else{
+      this.route.navigate(['/mbackedetail']);
+    }
   }
   logout(){
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.connecter=false;
-this.route.navigate(["/login"])
+    this.route.navigate(["/login"])
   }
-  recuperation(){
-
-//    console.log(objet);
-   // this.route.navigate(["/test"]);
-
-    //  if (this.role[0]=="ROLE_ALL") {
-    //    this.router.navigate(["/listusersysteme"]);
-    //  }
-    let rrr=localStorage.getItem('role')
-     if (rrr=="ROLE_ADMIN") {
-      this.connecter=true;
-      this.deconnecter=false;
-      this.route.navigate(["/collaborateur"]);
-      // this.router.navigate(["/listusersysteme"]);
-     }
-     else{
-      this.connecter=false;
-      this.deconnecter=true;
-      this.route.navigate(["/questions"]);
-     }
-    //  if (this.role[0]=="ROLE_CAISSIER") {
-    //    this.router.navigate(["/depot"]);
-    //  }
-    //  if (this.role[0]=="ROLE_PRESTATAIRE") {
-    //    this.router.navigate(["/listeuser"]);
-    //  }
-    //  if (this.role[0]=="ROLE_UTILISATEUR") {
-    //    this.router.navigate(["/transfert"]);
-    //  }
-    //  if (this.role[0]=="ROLE_ADMINISTRATEUR") {
-    //    this.router.navigate(["/listeuser"]);
-    //  }
-}
   getToken(){
     return this.jwt=localStorage.getItem('token');
   }
   chargementpage(){
-    if (localStorage.getItem('token')) {
-  //    alert("dans le if connecter"+this.connecter);
-    //  alert("dans le if deconnecter"+this.deconnecter);
-      this.connecter=true;   
-      this.deconnecter=false;     
+    let good=this.getToken();
+      if (good) {
+        this.connecter=true;
       }
       else{
-      //  alert("dans le else connecter"+this.connecter)    
+        this.logout();
       }
-      // console.log(this.connecter);
-      // if (this.connecter==false) {
-      //   this.connecter=true;
-      // }
-      // else{
-      //   console.log(this.connecter);
-        
-      // }
-      // console.log(this.connecter);
-      
     }
-    // else{
-    //   this.route.navigate(["/"])
-    // }
- // }
 }

@@ -221,5 +221,12 @@ class AdminController extends AbstractController
             'Content-Type' => 'application/json'
         ]);
     }
+    /**
+     * @Route("/yaya")
+     */
+    public function yaya(Request $request){
+        $data=$request->request->all();
+        dump($data);die();
+    }
     
 }

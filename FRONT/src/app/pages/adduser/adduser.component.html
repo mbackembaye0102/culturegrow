@@ -3,7 +3,9 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="login-wrap">
         <div class="user-pic">
-          <img src="https://i.ibb.co/kQB44c0/user.png" alt="user-pic">
+          
+          <img [src]="image"  alt="user-pic" (click)="pp.click()">
+          <input  hidden #pp type="file" accept="image/*" (change)="handleFileInputPP($event.target.files)">
         </div>
         <div class="user-details">
           <form [formGroup]="user" class="">

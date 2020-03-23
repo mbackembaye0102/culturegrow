@@ -14,6 +14,7 @@ export class AdduserComponent implements OnInit {
   url={addcollaborateur:'/collaborateur/add',addteam:'/team/add'}
   public rien:boolean=true;
   public cache:boolean=true;
+  public image="https://i.ibb.co/kQB44c0/user.png";
   suivant=false;
   public unTab = 2;
   public list=[]
@@ -114,4 +115,19 @@ export class AdduserComponent implements OnInit {
     console.log(data);
     
   }
+  handleFileInputPP(file: FileList) {
+    console.log(file);
+    let a=file.item(0)
+    // this.fileToUploadPp = file.item(0);
+    // console.log(this.fileToUploadPp);
+     var reader = new FileReader();
+     //console.log(reader);
+    reader.onload = (event: any) => {
+      
+      
+      this.image = event.target.result;
+    }
+    reader.readAsDataURL(a);
+  }
+
 }

@@ -17,6 +17,7 @@ import { AddteamstructureComponent } from './pages/admin/structure/addteamstruct
 import { QuestionsComponent } from './pages/questions/questions.component';
 import { AdduserComponent } from './pages/adduser/adduser.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
+import { GoogleformComponent } from './pages/googleform/googleform.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path:"questions",component:QuestionsComponent},
   {path:"mbacke",component:ListeComponent},
   {path:"mbackedetail",component:DetailuserComponent},
+  {path:"googleform",component:GoogleformComponent},
 ];
 
 @NgModule({

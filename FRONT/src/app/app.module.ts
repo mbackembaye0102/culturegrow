@@ -42,6 +42,7 @@ import { QuestionsComponent } from './pages/questions/questions.component';
 import { AdduserComponent } from './pages/adduser/adduser.component';
 import { ListeComponent } from './pages/mbacke/liste/liste.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
+import { GoogleformComponent } from './pages/googleform/googleform.component';
 // import { ListecollaborateurComponent } from './pages/admin/listecollaborateur/listecollaborateur.component';
 // import { AjoutcollaborateurComponent } from './pages/admin/ajoutcollaborateur/ajoutcollaborateur.component';
 // import { ModifcollaborateurComponent } from './pages/admin/modifcollaborateur/modifcollaborateur.component';
@@ -83,6 +84,7 @@ import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.compon
     AdduserComponent,
     ListeComponent,
     DetailuserComponent,
+    GoogleformComponent,
     // ListecollaborateurComponent,
     // AjoutcollaborateurComponent,
     // ModifcollaborateurComponent,
