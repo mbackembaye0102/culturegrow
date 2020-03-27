@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
         $user->setStatut("actif");
         $user->setTelephone("772652363");
         $user->setPoste("Développeur");
+        $user->setImage("uploads/defaut.png");
         $password = $this->encoder->encodePassword($user, 'welcome');
         $user->setPassword($password);
         $manager->persist($user);
@@ -59,6 +60,7 @@ class AppFixtures extends Fixture
         $user1->setStatut("actif");
         $user1->setTelephone("772658952");
         $user1->setPoste("Développeur");
+        $user1->setImage("uploads/defaut.png");
         $password1 = $this->encoder->encodePassword($user1, 'welcome');
         $user1->setPassword($password1);
         $manager->persist($user1);

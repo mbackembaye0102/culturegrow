@@ -16,10 +16,24 @@ export class AdminService {
   private urlsaveoneteamstructure:string="http://127.0.0.1:8000/admin/saveoneteamstructure";
   private urluserteam:string="http://127.0.0.1:8000/admin/userteam";
   private urlsaveuserteam:string="http://127.0.0.1:8000/admin/saveuserteam";
+  private urldetailuser:string="http://127.0.0.1:8000/admin/detailuser";
+  
   public idteam=0;
   constructor(private http: HttpClient) { }
- saveuser(data){
-    return this.http.post(this.urlsaveuser , data , {observe:'response'})
+ saveuser(data,fileToUpload){
+  const formData: FormData= new FormData();
+  formData.append('prenom', data.prenom);
+  formData.append('nom', data.nom);
+  formData.append('email', data.email);
+  formData.append('poste', data.poste);
+  formData.append('profil', data.profil);
+  formData.append('telephone', data.telephone);
+  formData.append('taille', data.taille);
+  formData.append('team1', data.team1);
+  formData.append('team2', data.team2);
+  formData.append('image', fileToUpload);
+  return this.http.post(this.urlsaveuser,formData,{observe:'response'})
+   // return this.http.post(this.urlsaveuser , data , {observe:'response'})
   }
   listuser(){
     return this.http.post(this.urllistuser , {observe:'response'})
@@ -48,8 +62,17 @@ export class AdminService {
   userteam(data){
     return this.http.post(this.urluserteam,data,{observe:'response'})
   }
-  saveuserteam(data){
-    return this.http.post(this.urlsaveuserteam,data,{observe:'response'})
+  saveuserteam(data,fileToUpload){
+    const formData: FormData= new FormData();
+    formData.append('username', data.username);
+    formData.append('prenom', data.prenom);
+    formData.append('nom', data.nom);
+    formData.append('telephone', data.telephone);
+    formData.append('profil', data.profil);
+    formData.append('image', fileToUpload, fileToUpload.name);
+    return this.http.post(this.urlsaveuserteam,formData,{observe:'response'})
   }
-  
+  detailuser(data){
+    return this.http.post(this.urldetailuser,data,{observe:'response'})
+  }
 }

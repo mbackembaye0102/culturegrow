@@ -4,7 +4,7 @@
       <div class="login-wrap">
         <div class="user-pic">
           
-          <img [src]="image"  alt="user-pic" (click)="pp.click()">
+          <img [src]="image" class="photo"  alt="user-pic" (click)="pp.click()">
           <input  hidden #pp type="file" accept="image/*" (change)="handleFileInputPP($event.target.files)">
         </div>
         <div class="user-details">

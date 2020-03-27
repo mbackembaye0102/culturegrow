@@ -71,7 +71,8 @@ export class AjoutcollaborateurComponent implements OnInit {
     console.log(this.taille);
     donner.taille=this.taille;
     console.log(donner);
-    this.admin.saveuser(donner).subscribe(
+    let a="";
+    this.admin.saveuser(donner,a).subscribe(
       res=>{console.log(res);
         this.router.navigate(['/collaborateur'])
 

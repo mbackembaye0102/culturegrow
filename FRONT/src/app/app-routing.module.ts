@@ -18,12 +18,14 @@ import { QuestionsComponent } from './pages/questions/questions.component';
 import { AdduserComponent } from './pages/adduser/adduser.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 import { GoogleformComponent } from './pages/googleform/googleform.component';
+import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detailcollaborateur/detailcollaborateur.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
   {path:'collaborateur',component:ListecollaborateurComponent},
   {path:'collaborateur/add',component:AdduserComponent},
+  {path:'collaborateur/detail/:id',component:DetailcollaborateurComponent},
   {path:'collaborateur/update/:id',component:ModifcollaborateurComponent},
   {path:'structure',component:ListestructureComponent},
   {path:'structure/add',component:AjoutstructureComponent},

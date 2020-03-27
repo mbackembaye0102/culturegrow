@@ -42,24 +42,24 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups({"grow", "externe"})
      */
-    private $Prenom;
+    private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"grow", "externe"})
      */
-    private $Nom;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
      */
-    private $Statut;
+    private $statut;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"grow", "externe"})
      */
-    private $Telephone;
+    private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -71,6 +71,12 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\UserTeamPromo", mappedBy="user")
      */
     private $userTeamPromos;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"grow", "externe"})
+     */
+    private $image;
 
     public function __construct()
     {
@@ -153,48 +159,48 @@ class User implements UserInterface
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): self
+    public function setPrenom(string $prenom): self
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): self
+    public function setNom(string $nom): self
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
 
     public function getStatut(): ?string
     {
-        return $this->Statut;
+        return $this->statut;
     }
 
-    public function setStatut(string $Statut): self
+    public function setStatut(string $statut): self
     {
-        $this->Statut = $Statut;
+        $this->statut = $statut;
 
         return $this;
     }
 
     public function getTelephone(): ?string
     {
-        return $this->Telephone;
+        return $this->telephone;
     }
 
-    public function setTelephone(string $Telephone): self
+    public function setTelephone(string $telephone): self
     {
-        $this->Telephone = $Telephone;
+        $this->telephone = $telephone;
 
         return $this;
     }
@@ -238,6 +244,18 @@ class User implements UserInterface
                 $userTeamPromo->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

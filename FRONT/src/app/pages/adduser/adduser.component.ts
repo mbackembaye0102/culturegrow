@@ -24,6 +24,7 @@ export class AdduserComponent implements OnInit {
   public job:Teampromo;
   public addgrow:boolean=false;
   public addteam:boolean=false;
+  fileToUpload: File=null;
   constructor(private router: Router,private auth:AuthService,private admin:AdminService) { }
 
   ngOnInit() {
@@ -86,7 +87,7 @@ export class AdduserComponent implements OnInit {
     console.log(this.taille);
     donner.taille=this.taille;
     console.log(donner);
-    this.admin.saveuser(donner).subscribe(
+    this.admin.saveuser(donner,this.fileToUpload).subscribe(
       res=>{console.log(res);
         this.router.navigate(['/collaborateur'])
 
@@ -105,7 +106,7 @@ export class AdduserComponent implements OnInit {
   })
   saveuserteam(data){
     data.id=this.admin.idteam;
-    this.admin.saveuserteam(data).subscribe(
+    this.admin.saveuserteam(data,this.fileToUpload).subscribe(
       res=>{console.log(res);
         this.router.navigate(['/team/'+data.id])
       },
@@ -117,17 +118,12 @@ export class AdduserComponent implements OnInit {
   }
   handleFileInputPP(file: FileList) {
     console.log(file);
-    let a=file.item(0)
-    // this.fileToUploadPp = file.item(0);
-    // console.log(this.fileToUploadPp);
+    this.fileToUpload=file.item(0)
      var reader = new FileReader();
-     //console.log(reader);
     reader.onload = (event: any) => {
-      
-      
       this.image = event.target.result;
     }
-    reader.readAsDataURL(a);
+    reader.readAsDataURL(this.fileToUpload);
   }
 
 }

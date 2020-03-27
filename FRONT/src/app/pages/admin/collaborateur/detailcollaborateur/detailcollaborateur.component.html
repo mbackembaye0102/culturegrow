@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="img col-md-2">
+        <img src="http://localhost:8000/uploads/{{user.image}}" height="150" alt="">
+    </div>
+    <div class="info col-md-4">
+      <h1>{{user.prenom}} {{user.nom}}</h1>
+      <span>{{user.poste}}</span> <br>
+      <span>{{user.team}}</span> <br>
+      <span>{{user.telephone}}</span> <br>
+      <span>{{user.username}}</span> <br>
+
+
+    </div>
+    <div class="col-md-2">
+      <a [routerLink]="['/collaborateur/update',user.id]" >
+      <input type="submit" value="Modifier Profil" class="btn btn-primary">
+    </a>
+    </div>
+  </div>
+
+
+  <div class="row">
+      <div class="c card col-md-2"></div>
+      <div class="card col-md-2"></div>
+      <div class="card col-md-2"></div>
+      <div class="card col-md-2"></div>
+      <div class="card col-md-2"></div>
+  </div>
+
+  <div class="c2 row">
+    <div class="c card col-md-2"></div>
+    <div class="card col-md-2"></div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

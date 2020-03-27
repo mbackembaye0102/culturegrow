@@ -10,17 +10,7 @@ import {AuthService} from './service/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestComponent } from './test/test.component';
 import { InterceptorService } from './interceptor.service';
-// import { AddstructureComponent } from './structure/addstructure/addstructure.component';
-// import { ListstructureComponent } from './structure/liststructure/liststructure.component';
-// import { OnestructureComponent } from './structure/onestructure/onestructure.component';
-// import { ListuserComponent } from './user/listuser/listuser.component';
-// import { AdduserComponent } from './user/adduser/adduser.component';
-// import { OneuserComponent } from './user/oneuser/oneuser.component';
-// import { AddpromoComponent } from './structure/addpromo/addpromo.component';
-// import { OrganisationComponent } from './grow/organisation/organisation.component';
-// import { AddTeamComponent } from './grow/add-team/add-team.component';
-// import { AddTeamFunctionComponent } from './grow/add-team-function/add-team-function.component';
-// import { HomeComponent } from './mentor/home/home.component';
+
 import { FooterComponent } from './layout/footer/footer.component';
 import { SidemenuComponent } from './layout/sidemenu/sidemenu.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -43,26 +33,13 @@ import { AdduserComponent } from './pages/adduser/adduser.component';
 import { ListeComponent } from './pages/mbacke/liste/liste.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 import { GoogleformComponent } from './pages/googleform/googleform.component';
-// import { ListecollaborateurComponent } from './pages/admin/listecollaborateur/listecollaborateur.component';
-// import { AjoutcollaborateurComponent } from './pages/admin/ajoutcollaborateur/ajoutcollaborateur.component';
-// import { ModifcollaborateurComponent } from './pages/admin/modifcollaborateur/modifcollaborateur.component';
+import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detailcollaborateur/detailcollaborateur.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TestComponent,
-    // AddstructureComponent,
-    // ListstructureComponent,
-    // OnestructureComponent,
-    // ListuserComponent,
-    // AdduserComponent,
-    // OneuserComponent,
-    // AddpromoComponent,
-    // OrganisationComponent,
-    // AddTeamComponent,
-    // AddTeamFunctionComponent,
-    // HomeComponent,
     FooterComponent,
     SidemenuComponent,
     HeaderComponent,
@@ -85,9 +62,7 @@ import { GoogleformComponent } from './pages/googleform/googleform.component';
     ListeComponent,
     DetailuserComponent,
     GoogleformComponent,
-    // ListecollaborateurComponent,
-    // AjoutcollaborateurComponent,
-    // ModifcollaborateurComponent,
+    DetailcollaborateurComponent,
   ],
   imports: [
     BrowserModule,

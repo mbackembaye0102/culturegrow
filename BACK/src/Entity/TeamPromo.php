@@ -24,7 +24,7 @@ class TeamPromo
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"grow", "externe"})
+     * @Groups({"grow", "infos"})
      */
     private $nom;
 

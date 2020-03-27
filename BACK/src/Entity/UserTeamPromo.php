@@ -26,6 +26,7 @@ class UserTeamPromo
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TeamPromo", inversedBy="userTeamPromos")
+     * @Groups({"infos"}) 
      */
     private $TeamPromo;
 

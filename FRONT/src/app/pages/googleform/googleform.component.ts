@@ -52,5 +52,10 @@ public model={
     this.nbr--;
     console.log(this.taille);
     console.log(this.data);
+    console.log(this.taille.length);
+    
+    if (this.nbr==0) {
+      this.moins=false
+    }
   }
 }

@@ -29,6 +29,7 @@ class AdminController extends AbstractController
      */
     public function adduser(Request $request,UserPasswordEncoderInterface $encoder,EntityManagerInterface $entityManagerInterface,TeamPromoRepository $teamPromoRepository){
         $data= $request->request->all();
+
         $user= new User();
         $taille=$data["taille"];
         $team=[];
@@ -45,6 +46,13 @@ class AdminController extends AbstractController
         $user->setRoles(["ROLE_$profil"]);
         $user->setTelephone($data['telephone']);
         $user->setStatut("actif");
+        $user->setImage("https://i.ibb.co/kQB44c0/user.png");
+        if ($requestFile = $request->files->all()) {
+            $file = $requestFile['image'];
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('chemin'),$fileName);
+            $user->setImage("uploads/".$fileName);
+        }
         $entityManagerInterface->persist($user);
         
         for ($i=0; $i <$taille; $i++) { 
@@ -195,6 +203,13 @@ class AdminController extends AbstractController
         $user->setRoles(["ROLE_$profil"]);
         $user->setTelephone($data['telephone']);
         $user->setStatut("actif");
+        $user->setImage("https://i.ibb.co/kQB44c0/user.png");
+        if ($requestFile = $request->files->all()) {
+            $file = $requestFile['image'];
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('chemin'),$fileName);
+            $user->setImage("uploads/".$fileName);
+        }
         $entityManagerInterface->persist($user);
         $userTeamPromo= new UserTeamPromo();
         $userTeamPromo->setUser($user);
@@ -222,11 +237,37 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/yaya")
+     * @Route("/detailuser")
      */
-    public function yaya(Request $request){
+    public function detailuser(Request $request,UserRepository $userRepository){
         $data=$request->request->all();
-        dump($data);die();
+        $id=$data['id'];
+        $user=$userRepository->find($id);
+        if ($user) {
+            $team=$this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user'=>$user->getId()]);
+            $a="";
+             for ($i=0; $i <count($team) ; $i++) {
+                 if ($i==0) {
+                     $a=$a.$team[$i]->getTeamPromo()->getNom();
+                 }
+                 else{
+                     $a=$a."&".$team[$i]->getTeamPromo()->getNom();
+                 }
+                 
+             }
+            $tableau=[
+              'id'=>$user->getId(),
+              'username'=>$user->getUsername(),
+              'prenom'=>$user->getPrenom(),
+              'nom'=>$user->getNom(),
+              'statut'=>$user->getStatut(),
+              'telephone'=>$user->getTelephone(),
+              'poste'=>$user->getPoste(),
+              'image'=>$user->getImage(),
+              'team'=>$a
+            ];
+            return $this->json($tableau);   
+        }
     }
     
 }
