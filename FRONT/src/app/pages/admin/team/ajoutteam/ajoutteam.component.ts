@@ -1,3 +1,4 @@
+import { AdminService } from './../../../../service/admin.service';
 import { AuthService } from './../../../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjoutteamComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
+  constructor(private auth:AuthService,private admin:AdminService) { }
 
   ngOnInit() {
-    this.auth.chargementpage()
+   // this.auth.chargementpage()
+   console.log(this.admin.idteam);
+   
   }
 
 

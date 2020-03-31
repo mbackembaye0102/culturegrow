@@ -1,3 +1,13 @@
+<div class="container">
+  <div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <h3>Bienvenue dans la rubrique session</h3>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-3">
@@ -9,12 +19,13 @@
     </div>
     <div class="col-7"></div>
     <div class="col-2">
-      <a [routerLink]="['/structure/add']" routerLinkActive="router-link-active" >Ajout Structure</a>
+      <a [routerLink]="['/structure/add']" routerLinkActive="router-link-active" >NEW
+      </a>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4" *ngFor="let item of structuremodel">
-      <a [routerLink]="['/onestructure',item.id]" >
+      <a [routerLink]="['/validationsession',item.id]" >
       <div class="card mb-4">
         <img class="card-img-top" src="http://localhost:8000/uploads/{{item.image}}"  alt="Card image cap">
         <div class="card-body">
@@ -24,5 +35,6 @@
     </a>
     </div>
 
+</div>
 </div>
 </div>

@@ -38,6 +38,12 @@ class TeamPromo
      */
     private $userTeamPromos;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"grow", "infos"})
+     */
+    private $image;
+
 
     public function __construct()
     {
@@ -100,6 +106,18 @@ class TeamPromo
                 $userTeamPromo->setTeamPromo(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

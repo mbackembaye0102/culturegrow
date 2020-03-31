@@ -51,7 +51,7 @@ class AdminController extends AbstractController
             $file = $requestFile['image'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('chemin'),$fileName);
-            $user->setImage("uploads/".$fileName);
+            $user->setImage($fileName);
         }
         $entityManagerInterface->persist($user);
         
@@ -109,6 +109,13 @@ class AdminController extends AbstractController
         $data=$request->request->all();
         $stucture=new Structure();
         $stucture->setNom($data['nom']);
+        $stucture->setImage("defaut.png");
+        if ($requestFile = $request->files->all()) {
+            $file = $requestFile['image'];
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('chemin'),$fileName);
+            $stucture->setImage($fileName);
+        }
         $entityManagerInterface->persist($stucture);
         $entityManagerInterface->flush();
         return $this->json([
@@ -167,6 +174,13 @@ class AdminController extends AbstractController
         $team= new TeamPromo();
         $team->setNom($data['nom']);
         $team->setStructure($structure);
+        $team->setImage("defaut.png");
+        if ($requestFile = $request->files->all()) {
+            $file = $requestFile['image'];
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('chemin'),$fileName);
+            $team->setImage($fileName);
+        }
         $entityManagerInterface->persist($team);
         $entityManagerInterface->flush();
         return $this->json([
@@ -208,7 +222,7 @@ class AdminController extends AbstractController
             $file = $requestFile['image'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('chemin'),$fileName);
-            $user->setImage("uploads/".$fileName);
+            $user->setImage($fileName);
         }
         $entityManagerInterface->persist($user);
         $userTeamPromo= new UserTeamPromo();
@@ -269,5 +283,16 @@ class AdminController extends AbstractController
             return $this->json($tableau);   
         }
     }
-    
+    /**
+     * @Route("/allstructure")
+     */
+    public function allstructure(StructureRepository $structureRepository,SerializerInterface $serializer){
+        $a=$structureRepository->findAll();
+        $data = $serializer->serialize($a, 'json',[
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
 }

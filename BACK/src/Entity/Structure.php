@@ -33,6 +33,12 @@ class Structure
      */
     private $teamPromos;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"grow", "externe"})
+     */
+    private $image;
+
     public function __construct()
     {
         $this->teamPromos = new ArrayCollection();
@@ -82,6 +88,18 @@ class Structure
                 $teamPromo->setStructure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

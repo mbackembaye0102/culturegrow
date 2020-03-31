@@ -25,12 +25,14 @@ class AppFixtures extends Fixture
     {
         $structure= new Structure();
         $structure->setNom("GROW");
+        $structure->setImage("defaut.php");
         $manager->persist($structure);
         $listteam=["Team Business","Grow Academy","Team Créa","Team Tech&Digital"];
         for ($i=0; $i < count($listteam); $i++) { 
             $team= new TeamPromo();
             $team->setNom($listteam[$i]);
             $team->setStructure($structure);
+            $team->setImage("defaut.php");
             $manager->persist($team);
         }
         $manager->flush();

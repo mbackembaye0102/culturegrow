@@ -28,7 +28,6 @@ export class ListeteamComponent implements OnInit {
     )
     
   }
-
 next(){
   this.admin.idteam=this.id;
   this.router.navigate(['/team/add']);

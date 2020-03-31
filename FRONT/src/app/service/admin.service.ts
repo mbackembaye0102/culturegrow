@@ -5,19 +5,21 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AdminService {
-  private urlsaveuser:string="http://127.0.0.1:8000/admin/saveusergrow";
-  private urllistuser:string="http://127.0.0.1:8000/admin/listuser";
-  private urllisteteamgrow:string="http://127.0.0.1:8000/admin/growteam";
-  private urllistepostegrow:string="http://127.0.0.1:8000/admin/growposte";
-  private urladdstructure:string="http://127.0.0.1:8000/admin/savestructure";
-  private urllistestructure:string="http://127.0.0.1:8000/admin/listestructure";
-  private urladdteamstructure:string="http://127.0.0.1:8000/admin/addteamstructure";
-  private urloneteamstructure:string="http://127.0.0.1:8000/admin/oneteamstructure";
-  private urlsaveoneteamstructure:string="http://127.0.0.1:8000/admin/saveoneteamstructure";
-  private urluserteam:string="http://127.0.0.1:8000/admin/userteam";
-  private urlsaveuserteam:string="http://127.0.0.1:8000/admin/saveuserteam";
-  private urldetailuser:string="http://127.0.0.1:8000/admin/detailuser";
-  
+  private url="http://127.0.0.1:8000/admin/";
+  private urlsaveuser:string="saveusergrow";
+  private urllistuser:string="listuser";
+  private urllisteteamgrow:string="growteam";
+  private urllistepostegrow:string="growposte";
+  private urladdstructure:string="savestructure";
+  private urllistestructure:string="listestructure";
+  private urladdteamstructure:string="addteamstructure";
+  private urloneteamstructure:string="oneteamstructure";
+  private urlsaveoneteamstructure:string="saveoneteamstructure";
+  private urluserteam:string="userteam";
+  private urlsaveuserteam:string="saveuserteam";
+  private urldetailuser:string="detailuser";
+  private urlallstructure:string="allstructure";
+
   public idteam=0;
   constructor(private http: HttpClient) { }
  saveuser(data,fileToUpload){
@@ -32,35 +34,42 @@ export class AdminService {
   formData.append('team1', data.team1);
   formData.append('team2', data.team2);
   formData.append('image', fileToUpload);
-  return this.http.post(this.urlsaveuser,formData,{observe:'response'})
+  return this.http.post(this.url+this.urlsaveuser,formData,{observe:'response'})
    // return this.http.post(this.urlsaveuser , data , {observe:'response'})
   }
   listuser(){
-    return this.http.post(this.urllistuser , {observe:'response'})
+    return this.http.post(this.url+this.urllistuser , {observe:'response'})
   }
   listeteamgrow(){
-    return this.http.post(this.urllisteteamgrow,{observe:'response'})
+    return this.http.post(this.url+this.urllisteteamgrow,{observe:'response'})
   }
   listepostegrow(){
-    return this.http.post(this.urllistepostegrow,{observe:'response'})
+    return this.http.post(this.url+this.urllistepostegrow,{observe:'response'})
   }
-  addstructure(data){
-    return this.http.post(this.urladdstructure,data,{observe:'response'})
+  addstructure(data,fileToUpload){
+    const formData: FormData= new FormData();
+    formData.append('nom', data.nom);
+    formData.append('image', fileToUpload);
+    return this.http.post(this.url+this.urladdstructure,formData,{observe:'response'})
   }
   listestructure(){
-    return this.http.post(this.urllistestructure,{observe:'response'})
+    return this.http.post(this.url+this.urllistestructure,{observe:'response'})
   }
   addteamstructure(data){
-    return this.http.post(this.urladdteamstructure,data,{observe:'response'})
+    return this.http.post(this.url+this.urladdteamstructure,data,{observe:'response'})
   }
   oneteamstructure(data){
-    return this.http.post(this.urloneteamstructure,data,{observe:'response'})
+    return this.http.post(this.url+this.urloneteamstructure,data,{observe:'response'})
   }
-  saveoneteamstructure(data){
-    return this.http.post(this.urlsaveoneteamstructure,data,{observe:'response'})
+  saveoneteamstructure(data,fileToUpload){
+    const formData: FormData= new FormData();
+    formData.append('nom', data.nom);
+    formData.append('id', data.id);
+    formData.append('image', fileToUpload);
+    return this.http.post(this.url+this.urlsaveoneteamstructure,formData,{observe:'response'})
   }
   userteam(data){
-    return this.http.post(this.urluserteam,data,{observe:'response'})
+    return this.http.post(this.url+this.urluserteam,data,{observe:'response'})
   }
   saveuserteam(data,fileToUpload){
     const formData: FormData= new FormData();
@@ -70,9 +79,13 @@ export class AdminService {
     formData.append('telephone', data.telephone);
     formData.append('profil', data.profil);
     formData.append('image', fileToUpload, fileToUpload.name);
-    return this.http.post(this.urlsaveuserteam,formData,{observe:'response'})
+    return this.http.post(this.url+this.urlsaveuserteam,formData,{observe:'response'})
   }
   detailuser(data){
-    return this.http.post(this.urldetailuser,data,{observe:'response'})
+    return this.http.post(this.url+this.urldetailuser,data,{observe:'response'})
+  }
+  allstructure(){
+    console.log(this.url+this.urlallstructure)
+    return this.http.post(this.url+this.urlallstructure,{observe:'response'})
   }
 }

@@ -12,6 +12,8 @@ export class AddteamstructureComponent implements OnInit {
 
   constructor(private admin:AdminService,private route:ActivatedRoute,private router:Router) { }
   id:any;
+  public image="https://i.ibb.co/kQB44c0/user.png";
+  public fileToUpload: File=null;
   ngOnInit() {
     this.id=this.route.snapshot.params['id'];
   }
@@ -22,7 +24,7 @@ export class AddteamstructureComponent implements OnInit {
   save(donner){
     console.log(donner);
     donner.id=this.id;
-    this.admin.saveoneteamstructure(donner).subscribe(
+    this.admin.saveoneteamstructure(donner,this.fileToUpload).subscribe(
       res=>{
         console.log(res);
         this.router.navigate(['/onestructure/',this.id])
@@ -32,5 +34,14 @@ export class AddteamstructureComponent implements OnInit {
         
       }
     )
+  }
+  handleFileInputPP(file: FileList) {
+    console.log(file);
+    this.fileToUpload=file.item(0)
+     var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.image = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
   }
 }

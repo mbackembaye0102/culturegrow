@@ -34,6 +34,8 @@ import { ListeComponent } from './pages/mbacke/liste/liste.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 import { GoogleformComponent } from './pages/googleform/googleform.component';
 import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detailcollaborateur/detailcollaborateur.component';
+import { SessionsComponent } from './pages/admin/sessions/sessions/sessions.component';
+import { ValidationsessionsComponent } from './pages/admin/sessions/validationsessions/validationsessions.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detail
     DetailuserComponent,
     GoogleformComponent,
     DetailcollaborateurComponent,
+    SessionsComponent,
+    ValidationsessionsComponent,
   ],
   imports: [
     BrowserModule,

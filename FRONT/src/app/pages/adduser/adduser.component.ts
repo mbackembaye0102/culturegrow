@@ -24,7 +24,7 @@ export class AdduserComponent implements OnInit {
   public job:Teampromo;
   public addgrow:boolean=false;
   public addteam:boolean=false;
-  fileToUpload: File=null;
+  public fileToUpload: File=null;
   constructor(private router: Router,private auth:AuthService,private admin:AdminService) { }
 
   ngOnInit() {

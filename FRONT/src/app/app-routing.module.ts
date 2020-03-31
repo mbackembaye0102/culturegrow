@@ -19,9 +19,11 @@ import { AdduserComponent } from './pages/adduser/adduser.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 import { GoogleformComponent } from './pages/googleform/googleform.component';
 import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detailcollaborateur/detailcollaborateur.component';
+import { SessionsComponent } from './pages/admin/sessions/sessions/sessions.component';
+import { ValidationsessionsComponent } from './pages/admin/sessions/validationsessions/validationsessions.component';
 
 const routes: Routes = [
-  {path:'',component:LoginComponent},
+  {path:'',component:LoginComponent,pathMatch: 'full'},
   {path:'login',component:LoginComponent},
   {path:'collaborateur',component:ListecollaborateurComponent},
   {path:'collaborateur/add',component:AdduserComponent},
@@ -32,7 +34,7 @@ const routes: Routes = [
   {path:'onestructure/:id',component:OnestructureComponent},
   {path:'structure/addteam/:id',component:AddteamstructureComponent},
   {path:'structure/update/:id',component:ModifcollaborateurComponent},
-  {path:'team/add',component:AdduserComponent},
+  {path:'team/add',component:AjoutteamComponent},
   {path:'team/:id',component:ListeteamComponent},
   {path:'team/update/:id',component:ModifteamComponent},
   {path:'mentor',component:HomeComponent},
@@ -41,6 +43,8 @@ const routes: Routes = [
   {path:"mbacke",component:ListeComponent},
   {path:"mbackedetail",component:DetailuserComponent},
   {path:"googleform",component:GoogleformComponent},
+  {path:"session",component:SessionsComponent},
+  {path:"validationsession/:id",component:ValidationsessionsComponent},
 ];
 
 @NgModule({
