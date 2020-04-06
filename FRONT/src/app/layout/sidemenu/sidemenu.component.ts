@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidemenuComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
+  constructor(public auth:AuthService) { }
 
   ngOnInit() {
   }

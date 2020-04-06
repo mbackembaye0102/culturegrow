@@ -16,7 +16,7 @@ export class ListecollaborateurComponent implements OnInit {
   ngOnInit() {
   //  this.auth.chargementpage();
   //alert(this.auth.connecter)
-    this.admin.listuser().subscribe(
+    this.admin.usergrow().subscribe(
       res=>{console.log(res);
         this.user=res;
         this.usertampo=res;

@@ -15,18 +15,21 @@ import { HomeComponent } from './pages/mentor/home/home.component';
 import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
-import { AdduserComponent } from './pages/adduser/adduser.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 import { GoogleformComponent } from './pages/googleform/googleform.component';
 import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detailcollaborateur/detailcollaborateur.component';
 import { SessionsComponent } from './pages/admin/sessions/sessions/sessions.component';
 import { ValidationsessionsComponent } from './pages/admin/sessions/validationsessions/validationsessions.component';
+import { UserteamstructureComponent } from './pages/admin/structure/userteamstructure/userteamstructure.component';
+import { AdduserteamstructureComponent } from './pages/admin/structure/adduserteamstructure/adduserteamstructure.component';
+import { ListteamComponent } from './pages/admin/evaluations/listteam/listteam.component';
+import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationteam/evaluationteam.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent,pathMatch: 'full'},
   {path:'login',component:LoginComponent},
   {path:'collaborateur',component:ListecollaborateurComponent},
-  {path:'collaborateur/add',component:AdduserComponent},
+  {path:'collaborateur/add',component:AjoutcollaborateurComponent},
   {path:'collaborateur/detail/:id',component:DetailcollaborateurComponent},
   {path:'collaborateur/update/:id',component:ModifcollaborateurComponent},
   {path:'structure',component:ListestructureComponent},
@@ -34,9 +37,11 @@ const routes: Routes = [
   {path:'onestructure/:id',component:OnestructureComponent},
   {path:'structure/addteam/:id',component:AddteamstructureComponent},
   {path:'structure/update/:id',component:ModifcollaborateurComponent},
+  {path:'onestructure/user/:id',component:UserteamstructureComponent},
+  {path:'adduserteam/:id',component:AdduserteamstructureComponent},
   {path:'team/add',component:AjoutteamComponent},
-  {path:'team/:id',component:ListeteamComponent},
-  {path:'team/update/:id',component:ModifteamComponent},
+  {path:'team',component:ListeteamComponent},
+  {path:'team/user/:id',component:ModifteamComponent},
   {path:'mentor',component:HomeComponent},
   {path:"test",component:TestComponent},
   {path:"questions",component:QuestionsComponent},
@@ -45,6 +50,8 @@ const routes: Routes = [
   {path:"googleform",component:GoogleformComponent},
   {path:"session",component:SessionsComponent},
   {path:"validationsession/:id",component:ValidationsessionsComponent},
+  {path:'evaluation',component:ListteamComponent},
+  {path:'evaluation/:id',component:EvaluationteamComponent},
 ];
 
 @NgModule({

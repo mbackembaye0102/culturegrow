@@ -78,9 +78,41 @@ class User implements UserInterface
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Structure", inversedBy="users")
+     */
+    private $structure;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nomtuteur;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephonetuteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="users")
+     */
+    private $mentor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="mentor")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Evaluation", mappedBy="evaluer")
+     */
+    private $evaluations;
+
     public function __construct()
     {
         $this->userTeamPromos = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
     }
 
 
@@ -256,6 +288,116 @@ class User implements UserInterface
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getStructure(): ?Structure
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(?Structure $structure): self
+    {
+        $this->structure = $structure;
+
+        return $this;
+    }
+
+    public function getNomtuteur(): ?string
+    {
+        return $this->nomtuteur;
+    }
+
+    public function setNomtuteur(?string $nomtuteur): self
+    {
+        $this->nomtuteur = $nomtuteur;
+
+        return $this;
+    }
+
+    public function getTelephonetuteur(): ?string
+    {
+        return $this->telephonetuteur;
+    }
+
+    public function setTelephonetuteur(?string $telephonetuteur): self
+    {
+        $this->telephonetuteur = $telephonetuteur;
+
+        return $this;
+    }
+
+    public function getMentor(): ?self
+    {
+        return $this->mentor;
+    }
+
+    public function setMentor(?self $mentor): self
+    {
+        $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(self $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setMentor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(self $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getMentor() === $this) {
+                $user->setMentor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Evaluation[]
+     */
+    public function getEvaluations(): Collection
+    {
+        return $this->evaluations;
+    }
+
+    public function addEvaluation(Evaluation $evaluation): self
+    {
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations[] = $evaluation;
+            $evaluation->setEvaluer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluation(Evaluation $evaluation): self
+    {
+        if ($this->evaluations->contains($evaluation)) {
+            $this->evaluations->removeElement($evaluation);
+            // set the owning side to null (unless already changed)
+            if ($evaluation->getEvaluer() === $this) {
+                $evaluation->setEvaluer(null);
+            }
+        }
 
         return $this;
     }

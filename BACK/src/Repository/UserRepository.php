@@ -21,9 +21,16 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return User[] Returns an array of User objects
      */
-    public function testreq($id){
+    public function testreq($role)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from($this->_entityName, 'u')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%"'.$role.'"%');
+    
+        return $qb->getQuery()->getResult();
     }
-
 
     // /**
     //  * @return User[] Returns an array of User objects

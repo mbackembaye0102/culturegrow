@@ -1,0 +1,74 @@
+<body class="body">
+  <div class="containers">
+    <div class="head">
+      <img src="../../../assets/img/growacademy (2).png" alt="">
+    </div>
+      <div class="titre">
+      
+        <h1>Tech et Digital <span id="span">*</span></h1>
+      </div>
+    <div class="evaluer">
+      <p class="nom"> Nom de la personne à évaluer <span id="span">*</span></p>
+      <div class="col-md-4">
+      <select class="select form-control" formControlName="evanuer" name="" id="" style="width:335px; height:50px;">
+          <option *ngFor="let user of user"  value="{{user.user.id}}">{{user.user.prenom}} {{user.user.nom}}</option>
+      </select>
+      </div>
+    </div>
+  
+    <form action="">
+      <div class="critere">
+          <p class="nom">Persévérance : Boxe, Deadline, Progression, Général.  <span id="span">*</span></p> 
+              <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('perseverance',item.id)"> <a id="perseverance{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+  
+      <div class="critere">
+          <p class="nom">Confiance en soi : Storytelling, Participation sessions, Giving Back, Général. <span id="span">*</span></p> 
+              <div class="b">
+              <b *ngFor="let item of barrem" (click)="reponse('confiance',item.id)"> <a id="confiance{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+  
+      <div class="critere">
+          <p class="nom">Collaboration : Peer to peer, Participation, Communication, Général. <span id="span">*</span></p> 
+              <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('collaboration',item.id)"> <a id="collaboration{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+  
+      <div class="critere">
+          <p class="nom">Autonomie : Prise d'initiative, Organisation, End to end, Général. <span id="span">*</span></p> 
+              <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('autonomie',item.id)"> <a id="autonomie{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+      <div class="critere">
+          <p class="nom">Problem solving : Créativité, Initiative, Persévérance, Général. <span id="span">*</span></p> 
+              <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('problemsolving',item.id)"> <a id="problemsolving{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+      <div class="critere">
+          <p class="nom">Transmission : Pédagogie, Peer to peer, Giving Back Days, Général. <span id="span">*</span></p> 
+              <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('transmission',item.id)"> <a id="transmission{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+      <div class="critere">
+          <p class="nom">Performance : Efficience, Qualité, Productivité, Général. <span id="span">*</span></p> 
+              <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('performance',item.id)"> <a id="performance{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+              </div>
+      </div>
+          
+      <input type="submit" (click)="validationdonner()"  value="Envoyer" class="bouton">
+  
+  </form>
+  
+  
+  
+  
+  </div>  
+</body>

@@ -3,7 +3,7 @@
     <!-- Sidebar Header    -->
     <div class="sidenav-header d-flex align-items-center justify-content-center">
       <!-- User Info-->
-      <div class="sidenav-header-inner text-center"><img src="http://localhost:8000/uploads/{{auth.utilisateur.image}}" alt="person" class="img-fluid rounded-circle">
+      <div class="sidenav-header-inner text-center"><img src="http://localhost:8000/uploads/defaut.png" alt="person" class="img-fluid rounded-circle">
         <h2 class="h5">{{auth.utilisateur.prenom}} {{auth.utilisateur.nom}}</h2><span>{{auth.utilisateur.poste}}</span>
       </div>
       <!-- Small Brand information, appears on minimized sidebar-->
@@ -13,18 +13,21 @@
     <div class="main-menu">
       <h5 class="sidenav-heading">Dashboard</h5>
       <ul id="side-main-menu" class="side-menu list-unstyled" *ngIf="auth.admin">                  
-        <li><a [routerLink]="['/']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Login                             </a></li>
+        <!-- <li><a [routerLink]="['/']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Login                             </a></li> -->
         <li><a [routerLink]="['/structure']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Structure                             </a></li>
         <li><a [routerLink]="['/collaborateur']" routerLinkActive="router-link-active" > <i class="icon-home"></i>GROW                             </a></li>
         <li><a [routerLink]="['/mentor']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Espace Mentor                             </a></li>
         <li><a [routerLink]="['/team']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Team                             </a></li>
-        <li><a [routerLink]="['/mbacke']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Mbacke Liste User                             </a></li>
+        <!-- <li><a [routerLink]="['/mbacke']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Mbacke Liste User                             </a></li>
         <li><a [routerLink]="['/mbackedetail']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Mbacke Detail User                             </a></li>
-        <li><a [routerLink]="['/googleform']" routerLinkActive="router-link-active" > <i class="icon-home"></i>GOOGLE FORM                          </a></li>
+        <li><a [routerLink]="['/googleform']" routerLinkActive="router-link-active" > <i class="icon-home"></i>GOOGLE FORM                          </a></li> -->
         <li><a [routerLink]="['/session']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Session                          </a></li>
+        <li><a [routerLink]="['/evaluation']" routerLinkActive="router-link-active" > <i class="icon-home"></i>EVALUATION                          </a></li>
+        <li><a [routerLink]="['/questions']" routerLinkActive="router-link-active" *ngIf="auth.isevaluation" > <i class="icon-home"></i>Formulaire</a></li>
       </ul>
       <ul id="side-main-menu" class="side-menu list-unstyled" *ngIf="auth.user">
-        <li><a [routerLink]="['/questions']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Evaluation</a></li>
+        <li><a [routerLink]="['/evaluation']" routerLinkActive="router-link-active" > <i class="icon-home"></i>EVALUATION                          </a></li>
+        <li><a [routerLink]="['/questions']" routerLinkActive="router-link-active" *ngIf="auth.isevaluation" > <i class="icon-home"></i>Formulaire</a></li>
         <li><a [routerLink]="['/mbackedetail']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Mes Évaluation</a></li>
       </ul>
     </div>

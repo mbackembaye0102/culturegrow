@@ -29,13 +29,16 @@ import { HomeComponent } from './pages/mentor/home/home.component';
 import { OnestructureComponent } from './pages/admin/structure/onestructure/onestructure.component';
 import { AddteamstructureComponent } from './pages/admin/structure/addteamstructure/addteamstructure.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
-import { AdduserComponent } from './pages/adduser/adduser.component';
 import { ListeComponent } from './pages/mbacke/liste/liste.component';
 import { DetailuserComponent } from './pages/mbacke/detailuser/detailuser.component';
 import { GoogleformComponent } from './pages/googleform/googleform.component';
 import { DetailcollaborateurComponent } from './pages/admin/collaborateur/detailcollaborateur/detailcollaborateur.component';
 import { SessionsComponent } from './pages/admin/sessions/sessions/sessions.component';
 import { ValidationsessionsComponent } from './pages/admin/sessions/validationsessions/validationsessions.component';
+import { UserteamstructureComponent } from './pages/admin/structure/userteamstructure/userteamstructure.component';
+import { AdduserteamstructureComponent } from './pages/admin/structure/adduserteamstructure/adduserteamstructure.component';
+import { ListteamComponent } from './pages/admin/evaluations/listteam/listteam.component';
+import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationteam/evaluationteam.component';
 
 @NgModule({
   declarations: [
@@ -60,13 +63,16 @@ import { ValidationsessionsComponent } from './pages/admin/sessions/validationse
     OnestructureComponent,
     AddteamstructureComponent,
     QuestionsComponent,
-    AdduserComponent,
     ListeComponent,
     DetailuserComponent,
     GoogleformComponent,
     DetailcollaborateurComponent,
     SessionsComponent,
     ValidationsessionsComponent,
+    UserteamstructureComponent,
+    AdduserteamstructureComponent,
+    ListteamComponent,
+    EvaluationteamComponent,
   ],
   imports: [
     BrowserModule,

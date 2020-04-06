@@ -39,9 +39,21 @@ class Structure
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Allsession", mappedBy="structure")
+     */
+    private $allsessions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="structure")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->teamPromos = new ArrayCollection();
+        $this->allsessions = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +112,68 @@ class Structure
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Allsession[]
+     */
+    public function getAllsessions(): Collection
+    {
+        return $this->allsessions;
+    }
+
+    public function addAllsession(Allsession $allsession): self
+    {
+        if (!$this->allsessions->contains($allsession)) {
+            $this->allsessions[] = $allsession;
+            $allsession->setStructure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAllsession(Allsession $allsession): self
+    {
+        if ($this->allsessions->contains($allsession)) {
+            $this->allsessions->removeElement($allsession);
+            // set the owning side to null (unless already changed)
+            if ($allsession->getStructure() === $this) {
+                $allsession->setStructure(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setStructure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getStructure() === $this) {
+                $user->setStructure(null);
+            }
+        }
 
         return $this;
     }

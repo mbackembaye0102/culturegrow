@@ -3,7 +3,9 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="login-wrap">
         <div class="user-pic">
-          <img src="https://i.ibb.co/kQB44c0/user.png" alt="user-pic">
+          
+          <img [src]="image" class="photo"  alt="user-pic" (click)="pp.click()">
+          <input  hidden #pp type="file" accept="image/*" (change)="handleFileInputPP($event.target.files)">
         </div>
         <div class="user-details">
           <form [formGroup]="user" class="">
@@ -31,28 +33,32 @@
                 <option value="Administrateur">Administrateur</option>
               </select>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label for="prenom" class="label col-3">poste</label>
               <select name="" formControlName="poste" class="form-control col-7" id="">
                 <option *ngFor="let item of job" value="{{item.nom}}">{{item.nom}}</option>
               </select>
-            </div>
+            </div> -->
+            <div *ngFor="let item of listposte; let i=index">
               <div class="form-group row">
-                <label for="" class="label col-3">Team</label>
-                <select name="" formControlName="team1" class="form-control col-7" id="">
-                  <option *ngFor="let item of team" value="{{item.nom}}">{{item.nom}}</option>
+                <label for="prenom" class="label col-3">Poste</label>
+                <select name="" class="form-control col-7" formControlName="poste{{i}}">
+                  <option *ngFor="let item of job" value="{{item.nom}}">{{item.nom}}</option>
                 </select>
-                <div (click)="plusteam()" *ngIf="cache" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
+                <div (click)="plusposte()" *ngIf="(nbrFichierpost)==i" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
               </div>
+            </div>
+            <div>
             <div *ngFor="let item of list; let i=index">
               <div class="form-group row">
                 <label for="prenom" class="label col-3">Team</label>
-                <select name="" class="form-control col-7" formControlName="team2">
+                <select name="" class="form-control col-7" formControlName="team{{i}}">
                   <option *ngFor="let item of team" value="{{item.nom}}">{{item.nom}}</option>
                 </select>
-                <div (click)="plusteam1()" *ngIf="(nbrFichier-1)==i" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
+                <div (click)="plusteam()" *ngIf="(nbrFichier)==i" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
               </div>
             </div>
+          </div>
             <div class="form-group">
               <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-9 col-md-9 col-sm-9 col-xs-12 button-contain">
                 <button class="btn btn-primary" (click)="save(user.value)">Save</button>

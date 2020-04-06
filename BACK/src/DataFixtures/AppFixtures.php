@@ -25,14 +25,14 @@ class AppFixtures extends Fixture
     {
         $structure= new Structure();
         $structure->setNom("GROW");
-        $structure->setImage("defaut.php");
+        $structure->setImage("defaut.png");
         $manager->persist($structure);
         $listteam=["Team Business","Grow Academy","Team Créa","Team Tech&Digital"];
         for ($i=0; $i < count($listteam); $i++) { 
             $team= new TeamPromo();
             $team->setNom($listteam[$i]);
             $team->setStructure($structure);
-            $team->setImage("defaut.php");
+            $team->setImage("defaut.png");
             $manager->persist($team);
         }
         $manager->flush();
@@ -46,6 +46,7 @@ class AppFixtures extends Fixture
         $user->setTelephone("772652363");
         $user->setPoste("Développeur");
         $user->setImage("defaut.png");
+        $user->setStructure($structure);
         $password = $this->encoder->encodePassword($user, 'welcome');
         $user->setPassword($password);
         $manager->persist($user);
@@ -63,6 +64,7 @@ class AppFixtures extends Fixture
         $user1->setTelephone("772658952");
         $user1->setPoste("Développeur");
         $user1->setImage("defaut.png");
+        $user1->setStructure($structure);
         $password1 = $this->encoder->encodePassword($user1, 'welcome');
         $user1->setPassword($password1);
         $manager->persist($user1);

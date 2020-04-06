@@ -13,6 +13,9 @@ export class AuthService {
   jwt: string;
   role:any;
   public admin=false;
+  public isevaluation:boolean=false;
+  public typeevaluation:string=null;
+  public concerner:any=null;
   public user=false;
   public connecter=false;
   public utilisateur:any;
@@ -44,7 +47,7 @@ export class AuthService {
       this.route.navigate(['/mentor']);
     }
     else{
-      this.route.navigate(['/questions']);
+      this.route.navigate(['/evaluation']);
       this.user=true;
 
     }
@@ -65,6 +68,20 @@ export class AuthService {
           res=>{
             console.log(res);
             this.utilisateur=res;
+            if (this.utilisateur.all=="good") {
+            //  alert("Evaluation par Team"+this.utilisateur.teamevaluer);
+              this.isevaluation=true;
+            }
+            else if(this.utilisateur.all=="bad"){
+              if (this.utilisateur.teamevaluer=="rien") {
+               // alert("Pas D'évaluation")
+                this.isevaluation=false;
+              }
+              else{
+               // alert("Evaluation par Team"+this.utilisateur.teamevaluer);
+                this.isevaluation=true;
+              }
+            }
           },
           error=>{
             console.log(error);

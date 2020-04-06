@@ -1,4 +1,4 @@
-<div class="container" *ngIf="addgrow">
+<div class="container">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="login-wrap">
@@ -26,34 +26,23 @@
               <input type="text" formControlName="email" class="form-control col-7">
             </div>
             <div class="form-group row">
-              <label for="prenom" class="label col-3">Profil</label>
-              <select name="" formControlName="profil" class="form-control col-7" id="">
-                <option value="Colaborateur">Colaborateur</option>
-                <option value="Mentor">Mentor</option>
-                <option value="Administrateur">Administrateur</option>
-              </select>
+              <label for="prenom" class="label col-3">Fonction</label>
+              <input type="text" formControlName="poste" class="form-control col-7">
             </div>
             <div class="form-group row">
-              <label for="prenom" class="label col-3">poste</label>
-              <select name="" formControlName="poste" class="form-control col-7" id="">
-                <option *ngFor="let item of job" value="{{item.nom}}">{{item.nom}}</option>
-              </select>
+              <label for="prenom" class="label col-3">Nom Tuteur</label>
+              <input type="text" formControlName="nomtuteur" class="form-control col-7">
             </div>
-              <div class="form-group row">
-                <label for="" class="label col-3">Team</label>
-                <select name="" formControlName="team1" class="form-control col-7" id="">
-                  <option *ngFor="let item of team" value="{{item.nom}}">{{item.nom}}</option>
-                </select>
-                <div (click)="plusteam()" *ngIf="cache" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
-              </div>
-            <div *ngFor="let item of list; let i=index">
-              <div class="form-group row">
-                <label for="prenom" class="label col-3">Team</label>
-                <select name="" class="form-control col-7" formControlName="team2">
-                  <option *ngFor="let item of team" value="{{item.nom}}">{{item.nom}}</option>
-                </select>
-                <div (click)="plusteam1()" *ngIf="(nbrFichier-1)==i" class="col-1"><span> <i style="font-size: 40px;" class="fa fa-plus-square"></i></span></div>
-              </div>
+            <div class="form-group row">
+              <label for="prenom" class="label col-3">Tel Tuteur</label>
+              <input type="text" formControlName="telephonetuteur" class="form-control col-7">
+            </div>
+            <div class="form-group row">
+              <label for="prenom" class="label col-3">Mentor</label>
+              <select name="" id="" formControlName="mentor" class="form-control col-7">
+                <option *ngFor="let item of mentor" value="{{item.id}}">{{item.nom}}</option>
+              </select>
+             
             </div>
             <div class="form-group">
               <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-9 col-md-9 col-sm-9 col-xs-12 button-contain">

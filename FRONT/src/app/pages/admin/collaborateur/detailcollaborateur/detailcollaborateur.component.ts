@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detailcollaborateur.component.scss']
 })
 export class DetailcollaborateurComponent implements OnInit {
-  private id:string;
-  private user:any;
+  public id:string;
+  public user:any;
+  public iam:any;
   constructor(private route:ActivatedRoute,private admin:AdminService) { }
 
   ngOnInit() {
@@ -18,6 +19,8 @@ export class DetailcollaborateurComponent implements OnInit {
     this.admin.detailuser(a).subscribe(
       res=>{
         console.log(res.body);
+        this.iam=res.body;
+        //console.log(this.iam.teamevaluer);
         this.user=res.body;
       },
       error=>{

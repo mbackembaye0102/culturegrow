@@ -12,16 +12,16 @@ export class ListeteamComponent implements OnInit {
 
   constructor(private auth:AuthService,private route:ActivatedRoute,private admin:AdminService,private router:Router) { }
   public id:any;
-  private user:any;
+  private team:any;
   ngOnInit() {
     //this.auth.chargementpage()
-    this.id=this.route.snapshot.params['id'];
-    let a={'id':this.id}
-    console.log(this.id);
-    this.admin.userteam(a).subscribe(
-      res=>{console.log(res.body);
+    // this.id=this.route.snapshot.params['id'];
+    // let a={'id':this.id}
+    // console.log(this.id);
+    this.admin.listeteamgrow().subscribe(
+      res=>{console.log(res);
        // let r=res.body;
-        this.user=res.body;
+        this.team=res;
       },
       error=>{console.log(error);
       }
@@ -29,7 +29,7 @@ export class ListeteamComponent implements OnInit {
     
   }
 next(){
-  this.admin.idteam=this.id;
+ // this.admin.idteam=this.id;
   this.router.navigate(['/team/add']);
 }
 }

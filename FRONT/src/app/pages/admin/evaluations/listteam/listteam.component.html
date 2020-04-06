@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="!this.auth.isevaluation">
+    <h1>Pas D'Evaluation</h1>
+  </div>
+  <div class="row">
+    <div class="col-3" *ngFor="let item of team">
+      
+      <div class="card">
+        <div class="card-body">
+          <a  [routerLink]="['/evaluation',item]">
+          <h5 class="card-title">{{item}}</h5>
+        </a>
+        </div>
+      </div>
+   
+    </div>
+  </div>
+</div>

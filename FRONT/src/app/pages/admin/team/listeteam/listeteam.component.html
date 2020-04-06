@@ -8,31 +8,21 @@
     </div>
     <div class="col-7"></div>
     <div class="col-2">
-      <a (click)="next()">
-      <input type="submit" value="Ajout Utilisateur" class="btn btn-primary">
-    </a>
+      <a [routerLink]="['/team/add']">Ajout Team
+      </a>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4" *ngFor="let item of user">
-        <div class="contact-box">
-            <a class="row" [routerLink]="['/collaborateur/update',item.id]">
-            <div class="col-4">
-                <div class="text-center">
-                    <img alt="image" class="rounded-circle m-t-xs img-fluid" src="../../../assets/img/avatar-0.jpg">
-                    <!-- <div class="m-t-xs font-bold">Developpeur Web Mobile</div> -->
-                </div>
-            </div>
-            <div class="col-8">
-                <h3><strong>{{item.user.Prenom}} {{item.user.Nom}}</strong></h3>
-                <address>
-                    <strong>{{item.user.poste}}</strong><br>
-                    <abbr title="Email">Mail:</abbr>{{item.user.username}} <br>
-                    <abbr title="Phone">Phone:</abbr> {{item.user.Telephone}}
-                </address>
-            </div>
-                </a>
+    <div class="col-3" *ngFor="let item of team">
+      
+      <div class="card">
+        <div class="card-body">
+          <a  [routerLink]="['/team/user',item.id]">
+          <h5 class="card-title">{{item.nom}}</h5>
+        </a>
         </div>
+      </div>
+   
     </div>
-</div>
+  </div>
 </div>
