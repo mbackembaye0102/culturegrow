@@ -2,49 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\Evaluation;
 use App\Entity\UserTeamPromo;
+use App\Form\EvaluationType;
 use App\Repository\AllsessionRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-
+    /**
+     * @Route("/infos",methods={"POST"})
+     */
 class SystemeController extends AbstractController
 {
     /**
-     * @Route("/infos123", name="systeme")
-     */
-    public function infos(){
-       $user=$this->getUser();
-       $team=$this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user'=>$user->getId()]);
-       $a="";
-        for ($i=0; $i <count($team) ; $i++) {
-            if ($i==0) {
-                $a=$a.$team[$i]->getTeamPromo()->getNom();
-            }
-            else{
-                $a=$a."&".$team[$i]->getTeamPromo()->getNom();
-            }
-            
-        }
-       $tableau=[
-         'id'=>$user->getId(),
-         'username'=>$user->getUsername(),
-         'prenom'=>$user->getPrenom(),
-         'nom'=>$user->getNom(),
-         'statut'=>$user->getStatut(),
-         'telephone'=>$user->getTelephone(),
-         'poste'=>$user->getPoste(),
-         'image'=>$user->getImage(),
-         'team'=>$a
-       ];
-       return $this->json($tableau);
-
-    }
- /**
-     * @Route("/infos")
+     * @Route("/user",methods={"POST"})
      */
     public function detailuser(Request $request, UserRepository $userRepository,AllsessionRepository $allsessionRepository)
     {
@@ -118,5 +93,33 @@ class SystemeController extends AbstractController
             ];
             return $this->json($tableau);
         }
+    }
+        /**
+     * @Route("/saveevaluation")
+     */
+    public function saveevaluation(Request $request,AllsessionRepository $allsessionRepository,SerializerInterface $serializer,UserRepository $userRepository,EntityManagerInterface $entityManagerInterface){
+        $data = $request->request->all();
+        $evaluation= new Evaluation();
+        $form=$this->createForm(EvaluationType::class,$evaluation);
+        $form->submit($data);
+        $evaluateur=$this->getUser();
+        $evaluer=$userRepository->find($data['evaluer']);
+        $evaluation->setEvaluateur($evaluateur);
+        $evaluation->setEvaluer($evaluer);
+        $date=date('Y-m-d');
+        $session=$allsessionRepository->findOneBy([
+            'date'=>$date,
+            'structure'=>$evaluateur->getStructure()
+        ]);
+        $evaluation->setSession($session);
+        $entityManagerInterface->persist($evaluation);
+        $entityManagerInterface->flush();
+        $data = $serializer->serialize($evaluation, 'json', [
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+
     }
 }

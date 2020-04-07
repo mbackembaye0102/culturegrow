@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -20,16 +23,19 @@ class Allsession
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $statut;
 
     /**
      * @ORM\Column(type="json",nullable=true)
+     * @Groups({"grow"})
      */
     private $teams = [];
 
@@ -42,6 +48,27 @@ class Allsession
      * @ORM\Column(type="string", length=255)
      */
     private $concerner;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Evaluation", mappedBy="session")
+     */
+    private $evaluations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Historiquesession", mappedBy="session")
+     */
+    private $historiquesessions;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $lesteams = [];
+
+    public function __construct()
+    {
+        $this->evaluations = new ArrayCollection();
+        $this->historiquesessions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +131,80 @@ class Allsession
     public function setConcerner(string $concerner): self
     {
         $this->concerner = $concerner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Evaluation[]
+     */
+    public function getEvaluations(): Collection
+    {
+        return $this->evaluations;
+    }
+
+    public function addEvaluation(Evaluation $evaluation): self
+    {
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations[] = $evaluation;
+            $evaluation->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluation(Evaluation $evaluation): self
+    {
+        if ($this->evaluations->contains($evaluation)) {
+            $this->evaluations->removeElement($evaluation);
+            // set the owning side to null (unless already changed)
+            if ($evaluation->getSession() === $this) {
+                $evaluation->setSession(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Historiquesession[]
+     */
+    public function getHistoriquesessions(): Collection
+    {
+        return $this->historiquesessions;
+    }
+
+    public function addHistoriquesession(Historiquesession $historiquesession): self
+    {
+        if (!$this->historiquesessions->contains($historiquesession)) {
+            $this->historiquesessions[] = $historiquesession;
+            $historiquesession->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriquesession(Historiquesession $historiquesession): self
+    {
+        if ($this->historiquesessions->contains($historiquesession)) {
+            $this->historiquesessions->removeElement($historiquesession);
+            // set the owning side to null (unless already changed)
+            if ($historiquesession->getSession() === $this) {
+                $historiquesession->setSession(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLesteams(): ?array
+    {
+        return $this->lesteams;
+    }
+
+    public function setLesteams(array $lesteams): self
+    {
+        $this->lesteams = $lesteams;
 
         return $this;
     }

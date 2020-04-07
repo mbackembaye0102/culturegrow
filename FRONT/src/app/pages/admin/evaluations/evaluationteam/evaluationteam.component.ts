@@ -74,6 +74,18 @@ export class EvaluationteamComponent implements OnInit {
     }
     else{
       alert("bakhe")
+      for (let index = 0; index < this.resultat.length; index++) {
+        //const element = array[index];
+        this.evaluation.get(this.resultat[index].libelle).setValue(this.resultat[index].valeur)
+      }
+      console.log(this.evaluation.value);
+      this.admin.saveevaluation(this.evaluation.value).subscribe(
+        res=>{console.log(res);
+        },
+        error=>{console.log(error);
+        }
+      )
+      
     }
   }
   evaluation=new FormGroup({
@@ -84,5 +96,6 @@ export class EvaluationteamComponent implements OnInit {
     problemsolving:new FormControl(''),
     transmission:new FormControl(''),
     performance:new FormControl(''),
+    evaluer:new FormControl(''),
   })
 }

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
-import {Users} from '../model/user.model'
+import {Users} from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private urllogin:string="http://127.0.0.1:8000/login";
-  private urlInfos:string="http://127.0.0.1:8000/infos";
+  private urlInfos:string="http://127.0.0.1:8000/infos/user";
   jwt: string;
   role:any;
   public admin=false;

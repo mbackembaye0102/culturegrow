@@ -22,6 +22,8 @@ export class AdminService {
     private urlsaveoneteamstructure:string="saveoneteamstructure";
     private urllistementor:string="listementor";
     private urluserteamevaluation="userteamevaluation";
+    private urlsaveevaluation="saveevaluation";
+    
 
     constructor(private http: HttpClient) { }
     usergrow() {
@@ -106,5 +108,8 @@ export class AdminService {
       }
       userteamevaluation(donner){
         return this.http.post(this.url+this.urluserteamevaluation,donner,{observe:'response'})
+      }
+      saveevaluation(donner){
+        return this.http.post("http://127.0.0.1:8000/infos/"+this.urlsaveevaluation,donner,{observe:'response'})
       }
 }

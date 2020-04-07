@@ -10,9 +10,11 @@
     <div class="evaluer">
       <p class="nom"> Nom de la personne à évaluer <span id="span">*</span></p>
       <div class="col-md-4">
-      <select class="select form-control" formControlName="evanuer" name="" id="" style="width:335px; height:50px;">
+        <form [formGroup]="evaluation">
+      <select class="select form-control" formControlName="evaluer" name="" id="" style="width:335px; height:50px;">
           <option *ngFor="let user of user"  value="{{user.user.id}}">{{user.user.prenom}} {{user.user.nom}}</option>
       </select>
+    </form>
       </div>
     </div>
   

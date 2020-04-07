@@ -39,7 +39,7 @@ import { UserteamstructureComponent } from './pages/admin/structure/userteamstru
 import { AdduserteamstructureComponent } from './pages/admin/structure/adduserteamstructure/adduserteamstructure.component';
 import { ListteamComponent } from './pages/admin/evaluations/listteam/listteam.component';
 import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationteam/evaluationteam.component';
-
+import {MaterialModule} from './material/material.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +81,7 @@ import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationtea
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [AuthService,
     {

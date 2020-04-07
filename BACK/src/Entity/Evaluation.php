@@ -28,6 +28,52 @@ class Evaluation
      */
     private $evaluateur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $perseverance;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $confiance;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $collaboration;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $autonomie;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $problemsolving;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $transmission;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $performance;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Allsession", inversedBy="evaluations")
+     */
+    private $session;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $team;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,4 +102,113 @@ class Evaluation
 
         return $this;
     }
+
+    public function getPerseverance(): ?string
+    {
+        return $this->perseverance;
+    }
+
+    public function setPerseverance(string $perseverance): self
+    {
+        $this->perseverance = $perseverance;
+
+        return $this;
+    }
+
+    public function getConfiance(): ?string
+    {
+        return $this->confiance;
+    }
+
+    public function setConfiance(string $confiance): self
+    {
+        $this->confiance = $confiance;
+
+        return $this;
+    }
+
+    public function getCollaboration(): ?string
+    {
+        return $this->collaboration;
+    }
+
+    public function setCollaboration(string $collaboration): self
+    {
+        $this->collaboration = $collaboration;
+
+        return $this;
+    }
+
+    public function getAutonomie(): ?string
+    {
+        return $this->autonomie;
+    }
+
+    public function setAutonomie(string $autonomie): self
+    {
+        $this->autonomie = $autonomie;
+
+        return $this;
+    }
+
+    public function getProblemsolving(): ?string
+    {
+        return $this->problemsolving;
+    }
+
+    public function setProblemsolving(string $problemsolving): self
+    {
+        $this->problemsolving = $problemsolving;
+
+        return $this;
+    }
+
+    public function getTransmission(): ?string
+    {
+        return $this->transmission;
+    }
+
+    public function setTransmission(string $transmission): self
+    {
+        $this->transmission = $transmission;
+
+        return $this;
+    }
+
+    public function getPerformance(): ?string
+    {
+        return $this->performance;
+    }
+
+    public function setPerformance(string $performance): self
+    {
+        $this->performance = $performance;
+
+        return $this;
+    }
+
+    public function getSession(): ?Allsession
+    {
+        return $this->session;
+    }
+
+    public function setSession(?Allsession $session): self
+    {
+        $this->session = $session;
+
+        return $this;
+    }
+
+    public function getTeam(): ?string
+    {
+        return $this->team;
+    }
+
+    public function setTeam(string $team): self
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
 }

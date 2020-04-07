@@ -271,7 +271,6 @@ class AdminController extends AbstractController
         $data = $request->request->all();
         $id = $data['id'];
         $user = $userRepository->find($id);
-     //   dump($user);die();
         $date=date('Y-m-d');
         
         if ($user) {
@@ -313,11 +312,9 @@ class AdminController extends AbstractController
     public function allstructure(StructureRepository $structureRepository, SerializerInterface $serializer)
     {
         $a = $structureRepository->findAll();
-      //  dump($a);
         $data = $serializer->serialize($a, 'json', [
             'groups' => ['grow']
         ]);
-       // dump($data);
         return new Response($data, 200, [
             'Content-Type' => 'application/json'
         ]);
