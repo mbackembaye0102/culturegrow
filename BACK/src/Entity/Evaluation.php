@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -20,46 +21,55 @@ class Evaluation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="evaluations")
+     * @Groups({"grow"})
      */
     private $evaluer;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="evaluations")
+     * @Groups({"grow"})
      */
     private $evaluateur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $perseverance;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $confiance;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $collaboration;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $autonomie;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $problemsolving;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $transmission;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $performance;
 

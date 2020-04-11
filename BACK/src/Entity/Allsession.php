@@ -18,6 +18,7 @@ class Allsession
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"grow"})
      */
     private $id;
 
@@ -46,6 +47,7 @@ class Allsession
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"grow"})
      */
     private $concerner;
 
@@ -54,15 +56,11 @@ class Allsession
      */
     private $evaluations;
 
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Historiquesession", mappedBy="session")
      */
     private $historiquesessions;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $lesteams = [];
 
     public function __construct()
     {
@@ -166,6 +164,7 @@ class Allsession
         return $this;
     }
 
+
     /**
      * @return Collection|Historiquesession[]
      */
@@ -193,18 +192,6 @@ class Allsession
                 $historiquesession->setSession(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getLesteams(): ?array
-    {
-        return $this->lesteams;
-    }
-
-    public function setLesteams(array $lesteams): self
-    {
-        $this->lesteams = $lesteams;
 
         return $this;
     }

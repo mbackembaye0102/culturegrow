@@ -44,10 +44,21 @@ class TeamPromo
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $userteam = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Historiquesession", mappedBy="team")
+     */
+    private $historiquesessions;
+
 
     public function __construct()
     {
         $this->userTeamPromos = new ArrayCollection();
+        $this->historiquesessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +129,49 @@ class TeamPromo
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUserteam(): ?array
+    {
+        return $this->userteam;
+    }
+
+    public function setUserteam(array $userteam): self
+    {
+        $this->userteam = $userteam;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Historiquesession[]
+     */
+    public function getHistoriquesessions(): Collection
+    {
+        return $this->historiquesessions;
+    }
+
+    public function addHistoriquesession(Historiquesession $historiquesession): self
+    {
+        if (!$this->historiquesessions->contains($historiquesession)) {
+            $this->historiquesessions[] = $historiquesession;
+            $historiquesession->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriquesession(Historiquesession $historiquesession): self
+    {
+        if ($this->historiquesessions->contains($historiquesession)) {
+            $this->historiquesessions->removeElement($historiquesession);
+            // set the owning side to null (unless already changed)
+            if ($historiquesession->getTeam() === $this) {
+                $historiquesession->setTeam(null);
+            }
+        }
 
         return $this;
     }

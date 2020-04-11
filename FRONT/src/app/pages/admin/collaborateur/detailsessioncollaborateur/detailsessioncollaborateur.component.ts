@@ -46,7 +46,9 @@ export class DetailsessioncollaborateurComponent implements OnInit {
     console.log(donner);
     this.admin.usersessiondata.team=donner;
     this.admin.userdetailsessionevaluation(this.admin.usersessiondata).subscribe(
-      res=>{console.log(res.body);
+      res=>{
+        console.log(this.admin.usersessiondata);
+        console.log(res.body);
         this.user=res.body;
         this.dataSource = new MatTableDataSource(this.user);
         this.dataSource.paginator = this.paginator;

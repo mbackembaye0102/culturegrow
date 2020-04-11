@@ -21,21 +21,75 @@ class SystemeController extends AbstractController
     /**
      * @Route("/user",methods={"POST"})
      */
-    public function detailuser(Request $request, UserRepository $userRepository,AllsessionRepository $allsessionRepository)
+    public function detailuser(Request $request, UserRepository $userRepository,AllsessionRepository $allsessionRepository,SerializerInterface $serializer)
     {
         $user=$this->getUser();
         $date=date('Y-m-d');
         
         if ($user) {
-            $team = $this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user' => $user->getId()]);
-            $structure=$team[0]->getTeamPromo()->getStructure();
-            $session=$allsessionRepository->findOneBy([
-                'date'=>$date,
-                'structure'=>$structure->getId()
-            ]);
-            if (!$session) {
+            if ($user->getStructure()==null) {
+                // Le super Admin
+                $data = $serializer->serialize($user, 'json', [
+                    'groups' => ['grow']
+                ]);
+                return new Response($data, 200, [
+                    'Content-Type' => 'application/json'
+                ]);
+
+            }
+            else{
+                $team = $this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user' => $user->getId()]);
+                $structure=$team[0]->getTeamPromo()->getStructure();
+                $session=$allsessionRepository->findOneBy([
+                    'date'=>$date,
+                    'structure'=>$structure->getId()
+                ]);
+                if (!$session) {
+                    $tableau = [
+                        'id' => $user->getId(),
+                        'username' => $user->getUsername(),
+                        'prenom' => $user->getPrenom(),
+                        'nom' => $user->getNom(),
+                        'statut' => $user->getStatut(),
+                        'telephone' => $user->getTelephone(),
+                        'poste' => $user->getPoste(),
+                        'image' => $user->getImage(),
+                        'evaluation'=>'pas d evaluation pour la structure',
+                    ];
+                    return $this->json($tableau);
+                }
+                
+                $a = [];
+                $isevaluer=array();
+                $teamsession=$session->getTeams();
+                $userteam=[];
+                for ($i=0; $i <count($team) ; $i++) { 
+                    array_push($userteam,$team[$i]->getTeamPromo()->getNom());
+                    array_push($a,$team[$i]->getTeamPromo()->getNom());
+                }
+                if ($session->getConcerner()==="good") {
+                    if (count($teamsession)!=0) {
+                        for ($i=0; $i < count($teamsession); $i++) { 
+                            if (!in_array($teamsession[$i],$userteam)) {
+                                array_push($userteam,$teamsession[$i]);
+                            }
+                        }
+                    }
+                }
+                elseif($session->getConcerner()==="bad"){
+                    for ($i=0; $i <count($teamsession) ; $i++) { 
+                        if (in_array($teamsession[$i],$userteam)) {
+                            array_push($isevaluer,$teamsession[$i]);
+                        }
+                        $userteam=$isevaluer;
+                    }
+                }
+                if (count($userteam)==0) {
+                    $userteam="rien";
+                }
                 $tableau = [
-                    'id' => $user->getId(),
+                    'id' => $user->getStructure()->getId(),
+                    'iduser'=>$user->getId(),
                     'username' => $user->getUsername(),
                     'prenom' => $user->getPrenom(),
                     'nom' => $user->getNom(),
@@ -43,55 +97,14 @@ class SystemeController extends AbstractController
                     'telephone' => $user->getTelephone(),
                     'poste' => $user->getPoste(),
                     'image' => $user->getImage(),
-                    'evaluation'=>'pas d evaluation pour la structure',
+                    'team' => $a,
+                    'evaluation'=>$session->getStatut(),
+                    'all'=>$session->getConcerner(),
+                    'teamevaluer'=>$userteam,
                 ];
                 return $this->json($tableau);
             }
-            
-            $a = [];
-            $isevaluer=array();
-            $teamsession=$session->getTeams();
-            $userteam=[];
-            for ($i=0; $i <count($team) ; $i++) { 
-                array_push($userteam,$team[$i]->getTeamPromo()->getNom());
-                array_push($a,$team[$i]->getTeamPromo()->getNom());
-            }
-            if ($session->getConcerner()==="good") {
-                if (count($teamsession)!=0) {
-                    for ($i=0; $i < count($teamsession); $i++) { 
-                        if (!in_array($teamsession[$i],$userteam)) {
-                            array_push($userteam,$teamsession[$i]);
-                        }
-                    }
-                }
-            }
-            elseif($session->getConcerner()==="bad"){
-                for ($i=0; $i <count($teamsession) ; $i++) { 
-                    if (in_array($teamsession[$i],$userteam)) {
-                        array_push($isevaluer,$teamsession[$i]);
-                    }
-                    $userteam=$isevaluer;
-                }
-            }
-            if (count($userteam)==0) {
-                $userteam="rien";
-            }
-            $tableau = [
-                'id' => $user->getStructure()->getId(),
-                'iduser'=>$user->getId(),
-                'username' => $user->getUsername(),
-                'prenom' => $user->getPrenom(),
-                'nom' => $user->getNom(),
-                'statut' => $user->getStatut(),
-                'telephone' => $user->getTelephone(),
-                'poste' => $user->getPoste(),
-                'image' => $user->getImage(),
-                'team' => $a,
-                'evaluation'=>$session->getStatut(),
-                'all'=>$session->getConcerner(),
-                'teamevaluer'=>$userteam,
-            ];
-            return $this->json($tableau);
+
         }
     }
     /**

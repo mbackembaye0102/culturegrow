@@ -12,6 +12,7 @@ use App\Entity\UserTeamPromo;
 use App\Form\EvaluationType;
 use App\Repository\AllsessionRepository;
 use App\Repository\EvaluationRepository;
+use App\Repository\HistoriquesessionRepository;
 use App\Repository\PosteRepository;
 use App\Repository\StructureRepository;
 use App\Repository\TeamPromoRepository;
@@ -19,6 +20,7 @@ use App\Repository\UserRepository;
 use App\Repository\UserTeamPromoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,7 +73,7 @@ class AdministrateurController extends AbstractController
         /**
      * @Route("/saveusergrow",name="saveusergrow", methods={"POST"})
      */
-    public function adduser(Request $request, UserPasswordEncoderInterface $encoder,StructureRepository $structureRepository, EntityManagerInterface $entityManagerInterface, TeamPromoRepository $teamPromoRepository,UserRepository $userRepository)
+    public function adduser(Request $request, UserPasswordEncoderInterface $encoder,StructureRepository $structureRepository, EntityManagerInterface $entityManagerInterface, TeamPromoRepository $teamPromoRepository,UserRepository $userRepository,AllsessionRepository $allsessionRepository)
     {
         $data = $request->request->all();
         
@@ -123,6 +125,18 @@ class AdministrateurController extends AbstractController
             $userTeamPromo->setUser($user);
             $userTeamPromo->setTeamPromo($team[$i]);
             $entityManagerInterface->persist($userTeamPromo);
+        }
+        $session=$allsessionRepository->findBy(['structure'=>$structure->getId(),'statut'=>'active']);
+        if ($session) {
+            for ($i=0; $i <count($session) ; $i++) { 
+                for ($j=0; $j < count($team); $j++) { 
+                    $historique=new Historiquesession();
+                    $historique->setTeam($team[$j]);
+                    $historique->setUser($user);
+                    $historique->setSession($session[$i]);
+                    $entityManagerInterface->persist($historique);   
+                }
+            }
         }
         $entityManagerInterface->flush();
         return $this->json([
@@ -190,7 +204,7 @@ class AdministrateurController extends AbstractController
         /**
      * @Route("/savesession")
      */
-    public function savesession(Request $request,TeamPromoRepository $teamPromoRepository,EntityManagerInterface $entityManagerInterface, StructureRepository $structureRepository)
+    public function savesession(Request $request,UserRepository $userRepository,TeamPromoRepository $teamPromoRepository,EntityManagerInterface $entityManagerInterface, StructureRepository $structureRepository,UserTeamPromoRepository $userTeamPromoRepository)
     {
         $data = $request->request->all();
         $taille = $data['taille'];
@@ -206,26 +220,51 @@ class AdministrateurController extends AbstractController
 
             $session->setDate($data['date']);
             $session->setStatut("active");
-           if ($data['all']=="good") {
-               $rien=[];
-                $allteams=$teamPromoRepository->findBy(['structure'=>$structure->getId()]);
-                for ($i=0; $i < count($allteams); $i++) { 
-                    array_push($rien,$allteams[$i]->getNom());
-                }
-                $session->setLesteams($rien);
+        //    if ($data['all']=="good") {
+        //        $rien=[];
+        //         $allteams=$teamPromoRepository->findBy(['structure'=>$structure->getId()]);
+        //         for ($i=0; $i < count($allteams); $i++) { 
+        //             array_push($rien,$allteams[$i]->getNom());
+        //         }
+        //       //  $session->setLesteams($rien);
 
-           }
+        //    }
            $session->setTeams($tab);
             $session->setConcerner($data['all']);
             $session->setStructure($structure);
             $entityManagerInterface->persist($session);
-            $historique=new Historiquesession();
-            $historique->setSession($session);
+            // $historique=new Historiquesession();
+            //  $historique->setSession($session);
             if ($data['all']=="good") {
-                $historique->setType("Evaluation Par Team");
+                //EVALUATION PAR TEAMS ou EVALUATION PAS TEAMS ET PLUS
+                // 1-Les user de cette structure
+                $user=$userRepository->findBy(['structure'=>$data['structure']]);
+                if ($user) {
+                    for ($i=0; $i < count($user); $i++) { 
+                        $userteam1=$userTeamPromoRepository->findBy(['user'=>$user[$i]->getId()]);
+                        for ($j=0; $j < count($userteam1); $j++) { 
+                            $historique=new Historiquesession();
+                            $historique->setSession($session);
+                            $historique->setUser($user[$i]);
+                            $historique->setTeam($userteam1[$j]->getTeamPromo());
+                            $entityManagerInterface->persist($historique);
+                        }
+                    }
+                }
             }
             elseif($data['all']=="bad"){
-                $historique->setType("Evaluation Par Team");
+                $a=$session->getTeams();
+                for ($i=0; $i <count($a) ; $i++) { 
+                    $team1=$teamPromoRepository->findOneBy(['nom'=>$a[$i]]);
+                    $userteam2=$userTeamPromoRepository->findBy(['TeamPromo'=>$team1->getId()]);
+                    for ($j=0; $j < count($userteam2); $j++) { 
+                        $historique=new Historiquesession();
+                        $historique->setSession($session);
+                        $historique->setUser($userteam2->getUser());
+                        $historique->setTeam($userteam2->getTeamPromo());
+                        $entityManagerInterface->persist($historique);
+                    }
+                }
             }
             $entityManagerInterface->flush();
             return $this->json([
@@ -582,10 +621,11 @@ class AdministrateurController extends AbstractController
             'session'=>$data['idsession'],
             'evaluer'=>$data['iduser'],
         ]);
-        $data = $serializer->serialize($evaluation, 'json', [
+      //  return new JsonResponse($evaluation);
+        $data1 = $serializer->serialize($evaluation, 'json', [
             'groups' => ['grow']
         ]);
-        return new Response($data, 200, [
+        return new Response($data1, 200, [
             'Content-Type' => 'application/json'
         ]);
     }

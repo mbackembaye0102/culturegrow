@@ -36,48 +36,48 @@ class AppFixtures extends Fixture
             $manager->persist($team);
         }
         $manager->flush();
-        //yaya user
+        //SUPER ADMIN
         $user= new User();
-        $user->setPrenom("El Hadji Yaya");
-        $user->setNom("Ly");
-        $user->setUsername("yaya");
+        $user->setPrenom("Babacar");
+        $user->setNom("SY");
+        $user->setUsername("director");
         $user->setRoles(["ROLE_ADMIN"]);
         $user->setStatut("actif");
-        $user->setTelephone("772652363");
-        $user->setPoste("Développeur");
+        $user->setTelephone("0000000");
+        $user->setPoste("Directeur");
         $user->setImage("defaut.png");
-        $user->setStructure($structure);
+       // $user->setStructure($structure);
         $password = $this->encoder->encodePassword($user, 'welcome');
         $user->setPassword($password);
         $manager->persist($user);
-        $userTeamPromo= new UserTeamPromo();
-        $userTeamPromo->setUser($user);
-        $userTeamPromo->setTeamPromo($team);
-        $manager->persist($userTeamPromo);
-        // mbacké user
-        $user1= new User();
-        $user1->setPrenom("ElHadji Mbacke");
-        $user1->setNom("Mbaye");
-        $user1->setUsername("mbacke");
-        $user1->setRoles(["ROLE_ADMIN"]);
-        $user1->setStatut("actif");
-        $user1->setTelephone("772658952");
-        $user1->setPoste("Développeur");
-        $user1->setImage("defaut.png");
-        $user1->setStructure($structure);
-        $password1 = $this->encoder->encodePassword($user1, 'welcome');
-        $user1->setPassword($password1);
-        $manager->persist($user1);
-        $userTeamPromo0= new UserTeamPromo();
-        $userTeamPromo0->setUser($user1);
-        $userTeamPromo0->setTeamPromo($team);
-        $manager->persist($userTeamPromo0);
-        $userTeamPromo1= new UserTeamPromo();
-        $userTeamPromo1->setUser($user1);
-        $team1=$this->teamPromoRepository->findOneBy(['nom'=>'Team Business']);
-        $userTeamPromo1->setTeamPromo($team1);
+        // $userTeamPromo= new UserTeamPromo();
+        // $userTeamPromo->setUser($user);
+        // $userTeamPromo->setTeamPromo($team);
+        // $manager->persist($userTeamPromo);
+        // // mbacké user
+        // $user1= new User();
+        // $user1->setPrenom("ElHadji Mbacke");
+        // $user1->setNom("Mbaye");
+        // $user1->setUsername("mbacke");
+        // $user1->setRoles(["ROLE_ADMIN"]);
+        // $user1->setStatut("actif");
+        // $user1->setTelephone("772658952");
+        // $user1->setPoste("Développeur");
+        // $user1->setImage("defaut.png");
+        // $user1->setStructure($structure);
+        // $password1 = $this->encoder->encodePassword($user1, 'welcome');
+        // $user1->setPassword($password1);
+        // $manager->persist($user1);
+        // $userTeamPromo0= new UserTeamPromo();
+        // $userTeamPromo0->setUser($user1);
+        // $userTeamPromo0->setTeamPromo($team);
+        // $manager->persist($userTeamPromo0);
+        // $userTeamPromo1= new UserTeamPromo();
+        // $userTeamPromo1->setUser($user1);
+        // $team1=$this->teamPromoRepository->findOneBy(['nom'=>'Team Business']);
+        // $userTeamPromo1->setTeamPromo($team1);
 
-        $manager->persist($userTeamPromo1);
+        // $manager->persist($userTeamPromo1);
         $listposte=["Développeur","Project Manager","Assitante Project Manager","Monteur","Cadreur","Infographe"];
         for ($i=0; $i < count($listteam); $i++) { 
             $poste= new Poste();
