@@ -94,7 +94,7 @@ class SystemeController extends AbstractController
             return $this->json($tableau);
         }
     }
-        /**
+    /**
      * @Route("/saveevaluation")
      */
     public function saveevaluation(Request $request,AllsessionRepository $allsessionRepository,SerializerInterface $serializer,UserRepository $userRepository,EntityManagerInterface $entityManagerInterface){
@@ -106,6 +106,7 @@ class SystemeController extends AbstractController
         $evaluer=$userRepository->find($data['evaluer']);
         $evaluation->setEvaluateur($evaluateur);
         $evaluation->setEvaluer($evaluer);
+        $evaluation->setTeam($data['team']);
         $date=date('Y-m-d');
         $session=$allsessionRepository->findOneBy([
             'date'=>$date,

@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Entity\UserTeamPromo;
 use App\Form\EvaluationType;
 use App\Repository\AllsessionRepository;
+use App\Repository\EvaluationRepository;
 use App\Repository\PosteRepository;
 use App\Repository\StructureRepository;
 use App\Repository\TeamPromoRepository;
@@ -95,6 +96,7 @@ class AdministrateurController extends AbstractController
         for ($i = 0; $i <= $taille; $i++) {
            // $a=$data["team$i"];
             $teams[$i] = $teamPromoRepository->findOneBy(['nom' => $data["team$i"]]);
+          //  $teams[$i]->setUserteam();
             array_push($team, $teams[$i]);
         }
         $user->setPrenom($data['prenom']);
@@ -462,6 +464,7 @@ class AdministrateurController extends AbstractController
      */
     public function saveevaluation(Request $request,SerializerInterface $serializer,UserRepository $userRepository,EntityManagerInterface $entityManagerInterface){
         $data = $request->request->all();
+      //  return $this->json(['team'=>$data['team']]);
         $evaluation= new Evaluation();
         $form=$this->createForm(EvaluationType::class,$evaluation);
         $form->submit($data);
@@ -469,6 +472,7 @@ class AdministrateurController extends AbstractController
         $evaluer=$userRepository->find($data['evaluer']);
         $evaluation->setEvaluateur($evaluateur);
         $evaluation->setEvaluer($evaluer);
+        $evaluation->setTeam($data['team']);
         $entityManagerInterface->persist($evaluation);
         $entityManagerInterface->flush();
         $data = $serializer->serialize($evaluation, 'json', [
@@ -485,7 +489,7 @@ class AdministrateurController extends AbstractController
     public function detailsession(Request $request,AllsessionRepository $allsessionRepository,SerializerInterface $serializer){
         $data = $request->request->all();
         $session=$allsessionRepository->findBy(['structure'=>$data['id']]);
-        dump($session[0]);die();
+       // dump($session[0]);die();
         $data = $serializer->serialize($session, 'json', [
             'groups' => ['grow']
         ]);
@@ -493,5 +497,96 @@ class AdministrateurController extends AbstractController
             'Content-Type' => 'application/json'
         ]);
         
+    }
+    /**
+     * @Route("/usersession")
+     */
+    public function usersession(Request $request,AllsessionRepository $allsessionRepository,SerializerInterface $serializer,UserRepository $userRepository){
+        $data = $request->request->all();
+        $user=$userRepository->find($data['id']);
+        $session=$allsessionRepository->findBy(['structure'=>$user->getStructure()]);
+        $team = $this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user' => $user->getId()]);
+        $a = [];
+        for ($i = 0; $i < count($team); $i++) {
+            array_push($a,$team[$i]->getTeamPromo()->getNom());
+        }
+        //$bad=false;
+        for ($i=0; $i <count($session) ; $i++) { 
+            
+            if ($session[$i]->getConcerner()=="bad") {
+                $tab=[];
+                $teambad=$session[$i]->getTeams();
+                for ($i=0; $i < count($teambad); $i++) { 
+                    if (in_array($teambad[$i],$a)) {
+                        array_push($tab,$teambad[$i]);
+                    }
+                }
+                if (count($tab)==0) {
+                    unset($session[$i]);
+                
+                }
+            }
+        }
+        sort($session);
+        $data = $serializer->serialize($session, 'json', [
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+    /**
+     * @Route("/usersessionteam")
+     */
+    public function usersessionteam(Request $request,SerializerInterface $serializer,UserRepository $userRepository,AllsessionRepository $allsessionRepository){
+        $data = $request->request->all();
+        $user=$userRepository->find($data['iduser']);
+        $session=$allsessionRepository->find($data['idsession']);
+        $team = $this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user' => $user->getId()]);
+        $a = [];
+            $isevaluer=array();
+            $teamsession=$session->getTeams();
+            $userteam=[];
+            for ($i=0; $i <count($team) ; $i++) { 
+                array_push($userteam,$team[$i]->getTeamPromo()->getNom());
+                array_push($a,$team[$i]->getTeamPromo()->getNom());
+            }
+            if ($session->getConcerner()==="good") {
+                if (count($teamsession)!=0) {
+                    for ($i=0; $i < count($teamsession); $i++) { 
+                        if (!in_array($teamsession[$i],$userteam)) {
+                            array_push($userteam,$teamsession[$i]);
+                        }
+                    }
+                }
+            }
+            elseif($session->getConcerner()==="bad"){
+                for ($i=0; $i <count($teamsession) ; $i++) { 
+                    if (in_array($teamsession[$i],$userteam)) {
+                        array_push($isevaluer,$teamsession[$i]);
+                    }
+                    $userteam=$isevaluer;
+                }
+            }
+            return $this->json(['team' => $userteam,]);
+        
+    }
+
+    /**
+     * @Route("/userdetailsessionevaluation")
+     */
+    public function userdetailsessionevaluation(Request $request,EvaluationRepository $evaluationRepository,SerializerInterface $serializer){
+        $data = $request->request->all();
+        $evaluation=$evaluationRepository->findBy([
+            'team'=>$data['team'],
+            'session'=>$data['idsession'],
+            'evaluer'=>$data['iduser'],
+        ]);
+        $data = $serializer->serialize($evaluation, 'json', [
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
     }
 }

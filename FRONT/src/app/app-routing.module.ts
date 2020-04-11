@@ -24,6 +24,7 @@ import { UserteamstructureComponent } from './pages/admin/structure/userteamstru
 import { AdduserteamstructureComponent } from './pages/admin/structure/adduserteamstructure/adduserteamstructure.component';
 import { ListteamComponent } from './pages/admin/evaluations/listteam/listteam.component';
 import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationteam/evaluationteam.component';
+import { DetailsessioncollaborateurComponent } from './pages/admin/collaborateur/detailsessioncollaborateur/detailsessioncollaborateur.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent,pathMatch: 'full'},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'collaborateur',component:ListecollaborateurComponent},
   {path:'collaborateur/add',component:AjoutcollaborateurComponent},
   {path:'collaborateur/detail/:id',component:DetailcollaborateurComponent},
+  {path:'detailusersession',component:DetailsessioncollaborateurComponent},
   {path:'collaborateur/update/:id',component:ModifcollaborateurComponent},
   {path:'structure',component:ListestructureComponent},
   {path:'structure/add',component:AjoutstructureComponent},
@@ -52,6 +54,7 @@ const routes: Routes = [
   {path:"validationsession/:id",component:ValidationsessionsComponent},
   {path:'evaluation',component:ListteamComponent},
   {path:'evaluation/:id',component:EvaluationteamComponent},
+  {path:'evaluation/:id',component:DetailsessioncollaborateurComponent},
 ];
 
 @NgModule({

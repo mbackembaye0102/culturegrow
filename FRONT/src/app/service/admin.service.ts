@@ -23,7 +23,11 @@ export class AdminService {
     private urllistementor:string="listementor";
     private urluserteamevaluation="userteamevaluation";
     private urlsaveevaluation="saveevaluation";
+    private urlusersession="usersession";
+    private urlusersessionteam="usersessionteam";
+    private urluserdetailsessionevaluation="userdetailsessionevaluation";
     
+    public usersessiondata={iduser:null,idsession:null,team:null}
 
     constructor(private http: HttpClient) { }
     usergrow() {
@@ -111,5 +115,14 @@ export class AdminService {
       }
       saveevaluation(donner){
         return this.http.post("http://127.0.0.1:8000/infos/"+this.urlsaveevaluation,donner,{observe:'response'})
+      }
+      usersession(donner){
+        return this.http.post(this.url+this.urlusersession,donner,{observe:'response'})
+      }
+      usersessionteam(donner){
+        return this.http.post(this.url+this.urlusersessionteam,donner,{observe:'response'})
+      }
+      userdetailsessionevaluation(donner){
+        return this.http.post(this.url+this.urluserdetailsessionevaluation,donner,{observe:'response'})
       }
 }

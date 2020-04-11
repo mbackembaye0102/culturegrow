@@ -79,6 +79,8 @@ export class EvaluationteamComponent implements OnInit {
         this.evaluation.get(this.resultat[index].libelle).setValue(this.resultat[index].valeur)
       }
       console.log(this.evaluation.value);
+      this.evaluation.get('team').setValue(this.id);
+      console.log(this.evaluation.value);
       this.admin.saveevaluation(this.evaluation.value).subscribe(
         res=>{console.log(res);
         },
@@ -97,5 +99,6 @@ export class EvaluationteamComponent implements OnInit {
     transmission:new FormControl(''),
     performance:new FormControl(''),
     evaluer:new FormControl(''),
+    team:new FormControl('')
   })
 }

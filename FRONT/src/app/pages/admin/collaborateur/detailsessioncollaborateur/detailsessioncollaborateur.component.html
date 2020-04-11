@@ -1,0 +1,70 @@
+<div class="mat-elevation-z8">
+  <div class="row">
+    <div class="col-8">
+      <form [formGroup]="detailteam">
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Team</label>
+          <div class="col-sm-5">
+            <select name="" id=""formControlName="team" (change)="changement($event.target.value)" class="form-control">
+              <option *ngFor="let item of teamevaluation" value="{{item}}">{{item}}</option>
+            </select>
+          </div>
+        </div>
+    </form>
+    </div>
+    <div class="col-4">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <!-- Name Column -->
+    <ng-container matColumnDef="evaluateur">
+      <th mat-header-cell *matHeaderCellDef> Evaluateur </th>
+      <td mat-cell *matCellDef="let element"> {{element.evaluateur.prenom}} </td>
+    </ng-container>
+    <ng-container matColumnDef="evaluer">
+      <th mat-header-cell *matHeaderCellDef> Evaluer </th>
+      <td mat-cell *matCellDef="let element"> {{element.evaluer.prenom}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="autonomie">
+      <th mat-header-cell *matHeaderCellDef> autonomie </th>
+      <td mat-cell *matCellDef="let element"> {{element.autonomie}} </td>
+    </ng-container>
+    <ng-container matColumnDef="collaboration">
+      <th mat-header-cell *matHeaderCellDef> collaboration </th>
+      <td mat-cell *matCellDef="let element"> {{element.collaboration}} </td>
+    </ng-container>
+    <ng-container matColumnDef="confiance">
+      <th mat-header-cell *matHeaderCellDef> confiance </th>
+      <td mat-cell *matCellDef="let element"> {{element.confiance}} </td>
+    </ng-container>
+    <ng-container matColumnDef="performance">
+      <th mat-header-cell *matHeaderCellDef> performance </th>
+      <td mat-cell *matCellDef="let element"> {{element.performance}} </td>
+    </ng-container>
+    <ng-container matColumnDef="perseverance">
+      <th mat-header-cell *matHeaderCellDef> perseverance </th>
+      <td mat-cell *matCellDef="let element"> {{element.perseverance}} </td>
+    </ng-container>
+    <ng-container matColumnDef="problemsolving">
+      <th mat-header-cell *matHeaderCellDef> problemsolving </th>
+      <td mat-cell *matCellDef="let element"> {{element.problemsolving}} </td>
+    </ng-container>
+    <ng-container matColumnDef="transmission">
+      <th mat-header-cell *matHeaderCellDef> transmission </th>
+      <td mat-cell *matCellDef="let element"> {{element.transmission}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+    (click)="selection.toggle(row)"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
