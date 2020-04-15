@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { FormGroup, FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-detailcollaborateur',
   templateUrl: './detailcollaborateur.component.html',
@@ -95,30 +96,41 @@ export class DetailcollaborateurComponent implements OnInit {
   }
   formulare=new FormGroup({
     taille:new FormControl(''),
-    date0:new FormControl('')
+    date0:new FormControl(''),
+    id:new FormControl(''),
   })
   change(statut,date){
     console.log(statut);
     console.log(date);
     this.goodselect=true;
-    if (statut) {
+    let alpha=false;
+    for (let index = 0; index < this.dataselect.length; index++) {
+      if (this.dataselect[index].date==date) {
+        this.dataselect[index].statut=statut;
+        alpha=true;
+      } 
+    }
+    if (alpha==false) {
       this.dataselect.push({date:date,statut:statut})
     }
-    else{
-      for (let index = 0; index < this.dataselect.length; index++) {
-        if (this.dataselect[index].date==date) {
-          this.dataselect[index].statut=statut
-        }
+    // if (statut) {
+    //   this.dataselect.push({date:date,statut:statut})
+    // }
+    // else{
+    //   for (let index = 0; index < this.dataselect.length; index++) {
+    //     if (this.dataselect[index].date==date) {
+    //       this.dataselect[index].statut=statut
+    //     }
         
-      }
-    //  console.log(this.dataselect);
-      
-    }
+    //   }
+    // }
     console.log(this.dataselect);
 
   }
   diagramme(){
     console.log(this.dataselect);
+    this.formulare.reset();
+    this.taille=0;
     for (let index = 0; index < this.dataselect.length; index++) {
       if (this.dataselect[index].statut==true) {
         this.formulare.get('date'+this.taille).setValue(this.dataselect[index].date);
@@ -127,7 +139,9 @@ export class DetailcollaborateurComponent implements OnInit {
         this.formulare.addControl('date'+this.taille,new FormControl(''))
       }
     }
+    this.formulare.get('id').setValue(this.id);
     console.log(this.formulare.value);
+    this.admin.userdata=this.formulare.value;
     
     this.nextr();
   }

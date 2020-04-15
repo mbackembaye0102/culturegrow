@@ -26,9 +26,9 @@ export class AdminService {
     private urlusersession="usersession";
     private urlusersessionteam="usersessionteam";
     private urluserdetailsessionevaluation="userdetailsessionevaluation";
-    
+    private urldata="data";
     public usersessiondata={iduser:null,idsession:null,team:null}
-
+    public userdata:any;
     constructor(private http: HttpClient) { }
     usergrow() {
         return this.http.post(this.url + this.urllistuser, { observe: 'response' })
@@ -124,5 +124,8 @@ export class AdminService {
       }
       userdetailsessionevaluation(donner){
         return this.http.post(this.url+this.urluserdetailsessionevaluation,donner,{observe:'response'})
+      }
+      data(donner){
+        return this.http.post(this.url+this.urldata,donner,{observe:'response'})
       }
 }

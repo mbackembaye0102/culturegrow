@@ -41,6 +41,8 @@ import { ListteamComponent } from './pages/admin/evaluations/listteam/listteam.c
 import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationteam/evaluationteam.component';
 import {MaterialModule} from './material/material.module';
 import { DetailsessioncollaborateurComponent } from './pages/admin/collaborateur/detailsessioncollaborateur/detailsessioncollaborateur.component';
+import { DiagramComponent } from './pages/admin/collaborateur/diagram/diagram.component';
+import { GrowComponent } from './pages/admin/grow/grow.component';
 //  import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { DetailsessioncollaborateurComponent } from './pages/admin/collaborateur
     ListteamComponent,
     EvaluationteamComponent,
     DetailsessioncollaborateurComponent,
+    DiagramComponent,
+    GrowComponent,
   ],
   imports: [
     BrowserModule,

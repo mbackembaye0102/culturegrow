@@ -75,11 +75,8 @@
 </mat-paginator>
 </div>
 
-<div class="row" *ngIf="diag">
-  <h1>Diagramme</h1>
-  <div id="yaya">
-    <canvas id="rien"></canvas>
-  </div>
+<div *ngIf="diag">
+  <app-diagram></app-diagram>
 </div>
 </div>
 

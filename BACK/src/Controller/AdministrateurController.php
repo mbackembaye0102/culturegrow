@@ -629,4 +629,83 @@ class AdministrateurController extends AbstractController
             'Content-Type' => 'application/json'
         ]);
     }
+    /**
+     * @Route("/data")
+     */
+    public function userdata(Request $request,EvaluationRepository $evaluationRepository,AllsessionRepository $allsessionRepository){
+        $data = $request->request->all();
+        $perseverancelabel=[];
+        $perseverancedata=[];
+        $confiancelabel=[];
+        $confiancedata=[];
+        $collaborationlabel=[];
+        $collaborationdata=[];
+        $autonomielabel=[];
+        $autonomiedata=[];
+        $problemsolvinglabel=[];
+        $problemsolvingdata=[];
+        $transmissionlabel=[];
+        $transmissiondata=[];
+        $performancelabel=[];
+        $performancedata=[];
+        for ($i=0; $i <= $data['taille']; $i++) { 
+            $perseverance=0;
+            $confiance=0;
+            $collaboration=0;
+            $autonomie=0;
+            $problemsolving=0;
+            $transmission=0;
+            $performance=0;
+            $session=$allsessionRepository->findOneBy(['date'=>$data["date$i"]]);
+            $evaluation=$evaluationRepository->findBy(['evaluer'=>$data['id'],'session'=>$session->getId()]);
+            for ($j=0; $j < count($evaluation); $j++) { 
+                $perseverance=$perseverance+$evaluation[$j]->getPerseverance();
+                $confiance=$confiance+$evaluation[$j]->getConfiance();
+                $collaboration=$collaboration+$evaluation[$j]->getCollaboration();
+                $autonomie=$autonomie+$evaluation[$j]->getAutonomie();
+                $problemsolving=$problemsolving+$evaluation[$j]->getProblemsolving();
+                $transmission=$transmission+$evaluation[$j]->getTransmission();
+                $performance=$performance+$evaluation[$j]->getPerformance();
+            }
+            $perseverance=$perseverance/count($evaluation);
+            $confiance=$confiance/count($evaluation);
+            $collaboration=$collaboration/count($evaluation);
+            $autonomie=$autonomie/count($evaluation);
+            $problemsolving=$problemsolving/count($evaluation);
+            $transmission=$transmission/count($evaluation);
+            $performance=$performance/count($evaluation);
+            array_push($perseverancelabel,$data["date$i"]);
+            array_push($perseverancedata,$perseverance);
+            array_push($confiancelabel,$data["date$i"]);
+            array_push($confiancedata,$confiance);
+            array_push($collaborationlabel,$data["date$i"]);
+            array_push($collaborationdata,$collaboration);
+            array_push($autonomielabel,$data["date$i"]);
+            array_push($autonomiedata,$autonomie);
+            array_push($problemsolvinglabel,$data["date$i"]);
+            array_push($problemsolvingdata,$problemsolving);
+            array_push($transmissionlabel,$data["date$i"]);
+            array_push($transmissiondata,$transmission);
+            array_push($performancelabel,$data["date$i"]);
+            array_push($performancedata,$performance);
+
+        }
+        return $this->json([
+            'perseverancelabel'=>$perseverancelabel,
+            'perseverancedata'=>$perseverancedata,
+            'confiancelabel'=>$confiancelabel,
+            'confiancedata'=>$confiancedata,
+            'collaborationlabel'=>$collaborationlabel,
+            'collaborationdata'=>$collaborationdata,
+            'autonomielabel'=>$autonomielabel,
+            'autonomiedata'=>$autonomiedata,
+            'problemsolvinglabel'=>$problemsolvinglabel,
+            'problemsolvingdata'=>$problemsolvingdata,
+            'transmissionlabel'=>$transmissionlabel,
+            'transmissiondata'=>$transmissiondata,
+            'performancelabel'=>$performancelabel,
+            'performancedata'=>$performancedata,
+        ]);
+        
+    }
 }
