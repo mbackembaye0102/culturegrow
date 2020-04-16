@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "TransfertArgentAngular"
+  "defaultProject": "TransfertArgentAngular",
+  "cli": {
+    "analytics": "c23643a2-1217-4049-91e8-cf4284d01dd7"
+  }
 }

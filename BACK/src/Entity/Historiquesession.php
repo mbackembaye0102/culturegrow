@@ -19,50 +19,46 @@ class Historiquesession
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $team;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="historiquesessions")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TeamPromo", inversedBy="historiquesessions")
+     */
+    private $team;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Allsession", inversedBy="historiquesessions")
      */
     private $session;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTeam(): ?string
-    {
-        return $this->team;
-    }
-
-    public function setTeam(string $team): self
-    {
-        $this->team = $team;
-
-        return $this;
-    }
-
-    public function getUser(): ?string
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(string $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTeam(): ?TeamPromo
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?TeamPromo $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }
@@ -75,18 +71,6 @@ class Historiquesession
     public function setSession(?Allsession $session): self
     {
         $this->session = $session;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }

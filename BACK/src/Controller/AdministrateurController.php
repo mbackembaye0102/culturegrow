@@ -11,6 +11,8 @@ use App\Entity\User;
 use App\Entity\UserTeamPromo;
 use App\Form\EvaluationType;
 use App\Repository\AllsessionRepository;
+use App\Repository\EvaluationRepository;
+use App\Repository\HistoriquesessionRepository;
 use App\Repository\PosteRepository;
 use App\Repository\StructureRepository;
 use App\Repository\TeamPromoRepository;
@@ -18,6 +20,7 @@ use App\Repository\UserRepository;
 use App\Repository\UserTeamPromoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,7 +73,7 @@ class AdministrateurController extends AbstractController
         /**
      * @Route("/saveusergrow",name="saveusergrow", methods={"POST"})
      */
-    public function adduser(Request $request, UserPasswordEncoderInterface $encoder,StructureRepository $structureRepository, EntityManagerInterface $entityManagerInterface, TeamPromoRepository $teamPromoRepository,UserRepository $userRepository)
+    public function adduser(Request $request, UserPasswordEncoderInterface $encoder,StructureRepository $structureRepository, EntityManagerInterface $entityManagerInterface, TeamPromoRepository $teamPromoRepository,UserRepository $userRepository,AllsessionRepository $allsessionRepository)
     {
         $data = $request->request->all();
         
@@ -95,6 +98,7 @@ class AdministrateurController extends AbstractController
         for ($i = 0; $i <= $taille; $i++) {
            // $a=$data["team$i"];
             $teams[$i] = $teamPromoRepository->findOneBy(['nom' => $data["team$i"]]);
+          //  $teams[$i]->setUserteam();
             array_push($team, $teams[$i]);
         }
         $user->setPrenom($data['prenom']);
@@ -121,6 +125,18 @@ class AdministrateurController extends AbstractController
             $userTeamPromo->setUser($user);
             $userTeamPromo->setTeamPromo($team[$i]);
             $entityManagerInterface->persist($userTeamPromo);
+        }
+        $session=$allsessionRepository->findBy(['structure'=>$structure->getId(),'statut'=>'active']);
+        if ($session) {
+            for ($i=0; $i <count($session) ; $i++) { 
+                for ($j=0; $j < count($team); $j++) { 
+                    $historique=new Historiquesession();
+                    $historique->setTeam($team[$j]);
+                    $historique->setUser($user);
+                    $historique->setSession($session[$i]);
+                    $entityManagerInterface->persist($historique);   
+                }
+            }
         }
         $entityManagerInterface->flush();
         return $this->json([
@@ -188,7 +204,7 @@ class AdministrateurController extends AbstractController
         /**
      * @Route("/savesession")
      */
-    public function savesession(Request $request,TeamPromoRepository $teamPromoRepository,EntityManagerInterface $entityManagerInterface, StructureRepository $structureRepository)
+    public function savesession(Request $request,UserRepository $userRepository,TeamPromoRepository $teamPromoRepository,EntityManagerInterface $entityManagerInterface, StructureRepository $structureRepository,UserTeamPromoRepository $userTeamPromoRepository)
     {
         $data = $request->request->all();
         $taille = $data['taille'];
@@ -204,26 +220,51 @@ class AdministrateurController extends AbstractController
 
             $session->setDate($data['date']);
             $session->setStatut("active");
-           if ($data['all']=="good") {
-               $rien=[];
-                $allteams=$teamPromoRepository->findBy(['structure'=>$structure->getId()]);
-                for ($i=0; $i < count($allteams); $i++) { 
-                    array_push($rien,$allteams[$i]->getNom());
-                }
-                $session->setLesteams($rien);
+        //    if ($data['all']=="good") {
+        //        $rien=[];
+        //         $allteams=$teamPromoRepository->findBy(['structure'=>$structure->getId()]);
+        //         for ($i=0; $i < count($allteams); $i++) { 
+        //             array_push($rien,$allteams[$i]->getNom());
+        //         }
+        //       //  $session->setLesteams($rien);
 
-           }
+        //    }
            $session->setTeams($tab);
             $session->setConcerner($data['all']);
             $session->setStructure($structure);
             $entityManagerInterface->persist($session);
-            $historique=new Historiquesession();
-            $historique->setSession($session);
+            // $historique=new Historiquesession();
+            //  $historique->setSession($session);
             if ($data['all']=="good") {
-                $historique->setType("Evaluation Par Team");
+                //EVALUATION PAR TEAMS ou EVALUATION PAS TEAMS ET PLUS
+                // 1-Les user de cette structure
+                $user=$userRepository->findBy(['structure'=>$data['structure']]);
+                if ($user) {
+                    for ($i=0; $i < count($user); $i++) { 
+                        $userteam1=$userTeamPromoRepository->findBy(['user'=>$user[$i]->getId()]);
+                        for ($j=0; $j < count($userteam1); $j++) { 
+                            $historique=new Historiquesession();
+                            $historique->setSession($session);
+                            $historique->setUser($user[$i]);
+                            $historique->setTeam($userteam1[$j]->getTeamPromo());
+                            $entityManagerInterface->persist($historique);
+                        }
+                    }
+                }
             }
             elseif($data['all']=="bad"){
-                $historique->setType("Evaluation Par Team");
+                $a=$session->getTeams();
+                for ($i=0; $i <count($a) ; $i++) { 
+                    $team1=$teamPromoRepository->findOneBy(['nom'=>$a[$i]]);
+                    $userteam2=$userTeamPromoRepository->findBy(['TeamPromo'=>$team1->getId()]);
+                    for ($j=0; $j < count($userteam2); $j++) { 
+                        $historique=new Historiquesession();
+                        $historique->setSession($session);
+                        $historique->setUser($userteam2->getUser());
+                        $historique->setTeam($userteam2->getTeamPromo());
+                        $entityManagerInterface->persist($historique);
+                    }
+                }
             }
             $entityManagerInterface->flush();
             return $this->json([
@@ -462,6 +503,7 @@ class AdministrateurController extends AbstractController
      */
     public function saveevaluation(Request $request,SerializerInterface $serializer,UserRepository $userRepository,EntityManagerInterface $entityManagerInterface){
         $data = $request->request->all();
+      //  return $this->json(['team'=>$data['team']]);
         $evaluation= new Evaluation();
         $form=$this->createForm(EvaluationType::class,$evaluation);
         $form->submit($data);
@@ -469,6 +511,7 @@ class AdministrateurController extends AbstractController
         $evaluer=$userRepository->find($data['evaluer']);
         $evaluation->setEvaluateur($evaluateur);
         $evaluation->setEvaluer($evaluer);
+        $evaluation->setTeam($data['team']);
         $entityManagerInterface->persist($evaluation);
         $entityManagerInterface->flush();
         $data = $serializer->serialize($evaluation, 'json', [
@@ -485,12 +528,183 @@ class AdministrateurController extends AbstractController
     public function detailsession(Request $request,AllsessionRepository $allsessionRepository,SerializerInterface $serializer){
         $data = $request->request->all();
         $session=$allsessionRepository->findBy(['structure'=>$data['id']]);
-        dump($session[0]);die();
+       // dump($session[0]);die();
         $data = $serializer->serialize($session, 'json', [
             'groups' => ['grow']
         ]);
         return new Response($data, 200, [
             'Content-Type' => 'application/json'
+        ]);
+        
+    }
+    /**
+     * @Route("/usersession")
+     */
+    public function usersession(Request $request,AllsessionRepository $allsessionRepository,SerializerInterface $serializer,UserRepository $userRepository){
+        $data = $request->request->all();
+        $user=$userRepository->find($data['id']);
+        $session=$allsessionRepository->findBy(['structure'=>$user->getStructure()]);
+        $team = $this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user' => $user->getId()]);
+        $a = [];
+        for ($i = 0; $i < count($team); $i++) {
+            array_push($a,$team[$i]->getTeamPromo()->getNom());
+        }
+        //$bad=false;
+        for ($i=0; $i <count($session) ; $i++) { 
+            
+            if ($session[$i]->getConcerner()=="bad") {
+                $tab=[];
+                $teambad=$session[$i]->getTeams();
+                for ($i=0; $i < count($teambad); $i++) { 
+                    if (in_array($teambad[$i],$a)) {
+                        array_push($tab,$teambad[$i]);
+                    }
+                }
+                if (count($tab)==0) {
+                    unset($session[$i]);
+                
+                }
+            }
+        }
+        sort($session);
+        $data = $serializer->serialize($session, 'json', [
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+    /**
+     * @Route("/usersessionteam")
+     */
+    public function usersessionteam(Request $request,SerializerInterface $serializer,UserRepository $userRepository,AllsessionRepository $allsessionRepository){
+        $data = $request->request->all();
+        $user=$userRepository->find($data['iduser']);
+        $session=$allsessionRepository->find($data['idsession']);
+        $team = $this->getDoctrine()->getRepository(UserTeamPromo::class)->findBy(['user' => $user->getId()]);
+        $a = [];
+            $isevaluer=array();
+            $teamsession=$session->getTeams();
+            $userteam=[];
+            for ($i=0; $i <count($team) ; $i++) { 
+                array_push($userteam,$team[$i]->getTeamPromo()->getNom());
+                array_push($a,$team[$i]->getTeamPromo()->getNom());
+            }
+            if ($session->getConcerner()==="good") {
+                if (count($teamsession)!=0) {
+                    for ($i=0; $i < count($teamsession); $i++) { 
+                        if (!in_array($teamsession[$i],$userteam)) {
+                            array_push($userteam,$teamsession[$i]);
+                        }
+                    }
+                }
+            }
+            elseif($session->getConcerner()==="bad"){
+                for ($i=0; $i <count($teamsession) ; $i++) { 
+                    if (in_array($teamsession[$i],$userteam)) {
+                        array_push($isevaluer,$teamsession[$i]);
+                    }
+                    $userteam=$isevaluer;
+                }
+            }
+            return $this->json(['team' => $userteam,]);
+        
+    }
+
+    /**
+     * @Route("/userdetailsessionevaluation")
+     */
+    public function userdetailsessionevaluation(Request $request,EvaluationRepository $evaluationRepository,SerializerInterface $serializer){
+        $data = $request->request->all();
+        $evaluation=$evaluationRepository->findBy([
+            'team'=>$data['team'],
+            'session'=>$data['idsession'],
+            'evaluer'=>$data['iduser'],
+        ]);
+      //  return new JsonResponse($evaluation);
+        $data1 = $serializer->serialize($evaluation, 'json', [
+            'groups' => ['grow']
+        ]);
+        return new Response($data1, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+    /**
+     * @Route("/data")
+     */
+    public function userdata(Request $request,EvaluationRepository $evaluationRepository,AllsessionRepository $allsessionRepository){
+        $data = $request->request->all();
+        $perseverancelabel=[];
+        $perseverancedata=[];
+        $confiancelabel=[];
+        $confiancedata=[];
+        $collaborationlabel=[];
+        $collaborationdata=[];
+        $autonomielabel=[];
+        $autonomiedata=[];
+        $problemsolvinglabel=[];
+        $problemsolvingdata=[];
+        $transmissionlabel=[];
+        $transmissiondata=[];
+        $performancelabel=[];
+        $performancedata=[];
+        for ($i=0; $i <= $data['taille']; $i++) { 
+            $perseverance=0;
+            $confiance=0;
+            $collaboration=0;
+            $autonomie=0;
+            $problemsolving=0;
+            $transmission=0;
+            $performance=0;
+            $session=$allsessionRepository->findOneBy(['date'=>$data["date$i"]]);
+            $evaluation=$evaluationRepository->findBy(['evaluer'=>$data['id'],'session'=>$session->getId()]);
+            for ($j=0; $j < count($evaluation); $j++) { 
+                $perseverance=$perseverance+$evaluation[$j]->getPerseverance();
+                $confiance=$confiance+$evaluation[$j]->getConfiance();
+                $collaboration=$collaboration+$evaluation[$j]->getCollaboration();
+                $autonomie=$autonomie+$evaluation[$j]->getAutonomie();
+                $problemsolving=$problemsolving+$evaluation[$j]->getProblemsolving();
+                $transmission=$transmission+$evaluation[$j]->getTransmission();
+                $performance=$performance+$evaluation[$j]->getPerformance();
+            }
+            $perseverance=$perseverance/count($evaluation);
+            $confiance=$confiance/count($evaluation);
+            $collaboration=$collaboration/count($evaluation);
+            $autonomie=$autonomie/count($evaluation);
+            $problemsolving=$problemsolving/count($evaluation);
+            $transmission=$transmission/count($evaluation);
+            $performance=$performance/count($evaluation);
+            array_push($perseverancelabel,$data["date$i"]);
+            array_push($perseverancedata,$perseverance);
+            array_push($confiancelabel,$data["date$i"]);
+            array_push($confiancedata,$confiance);
+            array_push($collaborationlabel,$data["date$i"]);
+            array_push($collaborationdata,$collaboration);
+            array_push($autonomielabel,$data["date$i"]);
+            array_push($autonomiedata,$autonomie);
+            array_push($problemsolvinglabel,$data["date$i"]);
+            array_push($problemsolvingdata,$problemsolving);
+            array_push($transmissionlabel,$data["date$i"]);
+            array_push($transmissiondata,$transmission);
+            array_push($performancelabel,$data["date$i"]);
+            array_push($performancedata,$performance);
+
+        }
+        return $this->json([
+            'perseverancelabel'=>$perseverancelabel,
+            'perseverancedata'=>$perseverancedata,
+            'confiancelabel'=>$confiancelabel,
+            'confiancedata'=>$confiancedata,
+            'collaborationlabel'=>$collaborationlabel,
+            'collaborationdata'=>$collaborationdata,
+            'autonomielabel'=>$autonomielabel,
+            'autonomiedata'=>$autonomiedata,
+            'problemsolvinglabel'=>$problemsolvinglabel,
+            'problemsolvingdata'=>$problemsolvingdata,
+            'transmissionlabel'=>$transmissionlabel,
+            'transmissiondata'=>$transmissiondata,
+            'performancelabel'=>$performancelabel,
+            'performancedata'=>$performancedata,
         ]);
         
     }

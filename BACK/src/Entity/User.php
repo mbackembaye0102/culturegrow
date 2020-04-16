@@ -17,13 +17,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"grow", "externe"})
+     * @Groups({"grow"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"grow", "externe"})
+     * @Groups({"grow"})
      */
     private $username;
 
@@ -108,11 +108,17 @@ class User implements UserInterface
      */
     private $evaluations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Historiquesession", mappedBy="user")
+     */
+    private $historiquesessions;
+
     public function __construct()
     {
         $this->userTeamPromos = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->evaluations = new ArrayCollection();
+        $this->historiquesessions = new ArrayCollection();
     }
 
 
@@ -396,6 +402,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($evaluation->getEvaluer() === $this) {
                 $evaluation->setEvaluer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Historiquesession[]
+     */
+    public function getHistoriquesessions(): Collection
+    {
+        return $this->historiquesessions;
+    }
+
+    public function addHistoriquesession(Historiquesession $historiquesession): self
+    {
+        if (!$this->historiquesessions->contains($historiquesession)) {
+            $this->historiquesessions[] = $historiquesession;
+            $historiquesession->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriquesession(Historiquesession $historiquesession): self
+    {
+        if ($this->historiquesessions->contains($historiquesession)) {
+            $this->historiquesessions->removeElement($historiquesession);
+            // set the owning side to null (unless already changed)
+            if ($historiquesession->getUser() === $this) {
+                $historiquesession->setUser(null);
             }
         }
 

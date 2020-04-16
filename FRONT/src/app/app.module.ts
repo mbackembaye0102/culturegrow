@@ -40,6 +40,10 @@ import { AdduserteamstructureComponent } from './pages/admin/structure/adduserte
 import { ListteamComponent } from './pages/admin/evaluations/listteam/listteam.component';
 import { EvaluationteamComponent } from './pages/admin/evaluations/evaluationteam/evaluationteam.component';
 import {MaterialModule} from './material/material.module';
+import { DetailsessioncollaborateurComponent } from './pages/admin/collaborateur/detailsessioncollaborateur/detailsessioncollaborateur.component';
+import { DiagramComponent } from './pages/admin/collaborateur/diagram/diagram.component';
+import { GrowComponent } from './pages/admin/grow/grow.component';
+//  import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +77,9 @@ import {MaterialModule} from './material/material.module';
     AdduserteamstructureComponent,
     ListteamComponent,
     EvaluationteamComponent,
+    DetailsessioncollaborateurComponent,
+    DiagramComponent,
+    GrowComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +89,7 @@ import {MaterialModule} from './material/material.module';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    // ChartsModule
   ],
   providers: [AuthService,
     {
