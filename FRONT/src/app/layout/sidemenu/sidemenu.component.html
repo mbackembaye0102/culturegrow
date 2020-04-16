@@ -23,7 +23,7 @@
         <li><a [routerLink]="['/googleform']" routerLinkActive="router-link-active" > <i class="icon-home"></i>GOOGLE FORM                          </a></li> -->
         <li><a [routerLink]="['/session']" routerLinkActive="router-link-active" > <i class="icon-home"></i>Session                          </a></li>
         <li><a [routerLink]="['/evaluation']" routerLinkActive="router-link-active" > <i class="icon-home"></i>EVALUATION                          </a></li>
-        <li><a [routerLink]="['/questions']" routerLinkActive="router-link-active" *ngIf="auth.isevaluation" > <i class="icon-home"></i>Formulaire</a></li>
+        <li><a [routerLink]="['/questions']" routerLinkActive="router-link-active"  > <i class="icon-home"></i>Formulaire</a></li>
       </ul>
       <ul id="side-main-menu" class="side-menu list-unstyled" *ngIf="auth.user">
         <li><a [routerLink]="['/evaluation']" routerLinkActive="router-link-active" > <i class="icon-home"></i>EVALUATION                          </a></li>

@@ -6,15 +6,19 @@
 .img{
   height: 30%;
 }
+.ct{
+  margin-top: -30px;
+}
 .input{
-  border-radius: 15px;
+  border-radius: 25px;
   margin-bottom: 10px;
   border:  solid white;
   background-color: #E9E9E9;
-  height: 30px;
-  width: 250px;
-  color: white;
+  height: 50px;
+  width: 400px;
+  color: black;
   padding: 15px;
+  margin-left: -45px;
 }
 
 .bouton{
@@ -22,7 +26,7 @@
   border: 1px solid #FF4080;
   color: white;
   border-radius: 15px;
-  width: 35%;
+  width: 45%;
   text-align: center;
   margin-left: 80px;
   margin-bottom: 20px;
@@ -47,7 +51,7 @@ padding-top: 65px;
 /*resolution d'ecran à 640px*/
 
 @media screen and (max-width: 440px){
-  $url:"/assets/mbackenever1.png";
+  $url:"../../assets/mbackenever1.png";
   body{
      width: auto;
    margin:0;
@@ -69,10 +73,12 @@ padding-top: 65px;
 .input{
 
   height: 30px;
-  width: 200px;
+  width: 300px;
   color: black;
+  margin-left: -10px;
   background-color: rgb(187, 187, 187);
-
+  height: 40px;
+opacity: 0.5;
   
 
 }
@@ -94,7 +100,7 @@ padding-top: 65px;
   border-radius: 15px;
   width: 35%;
   text-align: center;
-  margin-left: 50px;
+  margin-left: 70px;
   margin-bottom: 20px;
 
 }
