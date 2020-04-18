@@ -16,7 +16,7 @@
     <div class="col-md-4" *ngFor="let item of structuremodel">
       <a [routerLink]="['/onestructure',item.id]" >
       <div class="card mb-4">
-        <img class="card-img-top" src="http://localhost:8000/uploads/{{item.image}}"  alt="Card image cap">
+        <img class="card-img-top" src="{{admin.urlimage}}uploads/{{item.image}}"  alt="Card image cap">
         <div class="card-body">
            <h1 class="card-title">{{item.nom}}</h1>
         </div>

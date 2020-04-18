@@ -9,7 +9,7 @@ import { AdminService } from 'src/app/service/admin.service';
   styleUrls: ['./listecollaborateur.component.scss']
 })
 export class ListecollaborateurComponent implements OnInit {
-  private user:any;
+  public user:any;
   private usertampo:any;
   constructor(private auth:AuthService,private router:Router,private admin:AdminService) { }
 

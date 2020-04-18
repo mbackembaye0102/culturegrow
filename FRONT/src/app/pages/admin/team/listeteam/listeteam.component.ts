@@ -10,9 +10,9 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class ListeteamComponent implements OnInit {
 
-  constructor(private auth:AuthService,private route:ActivatedRoute,private admin:AdminService,private router:Router) { }
+  constructor(public auth:AuthService,private route:ActivatedRoute,private admin:AdminService,private router:Router) { }
   public id:any;
-  private team:any;
+  public team:any;
   ngOnInit() {
     //this.auth.chargementpage()
     // this.id=this.route.snapshot.params['id'];

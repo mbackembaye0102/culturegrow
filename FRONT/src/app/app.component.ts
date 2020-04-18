@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'TransfertArgentAngular';
   good=false;
-  constructor(private auth:AuthService){}
+  constructor(public auth:AuthService){}
   ngOnInit(){
     this.auth.chargementpage();    
   }

@@ -29,7 +29,7 @@ export class DetailcollaborateurComponent implements OnInit {
   public taille=0;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private activeRoute:ActivatedRoute,private admin:AdminService,private router:Router) { }
+  constructor(private activeRoute:ActivatedRoute,public admin:AdminService,private router:Router) { }
 
   ngOnInit() {
 

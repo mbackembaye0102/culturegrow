@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class ListteamComponent implements OnInit {
   public team:any;
-  constructor(private admin:AdminService,private auth:AuthService) { }
+  constructor(private admin:AdminService,public auth:AuthService) { }
 
   ngOnInit() {
     console.log(this.auth.utilisateur);

@@ -8,8 +8,10 @@ import {Users} from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private urllogin:string="http://127.0.0.1:8000/login";
-  private urlInfos:string="http://127.0.0.1:8000/infos/user";
+  public url:string="http://127.0.0.1:8000/";
+  private urllogin:string="login";
+  private urlInfos:string="infos/user";
+
   jwt: string;
   role:any;
   public admin=false;
@@ -21,10 +23,10 @@ export class AuthService {
   public utilisateur:any;
   constructor(private http: HttpClient,private route:Router) { }
   logger(data){
-    return this.http.post(this.urllogin , data , {observe:'response'})
+    return this.http.post(this.url+this.urllogin , data , {observe:'response'})
   }
   infosconnecter(){
-    return this.http.post(this.urlInfos  , {observe:'response'})
+    return this.http.post(this.url+this.urlInfos  , {observe:'response'})
   }
   enregistrementToken(jwtToken : string){ 
     localStorage.setItem('token',jwtToken);

@@ -34,7 +34,7 @@ export class AjoutcollaborateurComponent implements OnInit {
   public message:any;
   public postename:string='';
   public teamtable=[];
-  constructor(private router: Router,private auth:AuthService,private admin:AdminService) { }
+  constructor(private router: Router,private auth:AuthService,public admin:AdminService) { }
 
   ngOnInit() {
     this.admin.listeteamgrow().subscribe(
