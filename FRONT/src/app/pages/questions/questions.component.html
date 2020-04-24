@@ -27,48 +27,61 @@
 
     <form action="">
       <div class="critere">
-          <p class="nom">Persévérance : Boxe, Deadline, Progression, Général.  <span id="span">*</span></p> 
+          <p class="nom">Persévérance  <span id="span">*</span></p> 
+          <p class="nom1">  Boxe, Deadline, Progression, Général.</p>
               <div class="b">
-                <b *ngFor="let item of barrem" (click)="reponse('perseverance',item.id)"> <a id="perseverance{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+                <b *ngFor="let item of barrem" (click)="reponse('perseverance',item.id)"> <a  href="javascript:void(0);" class="a"><img id="perseverance{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+              </div>
+      </div>
+
+       <div class="critere">
+          <p class="nom">Confiance en soi  <span id="span">*</span></p> 
+          <p class="nom1">  Storytelling, Participation sessions, Giving Back, Général</p>
+
+              <div class="b">
+              <b *ngFor="let item of barrem" (click)="reponse('confiance',item.id)"> <a  href="javascript:void(0);" class="a"><img id="confiance{{item.id}}" src="assets/star.png" alt=""></a>  </b>
               </div>
       </div>
 
       <div class="critere">
-          <p class="nom">Confiance en soi : Storytelling, Participation sessions, Giving Back, Général. <span id="span">*</span></p> 
+          <p class="nom">Collaboration  <span id="span">*</span></p> 
+          <p class="nom1"> Peer to peer, Participation, Communication, Général</p>
+
               <div class="b">
-              <b *ngFor="let item of barrem" (click)="reponse('confiance',item.id)"> <a id="confiance{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+                <b *ngFor="let item of barrem" (click)="reponse('collaboration',item.id)"> <a href="javascript:void(0);" class="a"><img id="collaboration{{item.id}}" src="assets/star.png" alt=""></a>  </b>
               </div>
       </div>
 
       <div class="critere">
-          <p class="nom">Collaboration : Peer to peer, Participation, Communication, Général. <span id="span">*</span></p> 
-              <div class="b">
-                <b *ngFor="let item of barrem" (click)="reponse('collaboration',item.id)"> <a id="collaboration{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
-              </div>
-      </div>
+          <p class="nom">Autonomie <span id="span">*</span></p> 
+          <p class="nom1">  Prise d'initiative, Organisation, End to end, Général</p>
 
-      <div class="critere">
-          <p class="nom">Autonomie : Prise d'initiative, Organisation, End to end, Général. <span id="span">*</span></p> 
               <div class="b">
-                <b *ngFor="let item of barrem" (click)="reponse('autonomie',item.id)"> <a id="autonomie{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+                <b *ngFor="let item of barrem" (click)="reponse('autonomie',item.id)"> <a  href="javascript:void(0);" class="a"><img id="autonomie{{item.id}}" src="assets/star.png" alt=""></a>  </b>
               </div>
       </div>
       <div class="critere">
-          <p class="nom">Problem solving : Créativité, Initiative, Persévérance, Général. <span id="span">*</span></p> 
+          <p class="nom">Problem solving  <span id="span">*</span></p> 
+          <p class="nom1">Créativité, Initiative, Persévérance, Général</p>
+
               <div class="b">
-                <b *ngFor="let item of barrem" (click)="reponse('problemsolving',item.id)"> <a id="problemsolving{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+                <b *ngFor="let item of barrem" (click)="reponse('problemsolving',item.id)"> <a  href="javascript:void(0);" class="a"><img id="problemsolving{{item.id}}" src="assets/star.png" alt=""></a>  </b>
               </div>
       </div>
       <div class="critere">
-          <p class="nom">Transmission : Pédagogie, Peer to peer, Giving Back Days, Général. <span id="span">*</span></p> 
+          <p class="nom">Transmission <span id="span">*</span></p> 
+          <p class="nom1">Pédagogie, Peer to peer, Giving Back Days, Général</p>
+
               <div class="b">
-                <b *ngFor="let item of barrem" (click)="reponse('transmission',item.id)"> <a id="transmission{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+                <b *ngFor="let item of barrem" (click)="reponse('transmission',item.id)"> <a  href="javascript:void(0);" class="a"><img id="transmission{{item.id}}" src="assets/star.png" alt=""></a>  </b>
               </div>
       </div>
       <div class="critere">
-          <p class="nom">Performance : Efficience, Qualité, Productivité, Général. <span id="span">*</span></p> 
+          <p class="nom">Performance  <span id="span">*</span></p> 
+          <p class="nom1">Efficience, Qualité, Productivité, Général.</p>
+
               <div class="b">
-                <b *ngFor="let item of barrem" (click)="reponse('performance',item.id)"> <a id="performance{{item.valeur}}" href="javascript:void(0);" class="a">{{item.valeur}}</a>  </b>
+                <b *ngFor="let item of barrem" (click)="reponse('performance',item.id)"> <a  href="javascript:void(0);" class="a"><img id="performance{{item.id}}" src="assets/star.png" alt=""></a>  </b>
               </div>
       </div>
           

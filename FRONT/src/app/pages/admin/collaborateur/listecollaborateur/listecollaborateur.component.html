@@ -1,39 +1,97 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-3">
-      <div class="form-group marginRech">
-        <input type="search" placeholder="Recherche" (keyup)=search($event.target.value) class="inputRech">
+
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+      <title>Google form</title>
+  </head>
+  <body class="body">
+    <div class="containers">
+      <div class="head">
+        <img src="../../../assets/img/growacademy (2).png" alt="">
       </div>
-
-    </div>
-    <div class="col-7"></div>
-    <div class="col-2">
-      <a [routerLink]="['/collaborateur/add']">
-        <input type="submit" value="Ajout Collaborateur" class="btn btn-primary">
-      </a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4" *ngFor="let item of user">
-
-      <div class="card hovercard">
-        <div class="cardheader">
-
+        <div class="titre">
+        
+          <h1>Tech et Digital <span id="span">*</span></h1>
         </div>
-        <a [routerLink]="['/collaborateur/detail',item.id]">
-        <div class="avatar">
-          <img alt="" src="{{admin.urlimage}}uploads/{{item.image}}">
+      <div class="evaluer">
+        <p class="nom"> Nom de la personne à évaluer <span id="span">*</span></p>
+        <div class="col-md-4">
+        <select class="select form-control" name="" id="" style="width:335px; height:50px;">
+            <option value="Mbacke Mbaye">Mbacke Mbaye</option>
+        </select>
         </div>
-        <div class="info">
-          <div class="title">
-            <strong class="strong">{{item.prenom}} {{item.nom}}</strong>
-          </div>
-          <div class="desc">{{item.poste}}</div>
-          <div class="desc">Team Tech & Digital</div>
-        </div>
-        </a>
       </div>
-
+  
+      <form action="">
+        <div class="critere">
+            <p class="nom">Persévérance  <span id="span">*</span></p> 
+            <p class="nom1">  Boxe, Deadline, Progression, Général.</p>
+                <div class="b">
+                  <b *ngFor="let item of barrem" (click)="reponse('perseverance',item.id)"> <a  href="javascript:void(0);" class="a"><img id="perseverance{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+  
+         <div class="critere">
+            <p class="nom">Confiance en soi  <span id="span">*</span></p> 
+            <p class="nom1">  Storytelling, Participation sessions, Giving Back, Général</p>
+  
+                <div class="b">
+                <b *ngFor="let item of barrem" (click)="reponse('confiance',item.id)"> <a  href="javascript:void(0);" class="a"><img id="confiance{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+  
+        <div class="critere">
+            <p class="nom">Collaboration  <span id="span">*</span></p> 
+            <p class="nom1"> Peer to peer, Participation, Communication, Général</p>
+  
+                <div class="b">
+                  <b *ngFor="let item of barrem" (click)="reponse('collaboration',item.id)"> <a href="javascript:void(0);" class="a"><img id="collaboration{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+  
+        <div class="critere">
+            <p class="nom">Autonomie <span id="span">*</span></p> 
+            <p class="nom1">  Prise d'initiative, Organisation, End to end, Général</p>
+  
+                <div class="b">
+                  <b *ngFor="let item of barrem" (click)="reponse('autonomie',item.id)"> <a  href="javascript:void(0);" class="a"><img id="autonomie{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+        <div class="critere">
+            <p class="nom">Problem solving  <span id="span">*</span></p> 
+            <p class="nom1">Créativité, Initiative, Persévérance, Général</p>
+  
+                <div class="b">
+                  <b *ngFor="let item of barrem" (click)="reponse('problemsolving',item.id)"> <a  href="javascript:void(0);" class="a"><img id="problemsolving{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+        <div class="critere">
+            <p class="nom">Transmission <span id="span">*</span></p> 
+            <p class="nom1">Pédagogie, Peer to peer, Giving Back Days, Général</p>
+  
+                <div class="b">
+                  <b *ngFor="let item of barrem" (click)="reponse('transmission',item.id)"> <a  href="javascript:void(0);" class="a"><img id="transmission{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+        <div class="critere">
+            <p class="nom">Performance  <span id="span">*</span></p> 
+            <p class="nom1">Efficience, Qualité, Productivité, Général.</p>
+  
+                <div class="b">
+                  <b *ngFor="let item of barrem" (click)="reponse('performance',item.id)"> <a  href="javascript:void(0);" class="a"><img id="performance{{item.id}}" src="assets/star.png" alt=""></a>  </b>
+                </div>
+        </div>
+            
+        <input type="submit" (click)="validationdonner()"  value="Envoyer" class="bouton">
+  
+    </form>
+  
+  
+  
+  
     </div>
-  </div>
-</div>
+  </body>
+  </html>

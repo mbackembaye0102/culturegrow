@@ -1,34 +1,30 @@
-
-<div class=" ct container">
-  <div class="row">
-      <div class="col-md-6 ">
-          <img class="never" src="assets/mbackenever.png" alt="" >
-      </div>
-      <div class="col-md-6 formulaire">
-          <div class="row ">
-                  <img class="logo" src="../../assets/img/growacademy (1).png" alt="">
-          </div>
-          <form  class="form" [formGroup]="utilisateur" (ngSubmit)="addsys(utilisateur.value)">
-              <div class="row">
-                      <div class="form-group col-md-8 ">
-                          <input  type="email" class="form-control input" formControlName="username" placeholder="Username">
-                      </div>
-              </div>
-                
-              <div class="row">
-                      <div class="form-group col-md-8 ">
-                          <input  type="email" class="form-control input" formControlName="password" placeholder="Password">
-                      </div>
-              </div>
-              <div class="row">
-                      <div class="form-group col-md-8">
-                              <input  type="submit" [disabled]="!utilisateur.valid" class="form-control bouton">
-                      </div>
-              </div>
-         
-          </form>
-      </div>
-
-  </div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="row ">
+            <img class="logo" src="../../assets/img/growacademy (1).png" alt="">
+            </div>
+            <form  class="form" [formGroup]="utilisateur" (ngSubmit)="addsys(utilisateur.value)">
+                <div class="row">
+                        <div class="form-group col-md-8 ">
+                            <input  type="email" class="form-control input" formControlName="username" placeholder="Username">
+                        </div>
+                </div>
+                  
+                <div class="row">
+                        <div class="form-group col-md-8 ">
+                            <input  type="email" class="form-control input" formControlName="password" placeholder="Password">
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="form-group col-md-8">
+                                <input  type="submit" [disabled]="!utilisateur.valid" class="form-control bouton">
+                        </div>
+                </div>
+            
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
 </div>

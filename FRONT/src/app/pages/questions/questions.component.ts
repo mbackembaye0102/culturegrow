@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class QuestionsComponent implements OnInit {
   public barrem=
   [
-    {id:1,valeur:1},{id:2,valeur:2},{id:3,valeur:3},{id:4,valeur:4},{id:5,valeur:5},
-    {id:6,valeur:6},{id:7,valeur:7},{id:8,valeur:8},{id:9,valeur:9},{id:10,valeur:10}
+    {id:1,valeur:1},{id:2,valeur:2},{id:3,valeur:3},{id:4,valeur:4},{id:5,valeur:5}
   ]
   public resultat=
   [
@@ -29,20 +28,31 @@ export class QuestionsComponent implements OnInit {
   reponse(partie,valeur){
     console.log(partie);
     console.log(valeur);
-    let id=partie+valeur;
-    let a= document.getElementById(id)
-    let rien=this.resultat.find(r=>r.libelle==partie);
-    let value=this.resultat[rien.id].valeur;
-    if (value==null) {
-      this.resultat[rien.id].valeur=valeur;
-      a.style.color=rien.style;
+    for (let index = 1; index <= valeur; index++) {
+      let a=partie+index;
+      document.getElementById(a).setAttribute('src','assets/star1.png');
+      
     }
-    else if(value!=null){
-      let lastid=partie+value
-      document.getElementById(lastid).style.color="black";
-      this.resultat[rien.id].valeur=valeur;
-      a.style.color=rien.style;
+    for (let index = 0; valeur < 5; index++) {
+      valeur++
+      let a=partie+valeur;
+      document.getElementById(a).setAttribute('src','assets/star.png');
+      
     }
+    // let id=partie+valeur;
+    // let a= document.getElementById(id)
+    // let rien=this.resultat.find(r=>r.libelle==partie);
+    // let value=this.resultat[rien.id].valeur;
+    // if (value==null) {
+    //   this.resultat[rien.id].valeur=valeur;
+    //   a.style.color=rien.style;
+    // }
+    // else if(value!=null){
+    //   let lastid=partie+value
+    //   document.getElementById(lastid).style.color="black";
+    //   this.resultat[rien.id].valeur=valeur;
+    //   a.style.color=rien.style;
+    // }
   }
   validationdonner(){
     console.log(this.resultat);
