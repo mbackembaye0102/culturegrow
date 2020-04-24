@@ -18,7 +18,7 @@ export class ListecollaborateurComponent implements OnInit {
   //alert(this.auth.connecter)
   //this.Activeroute
  // console.log(this.router.url);
-  this.admin.titrepage=this.router.url;
+  this.admin.titrepage="COLLABORATEUR";
     this.admin.usergrow().subscribe(
       res=>{console.log(res);
         this.user=res;

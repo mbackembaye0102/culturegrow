@@ -37,6 +37,7 @@ export class AjoutcollaborateurComponent implements OnInit {
   constructor(private router: Router,private auth:AuthService,public admin:AdminService) { }
 
   ngOnInit() {
+    this.admin.titrepage="AJOUT COLLABORATEUR";
     this.admin.listeteamgrow().subscribe(
       res=>{
         this.team=res;

@@ -23,6 +23,7 @@ export class ValidationsessionsComponent implements OnInit {
   constructor(private admin:AdminService,private router:ActivatedRoute) { }
 
   ngOnInit() {
+    this.admin.titrepage="AJOUT SESSION";
     this.id=this.router.snapshot.params['id'];
     console.log(this.id);
     

@@ -19,6 +19,7 @@ export class DetailsessioncollaborateurComponent implements OnInit {
   constructor(private admin:AdminService) { }
 
   ngOnInit() {
+    this.admin.titrepage="DETAIL SESSION COLLABORATEUR";
     console.log(this.admin.usersessiondata);
     this.admin.usersessionteam(this.admin.usersessiondata).subscribe(
       res=>{console.log(res.body);

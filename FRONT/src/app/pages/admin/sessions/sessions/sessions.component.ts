@@ -11,6 +11,7 @@ export class SessionsComponent implements OnInit {
   constructor(private admin: AdminService) { }
 
   ngOnInit() {
+    this.admin.titrepage="SESSION";
     this.admin.allstructure().subscribe(
       res=>{
         console.log("sdds");

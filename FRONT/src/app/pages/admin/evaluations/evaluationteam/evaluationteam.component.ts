@@ -29,6 +29,7 @@ export class EvaluationteamComponent implements OnInit {
   constructor(private activeroute:ActivatedRoute,private admin:AdminService) { }
 
   ngOnInit() {
+    this.admin.titrepage="EVALUATION";
     this.id=this.activeroute.snapshot.params['id'];
     console.log(this.id);
     let a={id:this.id}

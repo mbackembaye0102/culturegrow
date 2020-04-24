@@ -32,7 +32,7 @@ export class DetailcollaborateurComponent implements OnInit {
   constructor(private activeRoute:ActivatedRoute,public admin:AdminService,private router:Router) { }
 
   ngOnInit() {
-
+    this.admin.titrepage="DETAIL COLLABORATEUR";
     this.id=this.activeRoute.snapshot.params['id'];
     let a={id:this.id};
     this.admin.detailuser(a).subscribe(

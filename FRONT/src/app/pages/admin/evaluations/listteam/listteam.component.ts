@@ -12,6 +12,7 @@ export class ListteamComponent implements OnInit {
   constructor(private admin:AdminService,public auth:AuthService) { }
 
   ngOnInit() {
+    this.admin.titrepage="EVALUATION";
     console.log(this.auth.utilisateur);
     if (this.auth.isevaluation) {
       let a={
