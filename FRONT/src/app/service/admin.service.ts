@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class AdminService {
+  public titrepage:string=null;
     private url = "http://127.0.0.1:8000/admin/";
     public urlimage:string="http://127.0.0.1:8000/";
     private urllistuser = "usergrow";

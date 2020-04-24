@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AdminService } from './../../service/admin.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public admin:AdminService,private router:Router) { }
+  public titre:string;
   ngOnInit() {
+    this.admin.titrepage=this.router.url;
   }
 
 }
