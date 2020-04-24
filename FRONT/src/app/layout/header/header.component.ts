@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(public admin:AdminService,private router:Router) { }
   public titre:string;
   ngOnInit() {
-    this.admin.titrepage=this.router.url;
+    this.titre=this.admin.titrepage;
   }
 
 }
