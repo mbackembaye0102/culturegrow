@@ -630,6 +630,19 @@ class AdministrateurController extends AbstractController
         ]);
     }
     /**
+     * @Route("/oneuser")
+     */
+    public function oneuser(Request $request,SerializerInterface $serializer,UserRepository $userRepository){
+        $data = $request->request->all();
+        $a = $userRepository->find( $data['id']);
+        $data = $serializer->serialize($a, 'json', [
+            'groups' => ['grow']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+    /**
      * @Route("/data")
      */
     public function userdata(Request $request,EvaluationRepository $evaluationRepository,AllsessionRepository $allsessionRepository){
@@ -706,6 +719,169 @@ class AdministrateurController extends AbstractController
             'performancelabel'=>$performancelabel,
             'performancedata'=>$performancedata,
         ]);
-        
+    }
+    /**
+     * @Route("/lastevaluation")
+     */
+    public function lastevaluation(SerializerInterface $serializer,Request $request,EvaluationRepository $evaluationRepository,AllsessionRepository $allsessionRepository){
+        $data=$request->request->all();
+        $id=$data['id'];
+        $anne=date('Y');
+        $mois=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"];
+        $moyenneperseverance=[];
+        $moyenneconfiance=[];
+        $moyennecollaboration=[];
+        $moyenneautonomie=[];
+        $moyenneproblemsolving=[];
+        $moyennetransmission=[];
+        $moyenneperformance=[];
+        $perseverance=0;
+        $confiance=0;
+        $collaboration=0;
+        $autonomie=0;
+        $problemsolving=0;
+        $transmission=0;
+        $performance=0;
+        //On parcour cherche l'ensemble des all session qui ont ete crer dans l'annee
+        //Pour chacune d'elle on cherche l'ensemble des evaluations don $id fut evaluer
+        //On calcule la moyenne des notes de ce mois
+        for ($i=0; $i <count($mois) ; $i++) { 
+           $sessionevaluationdelannee=$allsessionRepository->findBy(['annee'=>$anne,'mois'=>$mois[$i]]);
+           if (!$sessionevaluationdelannee) {
+               //pas de session sur ce mois de l'anne
+               array_push($moyenneperseverance,$perseverance);
+               array_push($moyenneconfiance,$confiance);
+               array_push($moyennecollaboration,$collaboration);
+               array_push($moyenneautonomie,$autonomie);
+               array_push($moyenneproblemsolving,$problemsolving);
+               array_push($moyennetransmission,$transmission);
+               array_push($moyenneperformance,$performance);
+               $perseverance=0;
+               $confiance=0;
+               $collaboration=0;
+               $autonomie=0;
+               $problemsolving=0;
+               $transmission=0;
+               $performance=0;
+           }
+           else{
+               dump($sessionevaluationdelannee);
+               //il y'a eu session sur ce mois de l'annee
+           // for ($j=0; $j <count($sessionevaluationdelannee) ; $j++) { 
+               //pour chacune des sessions de ce mois il faut avoir les evalation
+             //  if (!$sessionevaluationdelannee) {
+                   
+              // }
+              // else{
+
+               //}
+           // }
+           }
+
+        }
+        die();
+        return $this->json([
+            'date'=>$mois,
+            'perseverance'=>$moyenneperseverance,
+            'confiance'=>$moyenneconfiance,
+            'collaboration'=>$moyennecollaboration,
+            'autonomie'=>$moyenneautonomie,
+            'problemsolving'=>$moyenneproblemsolving,
+            'transmission'=>$moyennetransmission,
+            'performance'=>$moyenneperformance
+        ]);
+
+    }
+    /**
+     * @Route("/alldate")
+     */
+    public function alldate(SerializerInterface $serializer,AllsessionRepository $allsessionRepository){
+        $allevaluationuser=$allsessionRepository->findAll();
+      
+        $data = $serializer->serialize($allevaluationuser, 'json', [
+            'groups' => ['note']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+    /**
+     * @Route("/persoevaluation")
+     */
+    public function persoevaluation(Request $request,EvaluationRepository $evaluationRepository,AllsessionRepository $allsessionRepository){
+        $data=$request->request->all();
+        $nombre=$data['nombre'];
+        $date=[];
+        $moyenneperseverance=[];
+        $moyenneconfiance=[];
+        $moyennecollaboration=[];
+        $moyenneautonomie=[];
+        $moyenneproblemsolving=[];
+        $moyennetransmission=[];
+        $moyenneperformance=[];
+        $perseverance=0;
+        $confiance=0;
+        $collaboration=0;
+        $autonomie=0;
+        $problemsolving=0;
+        $transmission=0;
+        $performance=0;
+        for ($i=0; $i <$nombre ; $i++) { 
+            array_push($date,$data["date$i"]);
+            $rt=$allsessionRepository->findOneBy(['date'=>$data["date$i"]]);
+            $userevaluationdate=$evaluationRepository->findBy(['session'=>$rt->getId()]);
+            for($j=0; $j<count($userevaluationdate);$j++){
+                $perseverance=$perseverance+$userevaluationdate[$j]->getPerseverance();
+                $confiance=$confiance+$userevaluationdate[$j]->getConfiance();
+                $collaboration=$collaboration+$userevaluationdate[$j]->getCollaboration();
+                $autonomie=$autonomie+$userevaluationdate[$j]->getAutonomie();
+                $problemsolving=$problemsolving+$userevaluationdate[$j]->getProblemsolving();
+                $transmission=$transmission+$userevaluationdate[$j]->getTransmission();
+                $performance=$performance+$userevaluationdate[$j]->getPerformance();
+            }
+            if (count($userevaluationdate)==0) {
+                $perseverance=0;
+                $confiance=0;
+                $collaboration=0;
+                $autonomie=0;
+                $problemsolving=0;
+                $transmission=0;
+                $performance=0;
+            }
+            else{
+                $perseverance=$perseverance/count($userevaluationdate);
+                $confiance=$confiance/count($userevaluationdate);
+                $collaboration=$collaboration/count($userevaluationdate);
+                $autonomie=$autonomie/count($userevaluationdate);
+                $problemsolving=$problemsolving/count($userevaluationdate);
+                $transmission=$transmission/count($userevaluationdate);
+                $performance=$performance/count($userevaluationdate);
+            }
+
+            array_push($moyenneperseverance,$perseverance);
+            array_push($moyenneconfiance,$confiance);
+            array_push($moyennecollaboration,$collaboration);
+            array_push($moyenneautonomie,$autonomie);
+            array_push($moyenneproblemsolving,$problemsolving);
+            array_push($moyennetransmission,$transmission);
+            array_push($moyenneperformance,$performance);
+            $perseverance=0;
+            $confiance=0;
+            $collaboration=0;
+            $autonomie=0;
+            $problemsolving=0;
+            $transmission=0;
+            $performance=0;
+        }
+        return $this->json([
+            'date1'=>$date,
+            'perseverance1'=>$moyenneperseverance,
+            'confiance1'=>$moyenneconfiance,
+            'collaboration1'=>$moyennecollaboration,
+            'autonomie1'=>$moyenneautonomie,
+            'problemsolving1'=>$moyenneproblemsolving,
+            'transmission1'=>$moyennetransmission,
+            'performance1'=>$moyenneperformance
+        ]);
     }
 }

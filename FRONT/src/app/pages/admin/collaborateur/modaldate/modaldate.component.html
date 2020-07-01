@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row corps">
+    <div class="col-md-4 col-6" *ngFor="let item of admin.lesdate" (click)="choix(item.id)">
+        <div class="card">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" class="rien" [checked]="item.etat">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{item.date}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="valider mt-5">
+    <input type="submit" value="Valider" (click)="valider()" class="btn btn-primary rt">
+  </div>
+</div>

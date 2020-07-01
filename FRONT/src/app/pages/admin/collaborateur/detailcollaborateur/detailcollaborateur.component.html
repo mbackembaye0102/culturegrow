@@ -2,84 +2,275 @@
   <div class="row">
     <div class="img col-md-2">
         <img src="{{admin.urlimage}}uploads/{{user.image}}" height="150" alt="">
-        <button class="modif btn btn-primary" > Modifier</button>
-
+        <!-- <button class="modif btn btn-primary" > Modifier</button> -->
     </div>
     <div class="info col-md-4">
       <h1>{{user.prenom}} {{user.nom}}</h1>
       <span>{{user.poste}}</span> <br>
       <span>{{user.team}}</span> <br>
       <span>{{user.telephone}}</span> <br>
-      <span>{{user.username}}</span> <br>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-primary" *ngIf="goodselect" (click)="diagramme()" > Diagramme</button>
+      <!-- <span>{{user.username}}</span> <br> -->
     </div>
   </div>
 
 
-  <!-- <div class="row">
-      <div class="c card col-md-2"></div>
-      <div class="card col-md-2"></div>
-      <div class="card col-md-2"></div>
-      <div class="card col-md-2"></div>
-      <div class="card col-md-2"></div>
-  </div>
-
-  <div class="c2 row">
-    <div class="c card col-md-2"></div>
-    <div class="card col-md-2"></div>
-</div> -->
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox ></mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox (change)="change($event.checked,row.date)"></mat-checkbox>
-      </td>
-    </ng-container>
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-      <td mat-cell *matCellDef="let element;"> {{element.position}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> date </th>
-      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> TYPE </th>
-      <td mat-cell *matCellDef="let element"> {{element.concerner}} </td>
-    </ng-container>
-  
-
-   <ng-container matColumnDef="detail">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Detail </th>
-      <td mat-cell *matCellDef="let element">
-      <button (click)="detail(element.id)"><span class="material-icons">
-        arrow_right_alt
-        </span></button>  
-      </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
-</div>
-
-<div *ngIf="diag">
+<!-- <div *ngIf="diag">
   <app-diagram></app-diagram>
+</div> -->
+<div class="container-fluid">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">7 last Evaluation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Evaluateur/Evaluer</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Personnaliser</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="row">
+        <div class="col-md-6">
+              <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartDataperseverance"
+                        [labels]="barChartLabelsperseverance"
+                        [options]="barChartOptionsperseverance"
+                        [legend]="barChartLegendperseverance"
+                        [chartType]="barChartTypeperseverance">
+                </canvas>
+              </div>
+        </div>
+         <div class="col-md-6">
+                <div style="display: block">
+                    <canvas baseChart
+                            [datasets]="barChartDataconfiance"
+                            [labels]="barChartLabelsconfiance"
+                            [options]="barChartOptionsconfiance"
+                            [legend]="barChartLegendconfiance"
+                            [chartType]="barChartTypeconfiance">
+                    </canvas>
+                  </div>
+            </div>
+        <div class="col-md-6">
+              <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartDatacollaboration"
+                        [labels]="barChartLabelscollaboration"
+                        [options]="barChartOptionscollaboration"
+                        [legend]="barChartLegendcollaboration"
+                        [chartType]="barChartTypecollaboration">
+                </canvas>
+              </div>
+        </div>
+      
+        <div class="col-md-6">
+                <div style="display: block">
+                  <canvas baseChart
+                          [datasets]="barChartDataautonomie"
+                          [labels]="barChartLabelsautonomie"
+                          [options]="barChartOptionsautonomie"
+                          [legend]="barChartLegendautonomie"
+                          [chartType]="barChartTypeautonomie">
+                  </canvas>
+                </div>
+          </div>
+          <div class="col-md-6">
+                  <div style="display: block">
+                      <canvas baseChart
+                              [datasets]="barChartDataproblemsolving"
+                              [labels]="barChartLabelsproblemsolving"
+                              [options]="barChartOptionsproblemsolving"
+                              [legend]="barChartLegendproblemsolving"
+                              [chartType]="barChartTypeproblemsolving">
+                      </canvas>
+                    </div>
+          </div>
+          <div class="col-md-6">
+                <div style="display: block">
+                  <canvas baseChart
+                          [datasets]="barChartDatatransmission"
+                          [labels]="barChartLabelstransmission"
+                          [options]="barChartOptionstransmission"
+                          [legend]="barChartLegendtransmission"
+                          [chartType]="barChartTypetransmission">
+                  </canvas>
+                </div>
+          </div>
+          <div class="col-md-6">
+                <div style="display: block">
+                  <canvas baseChart
+                          [datasets]="barChartDataperformance"
+                          [labels]="barChartLabelsperformance"
+                          [options]="barChartOptionsperformance"
+                          [legend]="barChartLegendperformance"
+                          [chartType]="barChartTypeperformance">
+                  </canvas>
+                </div>
+          </div> 
+      </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox ></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (change)="change($event.checked,row.date)"></mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let element;"> {{element.position}} </td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+           <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TYPE </th>
+            <td mat-cell *matCellDef="let element"> {{element.concerner}} </td>
+          </ng-container>
+         <ng-container matColumnDef="detail">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Detail </th>
+            <td mat-cell *matCellDef="let element">
+            <button (click)="detail(element.id)"><span class="material-icons">
+              arrow_right_alt
+              </span></button>  
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [length]="100"
+                    [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+      <button class="btn btn-primary" (click)="choicedate()"> Date</button>
+      <div class="row" *ngIf="perfectpersodate">
+        <div class="col-md-6">
+          <div style="display: block">
+            <canvas baseChart
+                    [datasets]="barChartDataperseverance1"
+                    [labels]="barChartLabelsperseverance1"
+                    [options]="barChartOptionsperseverance1"
+                    [legend]="barChartLegendperseverance1"
+                    [chartType]="barChartTypeperseverance1">
+            </canvas>
+          </div>
+    </div>
+     <div class="col-md-6">
+            <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartDataconfiance1"
+                        [labels]="barChartLabelsconfiance1"
+                        [options]="barChartOptionsconfiance1"
+                        [legend]="barChartLegendconfiance1"
+                        [chartType]="barChartTypeconfiance1">
+                </canvas>
+              </div>
+        </div>
+        <div class="col-md-6">
+              <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartDataperseverance1"
+                        [labels]="barChartLabelsperseverance1"
+                        [options]="barChartOptionsperseverance1"
+                        [legend]="barChartLegendperseverance1"
+                        [chartType]="barChartTypeperseverance1">
+                </canvas>
+              </div>
+        </div>
+         <div class="col-md-6">
+                <div style="display: block">
+                    <canvas baseChart
+                            [datasets]="barChartDataconfiance1"
+                            [labels]="barChartLabelsconfiance1"
+                            [options]="barChartOptionsconfiance1"
+                            [legend]="barChartLegendconfiance1"
+                            [chartType]="barChartTypeconfiance1">
+                    </canvas>
+                  </div>
+            </div>
+        <div class="col-md-6">
+              <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartDatacollaboration1"
+                        [labels]="barChartLabelscollaboration1"
+                        [options]="barChartOptionscollaboration1"
+                        [legend]="barChartLegendcollaboration1"
+                        [chartType]="barChartTypecollaboration1">
+                </canvas>
+              </div>
+        </div>
+      
+        <div class="col-md-6">
+                <div style="display: block">
+                  <canvas baseChart
+                          [datasets]="barChartDataautonomie1"
+                          [labels]="barChartLabelsautonomie1"
+                          [options]="barChartOptionsautonomie1"
+                          [legend]="barChartLegendautonomie1"
+                          [chartType]="barChartTypeautonomie1">
+                  </canvas>
+                </div>
+          </div>
+          <div class="col-md-6">
+                  <div style="display: block">
+                      <canvas baseChart
+                              [datasets]="barChartDataproblemsolving1"
+                              [labels]="barChartLabelsproblemsolving1"
+                              [options]="barChartOptionsproblemsolving1"
+                              [legend]="barChartLegendproblemsolving1"
+                              [chartType]="barChartTypeproblemsolving1">
+                      </canvas>
+                    </div>
+          </div>
+          <div class="col-md-6">
+                <div style="display: block">
+                  <canvas baseChart
+                          [datasets]="barChartDatatransmission1"
+                          [labels]="barChartLabelstransmission1"
+                          [options]="barChartOptionstransmission1"
+                          [legend]="barChartLegendtransmission1"
+                          [chartType]="barChartTypetransmission1">
+                  </canvas>
+                </div>
+          </div>
+          <div class="col-md-6">
+                <div style="display: block">
+                  <canvas baseChart
+                          [datasets]="barChartDataperformance1"
+                          [labels]="barChartLabelsperformance1"
+                          [options]="barChartOptionsperformance1"
+                          [legend]="barChartLegendperformance1"
+                          [chartType]="barChartTypeperformance1">
+                  </canvas>
+                </div>
+          </div> 
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card">
+    <div class="card-header tab-regular">
+        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="card-tab-1" data-toggle="tab" href="#card-1" role="tab" aria-controls="card-1" aria-selected="true">(1) En cours</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="card-tab-2" data-toggle="tab" href="#card-2" role="tab" aria-controls="card-2" aria-selected="false">(0) Terminé</a>
+            </li>
+        </ul>
+    </div> -->
 </div>
+
 </div>
 
 

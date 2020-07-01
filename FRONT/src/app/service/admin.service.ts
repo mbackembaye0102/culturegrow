@@ -6,8 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminService {
   public titrepage:string=null;
-    private url = "http://127.0.0.1:8000/admin/";
-    public urlimage:string="http://127.0.0.1:8000/";
+    // private url = "http://127.0.0.1:8000/admin/";
+    // private urls="http://127.0.0.1:8000/infos/";
+    // public urlimage:string="http://127.0.0.1:8000/";
+    private url = "http://www.culture.telectronsenegal.com/admin/";
+    private urls="http://www.culture.telectronsenegal.com/infos/";
+    public urlimage:string="http://www.culture.telectronsenegal.com/";
+    
     private urllistuser = "usergrow";
     private urllisteteamgrow: string = "growteam";
     private urllistepostegrow: string = "growposte";
@@ -31,6 +36,8 @@ export class AdminService {
     private urldata="data";
     public usersessiondata={iduser:null,idsession:null,team:null}
     public userdata:any;
+    public lesdate:any;
+    public datamoyenne:any;
     constructor(private http: HttpClient) { }
     usergrow() {
         return this.http.post(this.url + this.urllistuser, { observe: 'response' })
@@ -116,7 +123,7 @@ export class AdminService {
         return this.http.post(this.url+this.urluserteamevaluation,donner,{observe:'response'})
       }
       saveevaluation(donner){
-        return this.http.post("http://127.0.0.1:8000/infos/"+this.urlsaveevaluation,donner,{observe:'response'})
+        return this.http.post(this.urls+this.urlsaveevaluation,donner,{observe:'response'})
       }
       usersession(donner){
         return this.http.post(this.url+this.urlusersession,donner,{observe:'response'})
@@ -129,5 +136,14 @@ export class AdminService {
       }
       data(donner){
         return this.http.post(this.url+this.urldata,donner,{observe:'response'})
+      }
+      lastevaluation(data){
+        return this.http.post(this.url+"lastevaluation" ,data, {observe:'response'});
+      }
+      alldate(){
+        return this.http.get(this.url+"alldate" , {observe:'response'});
+      }
+      persoevaluation(data){
+        return this.http.post(this.url+"persoevaluation" ,data, {observe:'response'});
       }
 }

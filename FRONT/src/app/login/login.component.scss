@@ -1,116 +1,182 @@
-.logo{
-  width: 30%;
-  text-align: center;
-  margin-left: 150px;
-}
-.img{
-  height: 30%;
-}
-.ct{
-  margin-top: -30px;
-}
-.input{
-  border-radius: 25px;
-  margin-bottom: 10px;
-  border:  solid white;
-  background-color: #E9E9E9;
-  height: 50px;
-  width: 400px;
-  color: black;
-  padding: 15px;
-  margin-left: -45px;
-}
+// .logo{
+//   width: 30%;
+//   text-align: center;
+//   margin-left: 150px;
+// }
+// .img{
+//   height: 30%;
+// }
+// .ct{
+//   margin-top: -30px;
+// }
+// .input{
+//   border-radius: 25px;
+//   margin-bottom: 10px;
+//   border:  solid white;
+//   background-color: #E9E9E9;
+//   height: 50px;
+//   width: 400px;
+//   color: black;
+//   padding: 15px;
+//   margin-left: -45px;
+// }
 
-.bouton{
-  background-color: #FF4080;
-  border: 1px solid #FF4080;
-  color: white;
-  border-radius: 15px;
-  width: 45%;
-  text-align: center;
-  margin-left: 80px;
-  margin-bottom: 20px;
+// .boutons{
+//   background-color: #FF4080;
+//   border: 1px solid #FF4080;
+//   color: white;
+//   border-radius: 15px;
+//   width: 45%;
+//   text-align: center;
+//   margin-left: 80px;
+//   margin-bottom: 20px;
 
-}
+// }
 
-.form{
-  border: 2px solid #E9E9E9;
-  border-radius: 20px;
-  padding-left: 100px;
-  padding-top: 30px;
-  box-shadow: 2px 2px 2px 2px #E9E9E9 ;
-  width: 500px;
-
-
-}
-
-.formulaire{
-padding-top: 65px;
-}
+// .form{
+//   border: 2px solid #E9E9E9;
+//   border-radius: 20px;
+//   padding-left: 100px;
+//   padding-top: 30px;
+//   box-shadow: 2px 2px 2px 2px #E9E9E9 ;
+//   width: 500px;
 
 
-/*resolution d'ecran à 640px*/
+// }
 
-@media screen and (max-width: 440px){
-  $url:"../../assets/mbackenever1.png";
-  body{
-     width: auto;
-   margin:0;
-     padding: 0;
-     background-image: url($url);
-     background-repeat: no-repeat;
-    //  background: {
-    //   image: url($url);
-    //   // repeat:no-repeat;
-    //  };
-  }
-.never{
-   visibility: hidden;
-}
+// .formulaire{
+// padding-top: 65px;
+// }
 
-.formulaire{
-   margin-top: -500px;
-}
-.input{
 
-  height: 30px;
-  width: 300px;
-  color: black;
-  margin-left: -10px;
-  background-color: rgb(187, 187, 187);
-  height: 40px;
-opacity: 0.5;
+// /*resolution d'ecran à 640px*/
+
+// @media screen and (max-width: 440px){
+//   $url:"../../assets/mbackenever1.png";
+//   body{
+//      width: auto;
+//    margin:0;
+//      padding: 0;
+//      background-image: url($url);
+//      background-repeat: no-repeat;
+//     //  background: {
+//     //   image: url($url);
+//     //   // repeat:no-repeat;
+//     //  };
+//   }
+// .never{
+//    visibility: hidden;
+// }
+
+// .formulaire{
+//    margin-top: -500px;
+// }
+// .input{
+
+//   height: 30px;
+//   width: 300px;
+//   color: black;
+//   margin-left: -10px;
+//   background-color: rgb(187, 187, 187);
+//   height: 40px;
+//   opacity: 0.5;
   
 
-}
+// }
 
-.form{
-  border: 2px solid #E9E9E9;
-  padding-left: 35px;
-  padding-top: 30px;
-  opacity: 0.9;
+// .rowss{
+// margin-left: -200px;
+// }
+// .form{
+//   border: 2px solid #E9E9E9;
+//   padding-left: 35px;
+//   padding-top: 30px;
+//   width: 350px;
+//   margin-right: -500px;
+//   opacity: 0.9;
+//   background-color: white;
+
+// }
+// .boutons{
+//   background-color: #FF4080;
+//   border: 1px solid #FF4080;
+//   color: white;
+//   border-radius: 15px;
+//   width: 35%;
+//   text-align: center;
+//   margin-left: 70px;
+//   margin-bottom: 20px;
+
+// }
+// .logo{
+//   width: 30%;
+//   text-align: center;
+//   margin-left: 140px;
+// }
+
+
+
+// }
+form {
+  // border: 3px solid #f1f1f1;
   background-color: white;
-  margin:0;
-
-
-}
-.bouton{
-  background-color: #FF4080;
-  border: 1px solid #FF4080;
-  color: white;
-  border-radius: 15px;
-  width: 35%;
-  text-align: center;
-  margin-left: 70px;
-  margin-bottom: 20px;
-
-}
-.logo{
-  width: 30%;
-  text-align: center;
-  margin-left: 140px;
 }
 
+input[type=text], input[type=password] {
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
 
+button {
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+width: 100%;
+}
 
+button:hover {
+opacity: 0.8;
+}
+
+.cancelbtn {
+width: auto;
+padding: 10px 18px;
+background-color: #f44336;
+}
+
+.imgcontainer {
+text-align: center;
+margin: 24px 0 12px 0;
+}
+
+img.avatar {
+width: 40%;
+border-radius: 50%;
+}
+
+.container {
+padding: 16px;
+}
+
+span.psw {
+float: right;
+padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+span.psw {
+   display: block;
+   float: none;
+}
+.cancelbtn {
+   width: 100%;
+}
 }

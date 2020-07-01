@@ -1,13 +1,9 @@
-<body>
-  <!-- side Menu -->
+
   <app-sidemenu *ngIf="auth.connecter"></app-sidemenu>
   <div [ngClass]="{page: auth.connecter}">
-    <!-- header -->
     <app-header *ngIf="auth.connecter"></app-header>
     <section class="mt-30px mb-30px">
       <router-outlet></router-outlet>
-    </section>
-    <!-- footer -->
+    </section>j
     <app-footer *ngIf="auth.connecter"></app-footer>
   </div>
-</body>

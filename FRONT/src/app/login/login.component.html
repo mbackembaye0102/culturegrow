@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="row">
-        <div class="col-4"></div>
+<!-- <div class="container">
+    <div class="row rowss">
+        <div class="col-4 div41"></div>
         <div class="col-4">
             <div class="row ">
             <img class="logo" src="../../assets/img/growacademy (1).png" alt="">
@@ -19,12 +19,39 @@
                 </div>
                 <div class="row">
                         <div class="form-group col-md-8">
-                                <input  type="submit" [disabled]="!utilisateur.valid" class="form-control bouton">
+                                <button type="submit" [disabled]="!utilisateur.valid" class="form-control boutons">Valider</button>
                         </div>
                 </div>
             
             </form>
         </div>
-        <div class="col-4"></div>
+        <div class="col-4 div42"></div>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <form [formGroup]="utilisateur" (ngSubmit)="addsys(utilisateur.value)" >
+                <div class="imgcontainer">
+                  <img src="assets/logo.png" alt="Avatar" class="avatar">
+                </div>
+              
+                <div class="container">
+                  <label for="uname"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="uname"  formControlName="username" required>
+              
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="psw" formControlName="password" required>
+                      
+                  <button type="submit">Login</button>
+                </div>
+              </form>
+        </div>
+        <div class="col-md-4">
+            
+        </div>
     </div>
 </div>

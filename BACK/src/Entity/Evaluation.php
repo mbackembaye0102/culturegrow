@@ -75,6 +75,7 @@ class Evaluation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Allsession", inversedBy="evaluations")
+     * @Groups({"grow"})
      */
     private $session;
 

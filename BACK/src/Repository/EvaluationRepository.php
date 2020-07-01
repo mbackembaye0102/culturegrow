@@ -18,6 +18,22 @@ class EvaluationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Evaluation::class);
     }
+     /**
+      * @return Evaluation[] Returns an array of Evaluation objects
+      */
+    
+    public function lastfiveevaluation($value)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.evaluer = :val')
+            ->setParameter('val', $value)
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
 
     // /**
     //  * @return Evaluation[] Returns an array of Evaluation objects

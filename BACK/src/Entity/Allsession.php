@@ -18,13 +18,13 @@ class Allsession
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"grow"})
+     * @Groups({"grow","note"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"grow"})
+     * @Groups({"grow","note"})
      */
     private $date;
 
@@ -61,6 +61,16 @@ class Allsession
      * @ORM\OneToMany(targetEntity="App\Entity\Historiquesession", mappedBy="session")
      */
     private $historiquesessions;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $annee;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mois;
 
     public function __construct()
     {
@@ -192,6 +202,30 @@ class Allsession
                 $historiquesession->setSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAnnee(): ?string
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(string $annee): self
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getMois(): ?string
+    {
+        return $this->mois;
+    }
+
+    public function setMois(string $mois): self
+    {
+        $this->mois = $mois;
 
         return $this;
     }

@@ -19,7 +19,25 @@ class AllsessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Allsession::class);
     }
 
-    // /**
+    /**
+     * @return Allsession[] Returns an array of Allsession objects
+     */
+    
+    public function last()
+    {
+        return $this->createQueryBuilder('a')
+            // ->andWhere('a.exampleField = :val')
+            // ->setParameter('val', $value)
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(7)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
+
+        // /**
     //  * @return Allsession[] Returns an array of Allsession objects
     //  */
     /*
@@ -35,7 +53,6 @@ class AllsessionRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?Allsession
     {

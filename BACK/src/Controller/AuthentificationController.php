@@ -33,7 +33,7 @@ class AuthentificationController extends AbstractController
                         'username' => $user->getUsername(),
                         'roles' => $user->getRoles(),
                         'Prenom' => $user->getPrenom(),
-                        'exp' => time() + 3600 // 1 hour expiration
+                        'exp' => time() + 600 // 1 hour expiration
                     ]);
                     return new JsonResponse(['token' => $token]);
                 }
@@ -42,7 +42,7 @@ class AuthentificationController extends AbstractController
                     'username' => $user->getUsername(),
                     'roles' => $user->getRoles(),
                     'Prenom' => $user->getPrenom(),
-                    'exp' => time() + 3600 // 1 hour expiration
+                    'exp' => time() + 600 // 1 hour expiration
                 ]);
                 return new JsonResponse(['token' => $token]);
               }

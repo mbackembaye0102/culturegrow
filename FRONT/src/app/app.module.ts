@@ -43,7 +43,13 @@ import {MaterialModule} from './material/material.module';
 import { DetailsessioncollaborateurComponent } from './pages/admin/collaborateur/detailsessioncollaborateur/detailsessioncollaborateur.component';
 import { DiagramComponent } from './pages/admin/collaborateur/diagram/diagram.component';
 import { GrowComponent } from './pages/admin/grow/grow.component';
-//  import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
+import { ModaldateComponent } from './pages/admin/collaborateur/modaldate/modaldate.component';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGuardService } from './service/auth-guard.service';
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,6 +86,7 @@ import { GrowComponent } from './pages/admin/grow/grow.component';
     DetailsessioncollaborateurComponent,
     DiagramComponent,
     GrowComponent,
+    ModaldateComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,9 +96,17 @@ import { GrowComponent } from './pages/admin/grow/grow.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    // ChartsModule
+    ChartsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+       // whitelistedDomains: ["example.com"],
+       // blacklistedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
   ],
-  providers: [AuthService,
+  entryComponents:[ModaldateComponent],
+  providers: [AuthGuardService,AuthService,
     {
     provide:HTTP_INTERCEPTORS,
     useClass:InterceptorService,

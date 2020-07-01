@@ -134,6 +134,5 @@ class SystemeController extends AbstractController
         return new Response($data, 200, [
             'Content-Type' => 'application/json'
         ]);
-
     }
 }

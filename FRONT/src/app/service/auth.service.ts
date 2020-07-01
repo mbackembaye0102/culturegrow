@@ -8,7 +8,9 @@ import {Users} from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  public url:string="http://127.0.0.1:8000/";
+  // public url:string="http://127.0.0.1:8000/";
+  public url:string="http://www.culture.telectronsenegal.com/";
+  
   private urllogin:string="login";
   private urlInfos:string="infos/user";
 
@@ -22,7 +24,7 @@ export class AuthService {
   public connecter=false;
   public utilisateur:any;
 
-  constructor(private http: HttpClient,private route:Router) { }
+  constructor(private http: HttpClient,private route:Router,public jwtHelper: JwtHelperService) { }
   logger(data){
     return this.http.post(this.url+this.urllogin , data , {observe:'response'})
   }
@@ -32,8 +34,10 @@ export class AuthService {
   enregistrementToken(jwtToken : string){ 
     localStorage.setItem('token',jwtToken);
     this.jwt=jwtToken;
-    let jwtHelper = new JwtHelperService();
-    let objet= jwtHelper.decodeToken(this.jwt);
+   // let jwtHel = new JwtHelperService();
+    let objet= this.jwtHelper.decodeToken(this.jwt);
+    console.log(objet);
+    
     localStorage.setItem('role',objet.roles[0]);
     this.chargementpage()
   //  this.connecter=true;
@@ -104,5 +108,11 @@ export class AuthService {
       else{
         this.logout();
       }
+    }
+    public isAuthenticated(): boolean {
+      const token = localStorage.getItem('token');
+      // Check whether the token is expired and return
+      // true or false
+      return !this.jwtHelper.isTokenExpired(token);
     }
 }
